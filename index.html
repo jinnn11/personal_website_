@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Swaminathan Sankaran | ML Engineer Portfolio</title>
+    <title>Swaminathan Sankaran | ML Engineer</title>
     <meta
       name="description"
-      content="Portfolio of Swaminathan Sankaran, an MS Data Science student building multimodal ML systems, retrieval applications, and drift-aware MLOps pipelines."
+      content="Swaminathan Sankaran — ML engineer building production AI systems: drift-aware MLOps, multimodal learning, and medical imaging."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,130 +24,93 @@
           <span>Swaminathan Sankaran</span>
         </a>
         <nav class="site-nav" aria-label="Primary">
+          <a href="#top">Home</a>
+          <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
-          <a href="#about">About</a>
+          <a href="#education">Education</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
 
       <main id="top">
+        <!-- Hero -->
         <section class="hero">
-          <div class="hero-copy">
-            <p class="eyebrow">Machine Learning Engineer Portfolio</p>
-            <h1>I build machine learning systems with measurable outcomes.</h1>
-            <p class="hero-text">
-              I am an MS Data Science student at the University at Buffalo with experience 
-              in developing and deploying NLP and computer vision systems on AWS. 
-              I focus on building multimodal models, robust MLOps pipelines, and 
-              semantic search systems across academic and production environments.
-            </p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="assets/swaminathan_resume.pdf" target="_blank" rel="noreferrer">Resume</a>
-              <a class="button button-secondary" href="https://github.com/jinnn11/" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="button button-secondary" href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">LinkedIn</a>
-            </div>
-            <ul class="contact-inline">
-              <li><a href="mailto:swaminathansankaran21@gmail.com">swaminathansankaran21@gmail.com</a></li>
-              <li><a href="tel:+17165332867">+1 (716) 533-2867</a></li>
-              <li>Buffalo, NY</li>
-            </ul>
+          <p class="eyebrow">ML Engineer</p>
+          <h1>Swaminathan Sankaran</h1>
+          <p class="hero-sub">
+            I design and ship end-to-end ML systems — from model training
+            through drift monitoring to production deployment.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="assets/swaminathan_resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a class="button button-secondary" href="mailto:swaminathansankaran21@gmail.com">Email</a>
+            <a class="button button-secondary" href="https://github.com/jinnn11/" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
-
-          <aside class="hero-panel">
-            <p class="panel-label">Currently looking for</p>
-            <h2>ML, Applied AI, Data Science, and MLOps internships</h2>
-            <p>
-              Strongest signal areas: production-minded ML systems, retrieval and
-              search, multimodal modeling, and evaluation-driven engineering.
-            </p>
-            <ul class="focus-list">
-              <li>Built real systems with FastAPI, Docker, AWS, Airflow, and MLflow</li>
-              <li>Comfortable with both research-style experimentation and deployment</li>
-              <li>Prefer projects where model quality and system reliability both matter</li>
-            </ul>
-          </aside>
         </section>
 
-        <section class="highlights">
-          <article>
-            <span>350+</span>
-            <p>documents automated in an OCR plus T5 ingestion workflow</p>
-          </article>
-          <article>
-            <span>99.9%</span>
-            <p>service uptime on Dockerized ML microservices deployed to AWS</p>
-          </article>
-          <article>
-            <span>10k+</span>
-            <p>documents indexed in a hybrid keyword and vector retrieval system</p>
-          </article>
-          <article>
-            <span>0.95</span>
-            <p>validation AUC on patch-level volumetric CT scan tamper classification</p>
-          </article>
+        <!-- About -->
+        <section class="section" id="about">
+          <p class="eyebrow">About</p>
+          <h2 class="section-title">A bit about me</h2>
+          <p>
+            I'm a graduate student at the University at Buffalo pursuing an MS in Data Science. I got into ML because I wanted to build things that actually work — not just models that perform well in a notebook, but systems that hold up in production.
+          </p>
+          <p>
+            That mindset led me to MLOps, drift monitoring, and containerized deployments during my time as an ML engineer at Zolvit, and it drives the projects I work on now — from multimodal drug discovery to medical imaging security.
+          </p>
+          <p>
+            I'm currently looking for ML engineering roles where I can bring production-grade systems thinking to real problems.
+          </p>
         </section>
 
+        <!-- Projects -->
         <section class="section" id="projects">
-          <div class="section-heading">
-            <p class="eyebrow">Selected Projects</p>
-            <h2>Projects that best represent how I work.</h2>
-          </div>
+          <p class="eyebrow">Projects</p>
+          <h2 class="section-title">Selected Work</h2>
 
-          <div class="project-grid">
-            <article class="project-card project-card-wide">
-              <div class="project-media">
-                <img
-                  src="assets/mlops-dashboard.png"
-                  alt="MLflow dashboard from the drift-aware MLOps pipeline"
-                />
-              </div>
-              <div class="project-body">
+          <div class="project-stack">
+            <article class="project-card">
+              <div class="project-header">
                 <p class="project-kicker">MLOps / Production Systems</p>
                 <h3>Drift-Aware MLOps Pipeline</h3>
-                <p class="project-summary">
-                  Designed a drift-aware pipeline to detect silent model degradation 
-                  and trigger automated retraining, improving model reliability under 
-                  changing data distributions.
-                </p>
-                <ul class="project-list">
-                  <li>Built and containerized the system using FastAPI, Airflow, and MLflow with Evidently AI.</li>
-                  <li>Monitored system health in real time using Prometheus and Grafana dashboards.</li>
-                  <li>Simulated concept drift, triggering automated retraining that recovered <strong>+0.1178 ROC-AUC</strong> on shifted data.</li>
-                </ul>
+              </div>
+              <p class="project-desc">
+                End-to-end system that detects silent model degradation through statistical drift monitoring and triggers automated retraining — recovering performance without manual intervention.
+              </p>
+              <ul class="project-list">
+                <li>Seven-stage Airflow DAG: data extraction, drift detection, retraining, smoke testing, model promotion</li>
+                <li>Full containerized stack — FastAPI, MLflow, Evidently, Prometheus, Grafana — via Docker Compose</li>
+                <li>Automated retraining recovered <strong>+0.1178 ROC-AUC</strong> on recession-shifted data</li>
+              </ul>
+              <div class="project-footer">
                 <div class="tag-row">
+                  <span>XGBoost</span>
                   <span>FastAPI</span>
                   <span>Airflow</span>
                   <span>MLflow</span>
                   <span>Evidently</span>
-                  <span>Prometheus</span>
-                  <span>Grafana</span>
                   <span>Docker</span>
                 </div>
-                <a class="text-link" href="https://github.com/jinnn11/DRIFT-AWARE-MLOps-PIPELINE" target="_blank" rel="noreferrer">View repository</a>
+                <a class="text-link" href="https://github.com/jinnn11/DRIFT-AWARE-MLOps-PIPELINE" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
               </div>
             </article>
 
             <article class="project-card">
-              <div class="project-media">
-                <img
-                  src="assets/molecule-similarity.png"
-                  alt="Architecture diagram for the molecule similarity project"
-                />
-              </div>
-              <div class="project-body">
+              <div class="project-header">
                 <p class="project-kicker">Multimodal Deep Learning</p>
                 <h3>Molecule Similarity Prediction</h3>
-                <p class="project-summary">
-                  Multi-modal architecture fusing 2D image features (ResNet-18), 
-                  3D geometry (SchNet), and fingerprint embeddings to improve candidate 
-                  selection for drug discovery.
-                </p>
-                <ul class="project-list">
-                  <li>Trained with contrastive learning across 291,742 molecules.</li>
-                  <li>Achieved <strong>~0.92 Pearson correlation</strong> on 200 expert-annotated pairs.</li>
-                  <li>Outperformed the Tanimoto similarity baseline on unseen molecular pairs.</li>
-                </ul>
+              </div>
+              <p class="project-desc">
+                Tri-modal contrastive learning system for drug discovery — fuses 2D molecular images, 3D atomic geometry, and chemical fingerprints to predict pairwise similarity.
+              </p>
+              <ul class="project-list">
+                <li>Pretrained three encoders (ResNet-18, SchNet, MLP) on 291k molecules using NT-Xent contrastive loss</li>
+                <li>Achieved <strong>~0.92 Pearson correlation</strong> on expert-annotated pairs, beating the Tanimoto baseline</li>
+                <li>Late-fusion architecture with per-modality cosine similarities for interpretable decomposition</li>
+              </ul>
+              <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>
                   <span>ResNet-18</span>
@@ -155,144 +118,246 @@
                   <span>Contrastive Learning</span>
                   <span>RDKit</span>
                 </div>
-                <a class="text-link" href="https://github.com/jinnn11/Molecule-Similarity-Prediction" target="_blank" rel="noreferrer">View repository</a>
+                <a class="text-link" href="https://github.com/jinnn11/Molecule-Similarity-Prediction" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
               </div>
             </article>
 
-            <article class="project-card project-card-compact">
-              <div class="project-media">
-                <img
-                  src="assets/ct-architecture.jpeg"
-                  alt="Architecture diagram for the CT tamper classification project"
-                />
-              </div>
-              <div class="project-body">
+            <article class="project-card">
+              <div class="project-header">
                 <p class="project-kicker">Medical Imaging</p>
                 <h3>Patch-Level CT Tamper Classification</h3>
-                <p class="project-summary">
-                  Built to detect tampering at the patch level within CT scans, where 
-                  localized manipulation is harder to catch than whole-scan forgeries.
-                </p>
-                <ul class="project-list">
-                  <li>Jointly trained a 3D convolutional compressor with an ImageNet-pretrained ResNet-18.</li>
-                  <li>Processed 169 volumetric lung CT scans to convert 16-slice 3D patches into compact 2D feature maps.</li>
-                  <li>Achieved <strong>0.95 validation AUC</strong>, outperforming 2.5D, 3D, and projection baselines.</li>
-                </ul>
+              </div>
+              <p class="project-desc">
+                Tamper detection for volumetric CT scans that identifies localized manipulation at the patch level — a harder problem than whole-scan forgery detection.
+              </p>
+              <ul class="project-list">
+                <li>3D convolutional compressor converts 16-slice patches into 2D feature maps for ImageNet-pretrained ResNet-18</li>
+                <li>Trained on 169 volumetric lung CT scans with 5-fold cross-validation</li>
+                <li>Achieved <strong>0.95 validation AUC</strong>, outperforming 2.5D, full 3D, and projection baselines</li>
+              </ul>
+              <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>
                   <span>DICOM</span>
                   <span>3D CNN</span>
+                  <span>ResNet-18</span>
+                  <span>Transfer Learning</span>
                 </div>
-                <a class="text-link" href="https://github.com/jinnn11/Patch-Level-CT-Tamper-Classification" target="_blank" rel="noreferrer">View repository</a>
+                <a class="text-link" href="https://github.com/jinnn11/Patch-Level-CT-Tamper-Classification" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
               </div>
             </article>
           </div>
         </section>
 
+        <!-- Experience -->
         <section class="section" id="experience">
-          <div class="section-heading">
-            <p class="eyebrow">Experience</p>
-            <h2>Industry work with operational and business impact.</h2>
+          <p class="eyebrow">Experience</p>
+          <h2 class="section-title">Where I've Worked</h2>
+
+          <article class="exp-card">
+            <div class="exp-header">
+              <div class="exp-logo">Z</div>
+              <div class="exp-meta">
+                <h3>Machine Learning Engineer, Intern</h3>
+                <p class="exp-company">Zolvit</p>
+                <span class="exp-date">Feb 2024 — Aug 2024</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Eliminated ~23 hours/week of manual data entry by building an OCR + T5-large extraction pipeline for legal documents</li>
+              <li>Improved legal retrieval precision by ~28% across 10,000+ documents using hybrid Elasticsearch keyword + Pinecone vector search</li>
+              <li>Built a document routing classifier achieving 92% accuracy on TF-IDF/Doc2Vec features, automating intake workflows</li>
+              <li>Containerized ML services with Docker and deployed on AWS EC2, maintaining 99.9% uptime with Grafana monitoring</li>
+            </ul>
+          </article>
+        </section>
+
+        <!-- Education -->
+        <section class="section" id="education">
+          <p class="eyebrow">Education</p>
+          <h2 class="section-title">Academic Background</h2>
+
+          <div class="edu-stack">
+            <article class="edu-card">
+              <div class="edu-top">
+                <div>
+                  <h3>University at Buffalo</h3>
+                  <p>MS in Engineering Science (Data Science)</p>
+                </div>
+                <span class="edu-date">Aug 2025 — Dec 2026</span>
+              </div>
+              <div class="edu-courses">
+                <h4>Relevant Coursework</h4>
+                <div class="tag-row">
+                  <span>Statistical Learning I & II</span>
+                  <span>Machine Learning</span>
+                  <span>Probability Theory</span>
+                  <span>Database Data Science</span>
+                  <span>Data Models & Query Languages</span>
+                  <span>Numerical Methods</span>
+                </div>
+              </div>
+            </article>
+            <article class="edu-card">
+              <div class="edu-top">
+                <div>
+                  <h3>Vellore Institute of Technology</h3>
+                  <p>B.Tech in Computer Science and Engineering (AI & ML)</p>
+                </div>
+                <span class="edu-date">Aug 2019 — Jul 2023</span>
+              </div>
+              <div class="edu-courses">
+                <h4>Relevant Coursework</h4>
+                <div class="tag-row">
+                  <span>Machine Learning</span>
+                  <span>Deep Learning</span>
+                  <span>Reinforcement Learning</span>
+                  <span>Computer Vision</span>
+                  <span>Applied Linear Algebra</span>
+                  <span>Statistics</span>
+                  <span>Data Structures & Algorithms</span>
+                  <span>Database Management Systems</span>
+                </div>
+              </div>
+            </article>
           </div>
-
-          <article class="experience-card">
-            <div class="experience-top">
-              <div>
-                <h3>Zolvit</h3>
-                <p>Machine Learning Engineer Intern</p>
-              </div>
-              <span>Feb 2024 to Aug 2024</span>
-            </div>
-            <div class="experience-columns">
-              <div>
-                <h4>Impact & Results</h4>
-                <ul>
-                  <li>Eliminated ~23 hours of weekly manual data entry via Google Vision OCR and T5-large.</li>
-                  <li>Improved legal precedent retrieval precision by ~28% for lawyers across 10,000+ documents.</li>
-                  <li>Drove 99.9% service uptime and eliminated recurring outages with Docker and AWS EC2.</li>
-                </ul>
-              </div>
-              <div>
-                <h4>Systems Built</h4>
-                <ul>
-                  <li>Hybrid search engine combining Elasticsearch keyword search with Pinecone vector embeddings.</li>
-                  <li>Document routing classifier achieving 92% accuracy on TF-IDF and Doc2Vec features.</li>
-                  <li>Automated ingestion pipeline replacing a fragile legacy process with FastAPI and monitoring via Grafana.</li>
-                </ul>
-              </div>
-            </div>
-          </article>
         </section>
 
-        <section class="section section-split" id="about">
-          <article class="info-card">
-            <p class="eyebrow">Skills</p>
-            <h2>Technical focus</h2>
-            <div class="skill-groups">
-              <div>
-                <h4>Programming & Data</h4>
-                <p>Python, C/C++, SQL, R, Pandas, NumPy, DICOM, RDKit</p>
-              </div>
-              <div>
-                <h4>Machine Learning</h4>
-                <p>PyTorch, TensorFlow, Scikit-learn, XGBoost, Hugging Face, embeddings, contrastive learning</p>
-              </div>
-              <div>
-                <h4>MLOps & Cloud</h4>
-                <p>Docker, Kubernetes, AWS, Airflow, MLflow, Evidently AI, Prometheus, Grafana</p>
-              </div>
-              <div>
-                <h4>NLP & Databases</h4>
-                <p>RAG, LangChain, Elasticsearch, Pinecone, PostgreSQL, MySQL, Spark, Snowflake</p>
-              </div>
-            </div>
-          </article>
+        <!-- Skills -->
+        <section class="section" id="skills">
+          <p class="eyebrow">Skills</p>
+          <h2 class="section-title">Technical Toolkit</h2>
 
-          <article class="info-card">
-            <p class="eyebrow">Education & Awards</p>
-            <h2>Academic Background</h2>
-            <div class="experience-top">
-              <div>
-                <h3>University at Buffalo</h3>
-                <p>MS in Engineering Science (Data Science), GPA: 3.67</p>
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h4>Languages & Databases</h4>
+              <div class="skill-items">
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/python.svg" alt="Python logo" /><span>Python</span></div>
+                <div class="skill-item"><span class="skill-badge">C+</span><span>C/C++</span></div>
+                <div class="skill-item"><span class="skill-badge">SQL</span><span>SQL</span></div>
+                <div class="skill-item"><span class="skill-badge">R</span><span>R</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/postgresql.svg" alt="PostgreSQL logo" /><span>PostgreSQL</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/mysql.svg" alt="MySQL logo" /><span>MySQL</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/elasticsearch.svg" alt="Elasticsearch logo" /><span>Elasticsearch</span></div>
+                <div class="skill-item"><span class="skill-badge">PN</span><span>Pinecone</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/snowflake.svg" alt="Snowflake logo" /><span>Snowflake</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/linux.svg" alt="Linux logo" /><span>Linux</span></div>
               </div>
-              <span>Aug 2025 to Dec 2026</span>
             </div>
-            <div class="experience-top">
-              <div>
-                <h3>Vellore Institute of Technology</h3>
-                <p>B.Tech in Computer Science and Engineering (AI and ML)</p>
+            <div class="skill-group">
+              <h4>AI & Machine Learning</h4>
+              <div class="skill-items">
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/pytorch.svg" alt="PyTorch logo" /><span>PyTorch</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/tensorflow.svg" alt="TensorFlow logo" /><span>TensorFlow</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/scikitlearn.svg" alt="Scikit-learn logo" /><span>Scikit-learn</span></div>
+                <div class="skill-item"><span class="skill-badge">XG</span><span>XGBoost</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/huggingface.svg" alt="Hugging Face logo" /><span>Hugging Face</span></div>
+                <div class="skill-item"><span class="skill-badge">LC</span><span>LangChain</span></div>
+                <div class="skill-item"><span class="skill-badge">LG</span><span>LangGraph</span></div>
+                <div class="skill-item"><span class="skill-badge">RG</span><span>RAG</span></div>
+                <div class="skill-item"><span class="skill-badge">TB</span><span>TensorBoard</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/numpy.svg" alt="NumPy logo" /><span>NumPy</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/pandas.svg" alt="Pandas logo" /><span>Pandas</span></div>
               </div>
-              <span>Aug 2019 to Jul 2023</span>
             </div>
-            <hr />
-            <h3>Recognition & Certifications</h3>
-            <p>Felix Infausto Scholarship, 2025</p>
-            <p>Coursera: Machine Learning Specialization, Deep Learning Specialization</p>
-          </article>
+            <div class="skill-group">
+              <h4>MLOps & Cloud</h4>
+              <div class="skill-items">
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/docker.svg" alt="Docker logo" /><span>Docker</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/kubernetes.svg" alt="Kubernetes logo" /><span>Kubernetes</span></div>
+                <div class="skill-item"><span class="skill-badge">AWS</span><span>AWS</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/apacheairflow.svg" alt="Apache Airflow logo" /><span>Airflow</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/mlflow.svg" alt="MLflow logo" /><span>MLflow</span></div>
+                <div class="skill-item"><span class="skill-badge">EV</span><span>Evidently AI</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/prometheus.svg" alt="Prometheus logo" /><span>Prometheus</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/grafana.svg" alt="Grafana logo" /><span>Grafana</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/git.svg" alt="Git logo" /><span>Git</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/linux.svg" alt="Linux logo" /><span>Linux</span></div>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>Data & Visualization</h4>
+              <div class="skill-items">
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/apachespark.svg" alt="Apache Spark logo" /><span>Spark</span></div>
+                <div class="skill-item"><span class="skill-badge">MP</span><span>Matplotlib</span></div>
+                <div class="skill-item"><span class="skill-badge">SB</span><span>Seaborn</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/plotly.svg" alt="Plotly logo" /><span>Plotly</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/streamlit.svg" alt="Streamlit logo" /><span>Streamlit</span></div>
+                <div class="skill-item"><span class="skill-badge">TB</span><span>Tableau</span></div>
+                <div class="skill-item"><span class="skill-badge">BI</span><span>Power BI</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/pandas.svg" alt="Pandas logo" /><span>Pandas</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/numpy.svg" alt="NumPy logo" /><span>NumPy</span></div>
+                <div class="skill-item"><img class="skill-logo" src="assets/skills/git.svg" alt="Git logo" /><span>Git</span></div>
+                <div class="skill-item"><span class="skill-badge">RD</span><span>RDKit</span></div>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section class="contact-card" id="contact">
-          <p class="eyebrow">Contact</p>
-          <h2>Interested in internship opportunities where model quality and system quality both matter.</h2>
-          <p>
-            If you are hiring for machine learning, applied AI, or MLOps
-            internships, I would be glad to share more about the projects above.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="mailto:swaminathansankaran21@gmail.com">Email me</a>
-            <a class="button button-secondary" href="assets/swaminathan_resume.pdf" target="_blank" rel="noreferrer">Open resume</a>
+        <!-- Awards -->
+        <section class="section" id="awards">
+          <p class="eyebrow">Awards & Certifications</p>
+          <h2 class="section-title">Recognition</h2>
+
+          <div class="awards-grid">
+            <article class="award-card">
+              <div class="award-icon-wrap">
+                <span class="award-icon">&#9733;</span>
+              </div>
+              <div class="award-content">
+                <h3>Felix Infausto Scholarship</h3>
+                <p class="award-org">University at Buffalo</p>
+                <span class="award-date">2025</span>
+              </div>
+            </article>
+            <article class="award-card">
+              <div class="award-icon-wrap">
+                <span class="award-icon">&#9882;</span>
+              </div>
+              <div class="award-content">
+                <h3>Coursera Specializations</h3>
+                <p class="award-org">Probability & Statistics for ML, Machine Learning Specialization, Deep Learning Specialization</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section contact-section" id="contact">
+          <div class="contact-card">
+            <p class="eyebrow">Get in Touch</p>
+            <h2>Let's build something that works.</h2>
+            <p class="contact-sub">
+              Open to ML engineering roles and collaborations. Reach out through any of these channels.
+            </p>
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:swaminathansankaran21@gmail.com">
+                <span class="contact-label">Email</span>
+                <span class="contact-value">swaminathansankaran21@gmail.com</span>
+              </a>
+              <a class="contact-link" href="https://github.com/jinnn11/" target="_blank" rel="noreferrer">
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">github.com/jinnn11</span>
+              </a>
+              <a class="contact-link" href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">Swaminathan Sankaran</span>
+              </a>
+            </div>
           </div>
         </section>
       </main>
 
       <footer class="site-footer">
         <p>Swaminathan Sankaran</p>
-        <p>Static portfolio built for simple deployment.</p>
         <p>&copy; <span id="year"></span></p>
       </footer>
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Temporary Theme Switcher -->
+    <div id="theme-switcher"></div>
+    <script src="theme-switcher.js"></script>
   </body>
 </html>
