@@ -227,6 +227,106 @@
         "radial-gradient(ellipse 55% 40% at 76% 18%, rgba(34,211,238,0.05) 0%, transparent 48%)",
         "linear-gradient(150deg, rgba(96,165,250,0.02) 0%, transparent 42%, rgba(59,130,246,0.03) 100%)"
       ]
+    },
+    {
+      name: "new - Amber Alloy",
+      bg: "#141210", surface: "#1f1b17", accent: [245,158,11],
+      text: "#f6f1ea", muted: "#b4a596", accentHex: "#f59e0b", accentDark: "#d97706",
+      glow: [
+        "radial-gradient(ellipse 108% 60% at 50% -12%, rgba(245,158,11,0.12) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 20%, rgba(251,191,36,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 22% 42%, rgba(217,119,6,0.03) 0%, transparent 45%)"
+      ]
+    },
+    {
+      name: "new - Orchid Haze",
+      bg: "#16121a", surface: "#211b27", accent: [217,70,239],
+      text: "#f5eef8", muted: "#afa0b7", accentHex: "#d946ef", accentDark: "#c026d3",
+      glow: [
+        "radial-gradient(ellipse 106% 58% at 50% -10%, rgba(217,70,239,0.12) 0%, transparent 55%)",
+        "radial-gradient(ellipse 56% 40% at 80% 22%, rgba(168,85,247,0.06) 0%, transparent 48%)",
+        "linear-gradient(145deg, rgba(217,70,239,0.02) 0%, transparent 38%, rgba(192,38,211,0.03) 100%)"
+      ]
+    },
+    {
+      name: "new - Deep Sea Glass",
+      bg: "#0d1718", surface: "#152123", accent: [34,197,94],
+      text: "#ecf5f1", muted: "#93a9a0", accentHex: "#22c55e", accentDark: "#16a34a",
+      glow: [
+        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(34,197,94,0.11) 0%, transparent 55%)",
+        "radial-gradient(ellipse 54% 38% at 74% 18%, rgba(20,184,166,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(74,222,128,0.03) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Merlot Fade",
+      bg: "#171012", surface: "#24191d", accent: [244,63,94],
+      text: "#f7edf0", muted: "#b6a0a8", accentHex: "#f43f5e", accentDark: "#e11d48",
+      glow: [
+        "radial-gradient(ellipse 108% 60% at 50% -12%, rgba(244,63,94,0.11) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 20%, rgba(251,146,60,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 20% 40%, rgba(190,24,93,0.03) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Ice Indigo",
+      bg: "#10141c", surface: "#171d2a", accent: [129,140,248],
+      text: "#eef1f8", muted: "#99a3b8", accentHex: "#818cf8", accentDark: "#6366f1",
+      glow: [
+        "radial-gradient(ellipse 110% 60% at 50% -10%, rgba(129,140,248,0.12) 0%, transparent 56%)",
+        "radial-gradient(ellipse 56% 40% at 78% 18%, rgba(96,165,250,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(165,180,252,0.035) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Copper Plum",
+      bg: "#171214", surface: "#241b1f", accent: [251,146,60],
+      text: "#f6efeb", muted: "#b3a19b", accentHex: "#fb923c", accentDark: "#ea580c",
+      glow: [
+        "radial-gradient(ellipse 106% 58% at 50% -10%, rgba(251,146,60,0.11) 0%, transparent 55%)",
+        "radial-gradient(ellipse 54% 38% at 78% 18%, rgba(192,132,252,0.05) 0%, transparent 48%)",
+        "linear-gradient(145deg, rgba(251,146,60,0.02) 0%, transparent 40%, rgba(168,85,247,0.03) 100%)"
+      ]
+    },
+    {
+      name: "new - Azure Mist",
+      bg: "#0f161b", surface: "#162129", accent: [56,189,248],
+      text: "#edf4f8", muted: "#96a9b5", accentHex: "#38bdf8", accentDark: "#0ea5e9",
+      glow: [
+        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(56,189,248,0.11) 0%, transparent 55%)",
+        "radial-gradient(ellipse 56% 40% at 76% 18%, rgba(45,212,191,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(125,211,252,0.03) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Neon Fig",
+      bg: "#141118", surface: "#1d1823", accent: [232,121,249],
+      text: "#f5eef8", muted: "#ada0b6", accentHex: "#e879f9", accentDark: "#d946ef",
+      glow: [
+        "radial-gradient(ellipse 108% 58% at 50% -10%, rgba(232,121,249,0.12) 0%, transparent 55%)",
+        "radial-gradient(ellipse 54% 38% at 78% 18%, rgba(129,140,248,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(217,70,239,0.035) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Sage Ember",
+      bg: "#131512", surface: "#1b1f1a", accent: [163,230,53],
+      text: "#f1f4ea", muted: "#a7ae96", accentHex: "#a3e635", accentDark: "#84cc16",
+      glow: [
+        "radial-gradient(ellipse 106% 58% at 50% -10%, rgba(163,230,53,0.10) 0%, transparent 55%)",
+        "radial-gradient(ellipse 54% 38% at 76% 22%, rgba(251,146,60,0.04) 0%, transparent 46%)",
+        "linear-gradient(150deg, rgba(163,230,53,0.02) 0%, transparent 42%, rgba(132,204,22,0.03) 100%)"
+      ]
+    },
+    {
+      name: "new - Night Coral",
+      bg: "#171315", surface: "#221b1d", accent: [251,113,133],
+      text: "#f7efef", muted: "#b6a4a6", accentHex: "#fb7185", accentDark: "#f43f5e",
+      glow: [
+        "radial-gradient(ellipse 108% 60% at 50% -12%, rgba(251,113,133,0.11) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 18%, rgba(244,114,182,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(244,63,94,0.03) 0%, transparent 46%)"
+      ]
     }
   ];
 
