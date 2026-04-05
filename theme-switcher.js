@@ -229,7 +229,7 @@
       ]
     },
     {
-      name: "new - Amber Alloy",
+      name: "new 2 - Amber Alloy",
       bg: "#141210", surface: "#1f1b17", accent: [245,158,11],
       text: "#f6f1ea", muted: "#b4a596", accentHex: "#f59e0b", accentDark: "#d97706",
       glow: [
@@ -239,7 +239,7 @@
       ]
     },
     {
-      name: "new - Orchid Haze",
+      name: "new 2 - Orchid Haze",
       bg: "#16121a", surface: "#211b27", accent: [217,70,239],
       text: "#f5eef8", muted: "#afa0b7", accentHex: "#d946ef", accentDark: "#c026d3",
       glow: [
@@ -249,7 +249,7 @@
       ]
     },
     {
-      name: "new - Deep Sea Glass",
+      name: "new 2 - Deep Sea Glass",
       bg: "#0d1718", surface: "#152123", accent: [34,197,94],
       text: "#ecf5f1", muted: "#93a9a0", accentHex: "#22c55e", accentDark: "#16a34a",
       glow: [
@@ -259,7 +259,7 @@
       ]
     },
     {
-      name: "new - Merlot Fade",
+      name: "new 2 - Merlot Fade",
       bg: "#171012", surface: "#24191d", accent: [244,63,94],
       text: "#f7edf0", muted: "#b6a0a8", accentHex: "#f43f5e", accentDark: "#e11d48",
       glow: [
@@ -269,7 +269,7 @@
       ]
     },
     {
-      name: "new - Ice Indigo",
+      name: "new 2 - Ice Indigo",
       bg: "#10141c", surface: "#171d2a", accent: [129,140,248],
       text: "#eef1f8", muted: "#99a3b8", accentHex: "#818cf8", accentDark: "#6366f1",
       glow: [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      name: "new - Copper Plum",
+      name: "new 2 - Copper Plum",
       bg: "#171214", surface: "#241b1f", accent: [251,146,60],
       text: "#f6efeb", muted: "#b3a19b", accentHex: "#fb923c", accentDark: "#ea580c",
       glow: [
@@ -289,7 +289,7 @@
       ]
     },
     {
-      name: "new - Azure Mist",
+      name: "new 2 - Azure Mist",
       bg: "#0f161b", surface: "#162129", accent: [56,189,248],
       text: "#edf4f8", muted: "#96a9b5", accentHex: "#38bdf8", accentDark: "#0ea5e9",
       glow: [
@@ -299,7 +299,7 @@
       ]
     },
     {
-      name: "new - Neon Fig",
+      name: "new 2 - Neon Fig",
       bg: "#141118", surface: "#1d1823", accent: [232,121,249],
       text: "#f5eef8", muted: "#ada0b6", accentHex: "#e879f9", accentDark: "#d946ef",
       glow: [
@@ -309,7 +309,7 @@
       ]
     },
     {
-      name: "new - Sage Ember",
+      name: "new 2 - Olive Ember",
       bg: "#131512", surface: "#1b1f1a", accent: [163,230,53],
       text: "#f1f4ea", muted: "#a7ae96", accentHex: "#a3e635", accentDark: "#84cc16",
       glow: [
@@ -319,7 +319,7 @@
       ]
     },
     {
-      name: "new - Night Coral",
+      name: "new 2 - Coral Ink",
       bg: "#171315", surface: "#221b1d", accent: [251,113,133],
       text: "#f7efef", muted: "#b6a4a6", accentHex: "#fb7185", accentDark: "#f43f5e",
       glow: [
