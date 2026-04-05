@@ -157,6 +157,76 @@
         "radial-gradient(ellipse 55% 40% at 70% 25%, rgba(200,114,96,0.05) 0%, transparent 50%)",
         "radial-gradient(ellipse 50% 35% at 25% 40%, rgba(180,100,80,0.03) 0%, transparent 50%)"
       ]
+    },
+    {
+      name: "new - Graphite Bloom",
+      bg: "#121317", surface: "#1a1d24", accent: [244,114,182],
+      text: "#f4f2f7", muted: "#a8a2b3", accentHex: "#f472b6", accentDark: "#ec4899",
+      glow: [
+        "radial-gradient(ellipse 105% 62% at 50% -12%, rgba(244,114,182,0.11) 0%, transparent 58%)",
+        "radial-gradient(ellipse 58% 42% at 78% 18%, rgba(168,85,247,0.06) 0%, transparent 52%)",
+        "radial-gradient(ellipse 48% 34% at 18% 42%, rgba(244,114,182,0.035) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new - Ink Teal Fade",
+      bg: "#0f1719", surface: "#162125", accent: [45,212,191],
+      text: "#ebf5f3", muted: "#8fa9a4", accentHex: "#2dd4bf", accentDark: "#14b8a6",
+      glow: [
+        "radial-gradient(ellipse 108% 60% at 50% -10%, rgba(45,212,191,0.11) 0%, transparent 58%)",
+        "radial-gradient(ellipse 55% 40% at 75% 18%, rgba(56,189,248,0.05) 0%, transparent 50%)",
+        "linear-gradient(145deg, rgba(45,212,191,0.02) 0%, transparent 38%, rgba(20,184,166,0.03) 100%)"
+      ]
+    },
+    {
+      name: "new - Mocha Ember",
+      bg: "#161210", surface: "#211b18", accent: [251,146,60],
+      text: "#f4eee7", muted: "#b2a094", accentHex: "#fb923c", accentDark: "#ea580c",
+      glow: [
+        "radial-gradient(ellipse 110% 62% at 50% -8%, rgba(251,146,60,0.11) 0%, transparent 58%)",
+        "radial-gradient(ellipse 52% 38% at 72% 24%, rgba(239,68,68,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 46% 34% at 24% 42%, rgba(251,146,60,0.03) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Glacier Violet",
+      bg: "#11151d", surface: "#19202b", accent: [167,139,250],
+      text: "#eef2f8", muted: "#94a0b2", accentHex: "#a78bfa", accentDark: "#8b5cf6",
+      glow: [
+        "radial-gradient(ellipse 104% 58% at 50% -10%, rgba(167,139,250,0.12) 0%, transparent 56%)",
+        "radial-gradient(ellipse 56% 40% at 80% 20%, rgba(96,165,250,0.06) 0%, transparent 50%)",
+        "radial-gradient(ellipse 48% 34% at 20% 38%, rgba(196,181,253,0.04) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new - Forest Signal",
+      bg: "#101612", surface: "#182019", accent: [132,204,22],
+      text: "#eef3ea", muted: "#9ca890", accentHex: "#84cc16", accentDark: "#65a30d",
+      glow: [
+        "radial-gradient(ellipse 106% 56% at 50% -10%, rgba(132,204,22,0.10) 0%, transparent 55%)",
+        "radial-gradient(ellipse 54% 38% at 74% 18%, rgba(34,197,94,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 46% 34% at 18% 45%, rgba(163,230,53,0.03) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Rose Quartz Night",
+      bg: "#181317", surface: "#221b20", accent: [244,171,185],
+      text: "#f6eff2", muted: "#b4a0a8", accentHex: "#f4abb9", accentDark: "#e8798f",
+      glow: [
+        "radial-gradient(ellipse 108% 60% at 50% -12%, rgba(244,171,185,0.11) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 78% 20%, rgba(232,121,249,0.05) 0%, transparent 48%)",
+        "radial-gradient(ellipse 48% 34% at 18% 40%, rgba(251,113,133,0.035) 0%, transparent 46%)"
+      ]
+    },
+    {
+      name: "new - Cobalt Current",
+      bg: "#0f1520", surface: "#182033", accent: [96,165,250],
+      text: "#eef3fb", muted: "#98a6bc", accentHex: "#60a5fa", accentDark: "#3b82f6",
+      glow: [
+        "radial-gradient(ellipse 106% 60% at 50% -12%, rgba(96,165,250,0.12) 0%, transparent 56%)",
+        "radial-gradient(ellipse 55% 40% at 76% 18%, rgba(34,211,238,0.05) 0%, transparent 48%)",
+        "linear-gradient(150deg, rgba(96,165,250,0.02) 0%, transparent 42%, rgba(59,130,246,0.03) 100%)"
+      ]
     }
   ];
 
