@@ -276,10 +276,10 @@
     document.body.style.backgroundImage = t.glow.join(", ");
 
     // Header backdrop
-    const hdr = document.querySelector(".site-header");
-    if (hdr) {
+    const hdrInner = document.querySelector(".header-inner");
+    if (hdrInner) {
       const [hr, hg, hb] = t.bg.match(/\w{2}/g).map(x => parseInt(x, 16));
-      hdr.style.background = `rgba(${hr},${hg},${hb},0.45)`;
+      hdrInner.style.background = `rgba(${hr},${hg},${hb},0.55)`;
     }
 
     // Update accent-derived variables
