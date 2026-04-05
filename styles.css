@@ -28,6 +28,7 @@ body {
   min-height: 100vh;
   font-family: "Instrument Sans", sans-serif;
   color: var(--text);
+  text-rendering: optimizeLegibility;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
     radial-gradient(circle at top right, rgba(155, 77, 47, 0.08), transparent 24%),
@@ -112,6 +113,7 @@ ul {
 .contact-inline a,
 .text-link {
   color: var(--muted);
+  transition: color 160ms ease;
 }
 
 .site-nav a:hover,
@@ -196,7 +198,7 @@ ul {
 }
 
 .button-secondary {
-  background: transparent;
+  background: var(--surface);
   border-color: var(--line-strong);
 }
 
@@ -220,6 +222,21 @@ ul {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.hero-panel:hover,
+.project-card:hover,
+.experience-card:hover,
+.info-card:hover,
+.contact-card:hover,
+.highlights article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(26, 28, 24, 0.08);
+  border-color: var(--line-strong);
 }
 
 .hero-panel {
@@ -307,6 +324,10 @@ ul {
   background: var(--surface-alt);
 }
 
+.project-card-wide .project-media {
+  min-height: 320px;
+}
+
 .project-media img {
   height: 100%;
   object-fit: cover;
@@ -352,10 +373,15 @@ ul {
   padding: 1.4rem;
 }
 
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
 .project-card h3,
 .experience-card h3 {
   font-size: 1.45rem;
-  margin-bottom: 0.7rem;
 }
 
 .project-summary {
@@ -363,12 +389,12 @@ ul {
 }
 
 .project-list {
-  margin: 1rem 0 1.1rem;
+  margin: 0;
 }
 
 .tag-row {
   gap: 0.55rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.15rem;
 }
 
 .tag-row span {
@@ -431,6 +457,7 @@ ul {
   gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
+  margin-top: 2rem;
 }
 
 .site-footer p {
