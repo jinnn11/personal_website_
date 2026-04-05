@@ -1,17 +1,17 @@
 :root {
-  --bg: #f5f1e8;
-  --surface: #fffdfa;
-  --surface-alt: #f8f3eb;
-  --line: #ddd3c7;
-  --line-strong: #cabca8;
-  --text: #1a1c18;
-  --muted: #5c6058;
-  --accent: #9b4d2f;
-  --accent-dark: #71321b;
-  --accent-soft: #efe0d5;
-  --shadow: 0 14px 35px rgba(26, 28, 24, 0.06);
-  --radius: 22px;
-  --radius-sm: 14px;
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-alt: #1f1f1f;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --text: #f0f0f0;
+  --muted: #a1a1aa;
+  --accent: #64ffda;
+  --accent-dark: #52e0c4;
+  --accent-soft: rgba(100, 255, 218, 0.12);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --radius: 16px;
+  --radius-sm: 10px;
   --max-width: 1120px;
 }
 
@@ -30,8 +30,7 @@ body {
   color: var(--text);
   text-rendering: optimizeLegibility;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
-    radial-gradient(circle at top right, rgba(155, 77, 47, 0.08), transparent 24%),
+    radial-gradient(circle at top right, rgba(100, 255, 218, 0.1), transparent 35%),
     var(--bg);
 }
 
@@ -81,8 +80,8 @@ ul {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 0;
-  background: rgba(245, 241, 232, 0.92);
-  border-bottom: 1px solid rgba(221, 211, 199, 0.7);
+  background: rgba(10, 10, 10, 0.85);
+  border-bottom: 1px solid var(--line);
   backdrop-filter: blur(8px);
 }
 
@@ -100,7 +99,7 @@ ul {
   height: 2.25rem;
   border-radius: 999px;
   background: var(--text);
-  color: #fff;
+  color: var(--bg);
   font-size: 0.85rem;
 }
 
@@ -194,7 +193,7 @@ ul {
 
 .button-primary {
   background: var(--text);
-  color: #fff;
+  color: var(--bg);
 }
 
 .button-secondary {
@@ -216,8 +215,7 @@ ul {
 .project-card,
 .experience-card,
 .info-card,
-.contact-card,
-.highlights article {
+.contact-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -232,15 +230,14 @@ ul {
 .project-card:hover,
 .experience-card:hover,
 .info-card:hover,
-.contact-card:hover,
-.highlights article:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(26, 28, 24, 0.08);
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   border-color: var(--line-strong);
 }
 
 .hero-panel {
-  padding: 1.4rem;
+  padding: 2rem;
 }
 
 .panel-label,
@@ -271,11 +268,16 @@ ul {
 .highlights {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 4rem;
 }
 
 .highlights article {
-  padding: 1.15rem;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .highlights span {
@@ -301,17 +303,23 @@ ul {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .project-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
 .project-card-wide {
   grid-column: span 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex-direction: row;
+}
+
+.project-card-wide .project-media,
+.project-card-wide .project-body {
+  flex: 1;
 }
 
 .project-card-compact .project-media img {
@@ -322,6 +330,9 @@ ul {
 .project-media {
   min-height: 260px;
   background: var(--surface-alt);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .project-card-wide .project-media {
@@ -344,10 +355,11 @@ ul {
 }
 
 .diagram-stack div {
-  padding: 0.95rem;
+  padding: 1.25rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .diagram-stack span {
@@ -370,7 +382,7 @@ ul {
 .experience-card,
 .info-card,
 .contact-card {
-  padding: 1.4rem;
+  padding: 2rem;
 }
 
 .project-body {
@@ -398,12 +410,13 @@ ul {
 }
 
 .tag-row span {
-  padding: 0.42rem 0.68rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: var(--surface-alt);
-  border: 1px solid var(--line);
-  font-size: 0.9rem;
-  color: var(--text);
+  background: var(--accent-soft);
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .text-link {
@@ -478,6 +491,7 @@ ul {
 
   .project-card-wide {
     grid-column: span 1;
+    flex-direction: column;
   }
 
   .hero h1 {
@@ -512,6 +526,6 @@ ul {
   .info-card,
   .contact-card,
   .hero-panel {
-    padding: 1.15rem;
+    padding: 1.5rem;
   }
 }
