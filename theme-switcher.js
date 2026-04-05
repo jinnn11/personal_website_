@@ -279,12 +279,14 @@
     const hdr = document.querySelector(".site-header");
     if (hdr) {
       const [hr, hg, hb] = t.bg.match(/\w{2}/g).map(x => parseInt(x, 16));
-      hdr.style.background = `rgba(${hr},${hg},${hb},0.28)`;
+      hdr.style.background = `rgba(${hr},${hg},${hb},0.45)`;
     }
 
-    // Update hardcoded border colors via CSS variable overrides
+    // Update accent-derived variables
     r.setProperty("--_accent-08", `rgba(${ar},${ag},${ab},0.08)`);
     r.setProperty("--_accent-15", `rgba(${ar},${ag},${ab},0.15)`);
+    r.setProperty("--glass-border-hover", `rgba(${ar},${ag},${ab},0.3)`);
+    r.setProperty("--float-shadow-hover", `0 14px 40px rgba(0,0,0,0.22), 0 0 20px rgba(${ar},${ag},${ab},0.08)`);
 
     // Active state
     grid.querySelectorAll(".ts-btn").forEach(b => b.classList.remove("active"));
