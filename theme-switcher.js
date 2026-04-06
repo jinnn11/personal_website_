@@ -336,16 +336,17 @@
     <style>
       #theme-switcher {
         position: fixed;
-        bottom: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 5.5rem;
+        right: 1rem;
         z-index: 9999;
         background: rgba(20,20,30,0.92);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 16px;
         padding: 0.75rem 1rem;
-        max-width: 95vw;
+        width: min(320px, calc(100vw - 2rem));
+        max-height: calc(100vh - 7rem);
+        overflow: auto;
         box-shadow: 0 8px 32px rgba(0,0,0,0.5);
       }
       #theme-switcher .ts-label {
@@ -360,7 +361,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.4rem;
-        justify-content: center;
+        justify-content: flex-start;
       }
       #theme-switcher .ts-btn {
         display: flex;
@@ -407,6 +408,14 @@
         line-height: 1;
       }
       #theme-switcher .ts-close:hover { color: #fff; }
+      @media (max-width: 900px) {
+        #theme-switcher {
+          top: auto;
+          right: 1rem;
+          bottom: 1rem;
+          max-height: 42vh;
+        }
+      }
     </style>
     <button class="ts-close" title="Close">&times;</button>
     <div class="ts-label">Theme Switcher (temporary)</div>
