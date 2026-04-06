@@ -38,9 +38,11 @@ if (yearElement) {
 // Scroll-spy: highlight active nav link
 (() => {
   const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+  const inPageLinks = document.querySelectorAll('a[href^="#"]');
   const sections = [];
   let activeLink = null;
   let scrollTicking = false;
+  let smoothScrollFrame = null;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   navLinks.forEach((link) => {
     const id = link.getAttribute("href").slice(1);
@@ -55,12 +57,52 @@ if (yearElement) {
     return header ? header.getBoundingClientRect().height + 40 : 120;
   }
 
+  function cancelSmoothScroll() {
+    if (!smoothScrollFrame) return;
+    cancelAnimationFrame(smoothScrollFrame);
+    smoothScrollFrame = null;
+  }
+
+  function easeInOutQuart(t) {
+    return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+  }
+
+  function smoothScrollTo(targetY) {
+    cancelSmoothScroll();
+
+    const startY = window.scrollY;
+    const destination = Math.max(0, Math.round(targetY));
+    const distance = destination - startY;
+
+    if (prefersReducedMotion.matches || Math.abs(distance) < 2) {
+      window.scrollTo(0, destination);
+      return;
+    }
+
+    const duration = Math.min(1050, Math.max(680, Math.abs(distance) * 0.55));
+    let startTime = null;
+
+    function step(timestamp) {
+      if (startTime === null) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeInOutQuart(progress);
+
+      window.scrollTo(0, startY + distance * eased);
+
+      if (progress < 1) {
+        smoothScrollFrame = requestAnimationFrame(step);
+      } else {
+        smoothScrollFrame = null;
+      }
+    }
+
+    smoothScrollFrame = requestAnimationFrame(step);
+  }
+
   function scrollToSection(el) {
     const top = window.scrollY + el.getBoundingClientRect().top - getThreshold() + 12;
-    window.scrollTo({
-      top: Math.max(0, top),
-      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-    });
+    smoothScrollTo(top);
   }
 
   function paintActive(link) {
@@ -124,19 +166,30 @@ if (yearElement) {
     });
   }
 
-  navLinks.forEach((link) => {
+  inPageLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
-      const id = link.getAttribute("href").slice(1);
+      const href = link.getAttribute("href");
+      const id = href ? href.slice(1) : "";
+      if (!id) return;
+
       const el = document.getElementById(id);
       if (!el) return;
 
       event.preventDefault();
-      paintActive(link);
+
+      if (link.matches('.site-nav a[href^="#"]')) {
+        paintActive(link);
+      }
+
       history.replaceState(null, "", `#${id}`);
       scrollToSection(el);
       requestAnimationFrame(updateActive);
-      setTimeout(updateActive, 180);
+      setTimeout(updateActive, 220);
     });
+  });
+
+  ["wheel", "touchstart", "mousedown", "keydown"].forEach((eventName) => {
+    window.addEventListener(eventName, cancelSmoothScroll, { passive: true });
   });
 
   window.addEventListener("scroll", requestActiveUpdate, { passive: true });
