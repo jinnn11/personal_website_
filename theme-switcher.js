@@ -359,14 +359,14 @@
       }
       #theme-switcher .ts-grid {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 0.4rem;
-        justify-content: flex-start;
       }
       #theme-switcher .ts-btn {
         display: flex;
         align-items: center;
         gap: 0.35rem;
+        width: 100%;
         padding: 0.35rem 0.65rem;
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 8px;
