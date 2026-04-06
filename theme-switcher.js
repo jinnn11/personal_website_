@@ -518,14 +518,16 @@
   function applyTheme(t, btn) {
     const r = document.documentElement.style;
     const [ar, ag, ab] = t.accent;
+    const neutralText = "#f7f7f4";
+    const neutralMuted = "#b4b6bd";
 
     // CSS variables
     r.setProperty("--bg", t.bg);
     r.setProperty("--surface", t.surface);
     r.setProperty("--line", `rgba(${ar},${ag},${ab},0.10)`);
     r.setProperty("--line-strong", `rgba(${ar},${ag},${ab},0.18)`);
-    r.setProperty("--text", t.text);
-    r.setProperty("--muted", t.muted);
+    r.setProperty("--text", neutralText);
+    r.setProperty("--muted", neutralMuted);
     r.setProperty("--accent", t.accentHex);
     r.setProperty("--accent-dark", t.accentDark);
     r.setProperty("--accent-soft", `rgba(${ar},${ag},${ab},0.10)`);
