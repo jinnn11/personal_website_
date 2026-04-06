@@ -1,4 +1,5 @@
 (() => {
+  const ENABLE_THEME_SWITCHER = false;
   const themes = [
     {
       name: "Soft Cosmos",
@@ -330,88 +331,164 @@
     },
     {
       name: "new 3 - Slate Mist",
-      bg: "#14181d", surface: "#1b2229", accent: [148,163,184],
+      bg: "#121416", surface: "#1a1d21", accent: [148,163,184],
       text: "#eef2f6", muted: "#98a5b5", accentHex: "#94a3b8", accentDark: "#64748b",
       glow: [
-        "radial-gradient(ellipse 104% 58% at 50% -10%, rgba(148,163,184,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 52% 36% at 74% 20%, rgba(96,165,250,0.035) 0%, transparent 46%)",
+        "radial-gradient(ellipse 104% 58% at 50% -10%, rgba(148,163,184,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 52% 36% at 74% 20%, rgba(96,165,250,0.025) 0%, transparent 46%)",
         "linear-gradient(145deg, rgba(148,163,184,0.018) 0%, transparent 42%, rgba(100,116,139,0.03) 100%)"
       ]
     },
     {
       name: "new 3 - Soft Sage",
-      bg: "#131713", surface: "#1a201b", accent: [134,167,137],
+      bg: "#121413", surface: "#1a1d1b", accent: [134,167,137],
       text: "#eef3ed", muted: "#9aa796", accentHex: "#86a789", accentDark: "#6b8c6f",
       glow: [
-        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(134,167,137,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 52% 36% at 78% 18%, rgba(163,177,138,0.035) 0%, transparent 46%)",
+        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(134,167,137,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 52% 36% at 78% 18%, rgba(163,177,138,0.024) 0%, transparent 46%)",
         "radial-gradient(ellipse 46% 32% at 20% 42%, rgba(110,140,112,0.03) 0%, transparent 45%)"
       ]
     },
     {
       name: "new 3 - Smoked Blue",
-      bg: "#12171d", surface: "#1a2129", accent: [120,144,168],
+      bg: "#121416", surface: "#1a1d21", accent: [120,144,168],
       text: "#eef2f6", muted: "#98a4b2", accentHex: "#7890a8", accentDark: "#5f748a",
       glow: [
-        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(120,144,168,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 54% 38% at 76% 20%, rgba(125,211,252,0.03) 0%, transparent 46%)",
+        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(120,144,168,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 20%, rgba(125,211,252,0.022) 0%, transparent 46%)",
         "linear-gradient(150deg, rgba(120,144,168,0.018) 0%, transparent 42%, rgba(95,116,138,0.03) 100%)"
       ]
     },
     {
       name: "new 3 - Sandstone",
-      bg: "#171513", surface: "#211d1a", accent: [191,161,128],
+      bg: "#141312", surface: "#1c1a18", accent: [191,161,128],
       text: "#f3eee8", muted: "#ac9f92", accentHex: "#bfa180", accentDark: "#9f7f5d",
       glow: [
-        "radial-gradient(ellipse 106% 58% at 50% -10%, rgba(191,161,128,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 50% 36% at 74% 18%, rgba(251,191,36,0.03) 0%, transparent 44%)",
+        "radial-gradient(ellipse 106% 58% at 50% -10%, rgba(191,161,128,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 50% 36% at 74% 18%, rgba(251,191,36,0.022) 0%, transparent 44%)",
         "radial-gradient(ellipse 48% 34% at 22% 42%, rgba(159,127,93,0.03) 0%, transparent 45%)"
       ]
     },
     {
       name: "new 3 - Mauve Ash",
-      bg: "#161419", surface: "#201c24", accent: [165,148,180],
+      bg: "#131316", surface: "#1b1a1f", accent: [165,148,180],
       text: "#f1edf4", muted: "#a79bb1", accentHex: "#a594b4", accentDark: "#83718f",
       glow: [
-        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(165,148,180,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 54% 38% at 76% 18%, rgba(192,132,252,0.03) 0%, transparent 46%)",
+        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(165,148,180,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 18%, rgba(192,132,252,0.022) 0%, transparent 46%)",
         "linear-gradient(145deg, rgba(165,148,180,0.018) 0%, transparent 40%, rgba(131,113,143,0.03) 100%)"
       ]
     },
     {
       name: "new 3 - Deep Olive",
-      bg: "#141612", surface: "#1b1f18", accent: [140,146,108],
+      bg: "#131412", surface: "#1a1c18", accent: [140,146,108],
       text: "#f0f2ea", muted: "#a3a68f", accentHex: "#8c926c", accentDark: "#727853",
       glow: [
-        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(140,146,108,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 54% 36% at 76% 18%, rgba(163,230,53,0.025) 0%, transparent 44%)",
+        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(140,146,108,0.072) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 36% at 76% 18%, rgba(163,230,53,0.018) 0%, transparent 44%)",
         "radial-gradient(ellipse 46% 32% at 20% 42%, rgba(114,120,83,0.03) 0%, transparent 45%)"
       ]
     },
     {
       name: "new 3 - Fog Rose",
-      bg: "#181417", surface: "#221c20", accent: [196,150,162],
+      bg: "#151315", surface: "#1d1a1c", accent: [196,150,162],
       text: "#f4eef1", muted: "#b09ca2", accentHex: "#c496a2", accentDark: "#a56f7e",
       glow: [
-        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(196,150,162,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 52% 36% at 78% 18%, rgba(244,171,185,0.03) 0%, transparent 46%)",
+        "radial-gradient(ellipse 106% 58% at 50% -12%, rgba(196,150,162,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 52% 36% at 78% 18%, rgba(244,171,185,0.022) 0%, transparent 46%)",
         "linear-gradient(150deg, rgba(196,150,162,0.018) 0%, transparent 42%, rgba(165,111,126,0.03) 100%)"
       ]
     },
     {
       name: "new 3 - Dusty Teal",
-      bg: "#121718", surface: "#192022", accent: [110,154,154],
+      bg: "#121415", surface: "#191c1d", accent: [110,154,154],
       text: "#edf3f3", muted: "#96a6a6", accentHex: "#6e9a9a", accentDark: "#517979",
       glow: [
-        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(110,154,154,0.10) 0%, transparent 56%)",
-        "radial-gradient(ellipse 54% 38% at 76% 18%, rgba(45,212,191,0.028) 0%, transparent 46%)",
+        "radial-gradient(ellipse 108% 58% at 50% -12%, rgba(110,154,154,0.075) 0%, transparent 56%)",
+        "radial-gradient(ellipse 54% 38% at 76% 18%, rgba(45,212,191,0.02) 0%, transparent 46%)",
         "radial-gradient(ellipse 46% 32% at 18% 42%, rgba(81,121,121,0.03) 0%, transparent 45%)"
+      ]
+    },
+    {
+      name: "new 4 - Midnight Navy",
+      bg: "#0c1220", surface: "#121a2c", accent: [147,197,253],
+      text: "#f0f4fa", muted: "#a0b4cc", accentHex: "#93c5fd", accentDark: "#60a5fa",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(147,197,253,0.07) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 75% 20%, rgba(96,165,250,0.035) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Executive Gold",
+      bg: "#111111", surface: "#1a1a1a", accent: [212,175,55],
+      text: "#f2f0ec", muted: "#b0a898", accentHex: "#d4af37", accentDark: "#b8941e",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(212,175,55,0.07) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 70% 20%, rgba(180,148,30,0.03) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Obsidian Blue",
+      bg: "#0e1117", surface: "#151a24", accent: [96,165,250],
+      text: "#eef2fa", muted: "#9eacc0", accentHex: "#60a5fa", accentDark: "#3b82f6",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(96,165,250,0.08) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 75% 18%, rgba(59,130,246,0.04) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Graphite Pearl",
+      bg: "#131313", surface: "#1c1c1c", accent: [209,213,219],
+      text: "#f4f4f4", muted: "#a0a4ab", accentHex: "#d1d5db", accentDark: "#9ca3af",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(209,213,219,0.05) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 70% 20%, rgba(156,163,175,0.025) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Deep Ink Cyan",
+      bg: "#0b0f14", surface: "#111820", accent: [103,232,249],
+      text: "#edf5f8", muted: "#96b8c4", accentHex: "#67e8f9", accentDark: "#22d3ee",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(103,232,249,0.07) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 75% 18%, rgba(34,211,238,0.035) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Onyx Brass",
+      bg: "#111110", surface: "#1a1918", accent: [207,176,128],
+      text: "#f3f0ea", muted: "#b0a494", accentHex: "#cfb080", accentDark: "#a88b58",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(207,176,128,0.07) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 70% 20%, rgba(168,139,88,0.03) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Carbon Emerald",
+      bg: "#0d1210", surface: "#141c18", accent: [52,211,153],
+      text: "#ecf5f0", muted: "#92b8a4", accentHex: "#34d399", accentDark: "#10b981",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(52,211,153,0.07) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 75% 18%, rgba(16,185,129,0.035) 0%, transparent 48%)"
+      ]
+    },
+    {
+      name: "new 4 - Titanium Violet",
+      bg: "#100f16", surface: "#181722", accent: [167,139,250],
+      text: "#f0eef8", muted: "#a49ebc", accentHex: "#a78bfa", accentDark: "#8b5cf6",
+      glow: [
+        "radial-gradient(ellipse 100% 55% at 50% -10%, rgba(167,139,250,0.08) 0%, transparent 55%)",
+        "radial-gradient(ellipse 50% 35% at 75% 18%, rgba(139,92,246,0.04) 0%, transparent 48%)"
       ]
     }
   ];
 
   // Build the switcher UI
   const panel = document.getElementById("theme-switcher");
+  if (!panel || !ENABLE_THEME_SWITCHER) {
+    if (panel) panel.style.display = "none";
+    return;
+  }
   panel.innerHTML = `
     <style>
       #theme-switcher {
@@ -520,33 +597,43 @@
     const [ar, ag, ab] = t.accent;
     const neutralText = "#f7f7f4";
     const neutralMuted = "#b4b6bd";
+    const isNew3 = t.name.startsWith("new 3 -");
+    const isNew4 = t.name.startsWith("new 4 -");
+    const textColor = (isNew3 || isNew4) ? "#fcfcfa" : neutralText;
+    const mutedColor = isNew4 ? "#cdd1d8" : isNew3 ? "#c4c9d1" : neutralMuted;
+    const lineAlpha = isNew4 ? 0.12 : isNew3 ? 0.14 : 0.10;
+    const lineStrongAlpha = isNew4 ? 0.20 : isNew3 ? 0.24 : 0.18;
+    const accentSoftAlpha = (isNew3 || isNew4) ? 0.08 : 0.10;
 
     // CSS variables
     r.setProperty("--bg", t.bg);
     r.setProperty("--surface", t.surface);
-    r.setProperty("--line", `rgba(${ar},${ag},${ab},0.10)`);
-    r.setProperty("--line-strong", `rgba(${ar},${ag},${ab},0.18)`);
-    r.setProperty("--text", neutralText);
-    r.setProperty("--muted", neutralMuted);
+    r.setProperty("--line", `rgba(${ar},${ag},${ab},${lineAlpha})`);
+    r.setProperty("--line-strong", `rgba(${ar},${ag},${ab},${lineStrongAlpha})`);
+    r.setProperty("--text", textColor);
+    r.setProperty("--muted", mutedColor);
     r.setProperty("--accent", t.accentHex);
     r.setProperty("--accent-dark", t.accentDark);
-    r.setProperty("--accent-soft", `rgba(${ar},${ag},${ab},0.10)`);
+    r.setProperty("--accent-soft", `rgba(${ar},${ag},${ab},${accentSoftAlpha})`);
 
     // Body background
     document.body.style.background = t.bg;
-    document.body.style.backgroundImage = t.glow.join(", ");
+    document.body.style.backgroundImage = (isNew3 || isNew4) ? t.glow.slice(0, 2).join(", ") : t.glow.join(", ");
 
     // Header backdrop
     const hdrInner = document.querySelector(".header-inner");
     if (hdrInner) {
       const [hr, hg, hb] = t.bg.match(/\w{2}/g).map(x => parseInt(x, 16));
-      hdrInner.style.background = `rgba(${hr},${hg},${hb},0.55)`;
+      const hdrAlpha = isNew4 ? "0.75" : isNew3 ? "0.68" : "0.55";
+      hdrInner.style.background = `rgba(${hr},${hg},${hb},${hdrAlpha})`;
     }
 
     // Update accent-derived variables
-    r.setProperty("--_accent-08", `rgba(${ar},${ag},${ab},0.08)`);
-    r.setProperty("--_accent-15", `rgba(${ar},${ag},${ab},0.15)`);
-    r.setProperty("--glass-border-hover", `rgba(${ar},${ag},${ab},0.3)`);
+    const a08 = isNew4 ? "0.06" : isNew3 ? "0.06" : "0.08";
+    const a15 = isNew4 ? "0.10" : isNew3 ? "0.12" : "0.15";
+    r.setProperty("--_accent-08", `rgba(${ar},${ag},${ab},${a08})`);
+    r.setProperty("--_accent-15", `rgba(${ar},${ag},${ab},${a15})`);
+    r.setProperty("--glass-border-hover", `rgba(${ar},${ag},${ab},${isNew4 ? "0.35" : "0.3"})`);
     r.setProperty("--float-shadow-hover", `0 14px 40px rgba(0,0,0,0.22), 0 0 20px rgba(${ar},${ag},${ab},0.08)`);
 
     // Active state

@@ -28,6 +28,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
 }
 
 body {
@@ -81,6 +83,7 @@ ul {
   width: min(calc(100% - 2.5rem), var(--max-width));
   margin: 0 auto;
   padding-bottom: 3rem;
+  animation: pageIn 0.6s ease both;
 }
 
 /* ── Header ── */
@@ -142,19 +145,23 @@ ul {
 
 .site-nav a {
   position: relative;
-  color: var(--muted);
+  color: var(--text);
   font-size: 0.82rem;
   font-weight: 500;
   padding: 0.4rem 0.65rem;
   border-radius: 999px;
+  opacity: 0.72;
   transition: color 200ms ease,
-    background-color 200ms ease;
+    background-color 200ms ease,
+    opacity 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .site-nav a:hover,
 .site-nav a:focus-visible {
+  opacity: 1;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .header-cta {
@@ -287,6 +294,7 @@ ul {
 .section {
   padding: 4.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.04);
+  scroll-margin-top: 6rem;
 }
 
 .section-title {
@@ -935,6 +943,76 @@ ul {
 
 .site-footer p {
   font-size: 0.85rem;
+}
+
+/* ── Active Nav ── */
+
+.site-nav a.active,
+.site-nav a.active:hover,
+.site-nav a[aria-current="true"],
+.site-nav a[aria-current="true"]:hover {
+  opacity: 1;
+  color: #111318;
+  background: #f7f7f4;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.22);
+  outline: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ── Page Load Animation ── */
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scroll Reveal ── */
+
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-ready .reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Custom Scrollbar (Webkit) ── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dark);
+}
+
+/* ── Project Image Consistency ── */
+
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
 }
 
 /* ── Responsive ── */
