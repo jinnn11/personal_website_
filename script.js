@@ -19,11 +19,29 @@ if (yearElement) {
   });
 })();
 
+// Scroll progress bar
+(() => {
+  const bar = document.querySelector(".scroll-progress");
+  if (!bar) return;
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = `${progress}%`;
+  }
+
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+})();
+
 // Scroll-spy: highlight active nav link
 (() => {
   const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
   const sections = [];
   let activeLink = null;
+  let scrollTicking = false;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   navLinks.forEach((link) => {
     const id = link.getAttribute("href").slice(1);
     const el = document.getElementById(id);
@@ -35,6 +53,14 @@ if (yearElement) {
   function getThreshold() {
     const header = document.querySelector(".site-header");
     return header ? header.getBoundingClientRect().height + 40 : 120;
+  }
+
+  function scrollToSection(el) {
+    const top = window.scrollY + el.getBoundingClientRect().top - getThreshold() + 12;
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+    });
   }
 
   function paintActive(link) {
@@ -89,27 +115,58 @@ if (yearElement) {
     paintActive(current);
   }
 
+  function requestActiveUpdate() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    window.requestAnimationFrame(() => {
+      updateActive();
+      scrollTicking = false;
+    });
+  }
+
   navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
+      const id = link.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      event.preventDefault();
       paintActive(link);
+      history.replaceState(null, "", `#${id}`);
+      scrollToSection(el);
       requestAnimationFrame(updateActive);
-      setTimeout(updateActive, 120);
+      setTimeout(updateActive, 180);
     });
   });
 
-  window.addEventListener("scroll", updateActive, { passive: true });
+  window.addEventListener("scroll", requestActiveUpdate, { passive: true });
   window.addEventListener("resize", updateActive);
   window.addEventListener("hashchange", updateActive);
   updateActive();
 })();
 
-// Scroll-reveal: animate sections into view
+// Scroll-reveal: animate sections into view with staggered children
 (() => {
   const reveals = document.querySelectorAll(".reveal");
   if (!reveals.length) return;
 
-  // Signal CSS that JS is ready — sections stay visible if JS fails
   document.documentElement.classList.add("reveal-ready");
+
+  // Tag stagger-able children and set incremental delays
+  reveals.forEach((section) => {
+    const children = section.querySelectorAll(
+      ".project-card, .exp-card, .edu-card, .skill-group, .award-card, .contact-link"
+    );
+    children.forEach((child, i) => {
+      child.classList.add("stagger");
+      child.style.animationDelay = `${i * 0.08}s`;
+      child.addEventListener("animationend", () => {
+        child.classList.remove("stagger");
+        child.classList.add("stagger-done");
+        child.style.animation = "none";
+      }, { once: true });
+    });
+  });
 
   const observer = new IntersectionObserver(
     (entries) => {

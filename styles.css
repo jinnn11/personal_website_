@@ -20,6 +20,13 @@
   --float-shadow: 0 4px 24px rgba(0,0,0,0.12);
   --float-shadow-hover: 0 14px 40px rgba(0,0,0,0.22), 0 0 20px rgba(192,132,252,0.08);
   --max-width: 960px;
+  --card-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --card-dur: 900ms;
+  --card-color-dur: 650ms;
+  --btn-dur: 600ms;
+  --btn-color-dur: 500ms;
+  --micro-dur: 450ms;
+  --card-lift-shadow: 0 28px 56px rgba(0, 0, 0, 0.24), 0 0 28px rgba(192,132,252,0.08);
 }
 
 * {
@@ -76,6 +83,20 @@ ul {
   padding-left: 1.1rem;
 }
 
+/* ── Scroll Progress ── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  z-index: 100;
+  transition: width 60ms linear;
+  pointer-events: none;
+}
+
 /* ── Shell ── */
 
 .site-shell {
@@ -126,13 +147,13 @@ ul {
   font-size: 0.72rem;
   font-weight: 700;
   font-family: "Space Grotesk", sans-serif;
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 250ms ease;
+  transition: transform var(--btn-dur) var(--card-ease),
+    box-shadow var(--btn-dur) var(--card-ease);
 }
 
 .brand:hover .brand-mark {
-  transform: scale(1.1);
-  box-shadow: 0 0 16px rgba(192, 132, 252, 0.3);
+  transform: scale(1.03);
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.25);
 }
 
 .site-nav {
@@ -151,10 +172,10 @@ ul {
   padding: 0.4rem 0.65rem;
   border-radius: 999px;
   opacity: 0.72;
-  transition: color 200ms ease,
-    background-color 200ms ease,
-    opacity 200ms ease,
-    box-shadow 200ms ease;
+  transition: color var(--micro-dur) ease,
+    background-color var(--micro-dur) ease,
+    opacity var(--micro-dur) ease,
+    box-shadow var(--micro-dur) ease;
 }
 
 .site-nav a:hover,
@@ -177,15 +198,15 @@ ul {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 250ms ease,
-    background-color 200ms ease;
+  transition: transform var(--btn-dur) var(--card-ease),
+    box-shadow var(--btn-dur) var(--card-ease),
+    background-color var(--btn-color-dur) ease;
 }
 
 .header-cta:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(192, 132, 252, 0.3);
+  box-shadow: 0 6px 20px rgba(192, 132, 252, 0.3);
 }
 
 .header-cta:active {
@@ -195,7 +216,7 @@ ul {
 
 .text-link {
   color: var(--muted);
-  transition: color 200ms ease;
+  transition: color var(--micro-dur) ease;
 }
 
 .text-link:hover,
@@ -206,9 +227,43 @@ ul {
 /* ── Hero ── */
 
 .hero {
+  position: relative;
   padding: 4rem 0 4.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.04);
   text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  translate: -50% 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,132,252,0.18) 0%, rgba(168,85,247,0.08) 40%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: heroGlow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes heroGlow {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 
 .eyebrow {
@@ -251,10 +306,10 @@ ul {
   border: 1px solid transparent;
   font-size: 0.88rem;
   font-weight: 600;
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 200ms ease,
-    background-color 200ms ease,
-    box-shadow 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--btn-dur) var(--card-ease),
+    border-color var(--btn-color-dur) ease,
+    background-color var(--btn-color-dur) ease,
+    box-shadow var(--btn-dur) var(--card-ease);
 }
 
 .button:hover,
@@ -295,8 +350,8 @@ ul {
   padding: 4.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.04);
   scroll-margin-top: 6rem;
-  content-visibility: auto;
-  contain-intrinsic-size: 700px;
+  perspective: 1600px;
+  perspective-origin: 50% 20%;
 }
 
 .section-title {
@@ -356,6 +411,7 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  transform-style: preserve-3d;
 }
 
 .project-card {
@@ -366,16 +422,21 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--float-shadow), var(--glass-highlight);
-  transition: border-color 250ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  z-index: 0;
+  transition: border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease),
+    z-index 0ms linear 0ms;
 }
 
 .project-card:hover {
   border-color: var(--glass-border-hover);
   background: var(--glass-bg-hover);
-  transform: translateY(-5px);
-  box-shadow: var(--float-shadow-hover), var(--glass-highlight);
+  transform: translateY(-3px);
+  box-shadow: var(--card-lift-shadow), var(--glass-highlight);
 }
 
 .project-header {
@@ -461,9 +522,9 @@ ul {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--accent);
-  transition: border-color 200ms ease,
-    background-color 200ms ease,
-    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: border-color var(--micro-dur) ease,
+    background-color var(--micro-dur) ease,
+    transform var(--btn-dur) var(--card-ease);
 }
 
 .tag-row span:hover {
@@ -490,7 +551,7 @@ ul {
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--btn-dur) var(--card-ease);
 }
 
 .text-link:hover::after,
@@ -509,16 +570,21 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--float-shadow), var(--glass-highlight);
-  transition: border-color 250ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  z-index: 0;
+  transition: border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease),
+    z-index 0ms linear 0ms;
 }
 
 .exp-card:hover {
   border-color: var(--glass-border-hover);
   background: var(--glass-bg-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--float-shadow-hover), var(--glass-highlight);
+  transform: translateY(-3px);
+  box-shadow: var(--card-lift-shadow), var(--glass-highlight);
 }
 
 .exp-header {
@@ -538,9 +604,9 @@ ul {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--glass-border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 250ms ease,
-    box-shadow 350ms ease;
+  transition: transform var(--card-dur) var(--card-ease),
+    border-color var(--card-color-dur) ease,
+    box-shadow var(--card-dur) var(--card-ease);
   overflow: hidden;
 }
 
@@ -553,9 +619,9 @@ ul {
 }
 
 .exp-card:hover .exp-logo {
-  transform: scale(1.08);
+  transform: scale(1.02);
   border-color: rgba(255,255,255,0.14);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
 }
 
 .exp-meta h3 {
@@ -613,6 +679,7 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  transform-style: preserve-3d;
 }
 
 .edu-card {
@@ -623,16 +690,21 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--float-shadow), var(--glass-highlight);
-  transition: border-color 250ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  z-index: 0;
+  transition: border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease),
+    z-index 0ms linear 0ms;
 }
 
 .edu-card:hover {
   border-color: var(--glass-border-hover);
   background: var(--glass-bg-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--float-shadow-hover), var(--glass-highlight);
+  transform: translateY(-3px);
+  box-shadow: var(--card-lift-shadow), var(--glass-highlight);
 }
 
 .edu-top {
@@ -711,6 +783,7 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  transform-style: preserve-3d;
 }
 
 .skill-group {
@@ -721,16 +794,21 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--float-shadow), var(--glass-highlight);
-  transition: border-color 250ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  z-index: 0;
+  transition: border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease),
+    z-index 0ms linear 0ms;
 }
 
 .skill-group:hover {
   border-color: var(--glass-border-hover);
   background: var(--glass-bg-hover);
   transform: translateY(-3px);
-  box-shadow: var(--float-shadow-hover), var(--glass-highlight);
+  box-shadow: var(--card-lift-shadow), var(--glass-highlight);
 }
 
 .skill-group h4 {
@@ -759,17 +837,17 @@ ul {
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.03);
-  transition: border-color 250ms ease,
-    background-color 250ms ease,
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 300ms ease;
+  transition: border-color var(--btn-color-dur) ease,
+    background-color var(--btn-color-dur) ease,
+    transform var(--btn-dur) var(--card-ease),
+    box-shadow var(--btn-dur) var(--card-ease);
 }
 
 .skill-item:hover {
   border-color: var(--glass-border-hover);
   background: rgba(255, 255, 255, 0.09);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15), 0 0 12px rgba(192,132,252,0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.16), 0 0 12px rgba(192,132,252,0.05);
 }
 
 .skill-logo {
@@ -810,6 +888,7 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  transform-style: preserve-3d;
 }
 
 .award-card {
@@ -831,16 +910,21 @@ ul {
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.12),
     0 1px 0 rgba(255, 255, 255, 0.05) inset;
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 250ms ease;
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  z-index: 0;
+  transition: transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease),
+    border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    z-index 0ms linear 0ms;
 }
 
 .award-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   border-color: var(--glass-border-hover);
   background: var(--glass-bg-hover);
-  box-shadow: var(--float-shadow-hover), var(--glass-highlight);
+  box-shadow: var(--card-lift-shadow), var(--glass-highlight);
 }
 
 .award-icon-wrap {
@@ -852,13 +936,13 @@ ul {
   background: var(--accent-soft);
   border: 1px solid var(--_accent-15);
   box-shadow: 0 0 20px var(--accent-soft);
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms ease;
+  transition: transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease);
 }
 
 .award-card:hover .award-icon-wrap {
-  transform: scale(1.12) rotate(4deg);
-  box-shadow: 0 0 28px var(--_accent-15), 0 0 0 4px var(--accent-soft);
+  transform: scale(1.015) rotate(1deg);
+  box-shadow: 0 0 22px var(--_accent-15), 0 0 0 3px var(--accent-soft);
 }
 
 .award-icon {
@@ -901,10 +985,10 @@ ul {
   border: 1px solid var(--_accent-15);
   border-radius: 999px;
   background: transparent;
-  transition: background-color 220ms ease,
-    color 220ms ease,
-    border-color 220ms ease,
-    transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-color var(--btn-color-dur) ease,
+    color var(--btn-color-dur) ease,
+    border-color var(--btn-color-dur) ease,
+    transform var(--btn-dur) var(--card-ease);
 }
 
 .award-link:hover {
@@ -928,6 +1012,62 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--float-shadow), var(--glass-highlight);
+  z-index: 0;
+}
+
+/* Make larger surfaces react as clearly as the inner skill tiles. */
+:is(.project-card, .exp-card, .edu-card, .skill-group, .award-card, .contact-card) {
+  position: relative;
+  isolation: isolate;
+}
+
+:is(.project-card, .exp-card, .edu-card, .skill-group, .award-card, .contact-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow var(--card-dur) var(--card-ease), opacity var(--card-dur) var(--card-ease);
+  opacity: 0;
+}
+
+:is(.project-card, .exp-card, .edu-card, .skill-group, .award-card, .contact-card):hover {
+  border-color: rgba(192, 132, 252, 0.42);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.055) 100%
+  );
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(192, 132, 252, 0.14),
+    0 0 16px rgba(192, 132, 252, 0.05),
+    var(--glass-highlight);
+}
+
+:is(.project-card, .exp-card, .edu-card, .skill-group, .award-card, .contact-card):hover::after {
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+
+.project-card:hover,
+.exp-card:hover,
+.edu-card:hover,
+.skill-group:hover,
+.award-card:hover,
+.contact-card:hover {
+  transform: translateY(-3px);
+  z-index: 3;
+}
+
+.contact-card {
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  transition: border-color var(--card-color-dur) ease,
+    background var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease);
 }
 
 .contact-card h2 {
@@ -955,17 +1095,19 @@ ul {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   background: rgba(255,255,255,0.03);
-  transition: border-color 250ms ease,
-    background-color 250ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform: translateY(0);
+  transition: border-color var(--card-color-dur) ease,
+    background-color var(--card-color-dur) ease,
+    transform var(--card-dur) var(--card-ease),
+    box-shadow var(--card-dur) var(--card-ease);
 }
 
 .contact-link:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
 }
 
 .contact-label {
@@ -980,7 +1122,7 @@ ul {
 .contact-value {
   color: var(--muted);
   font-size: 0.92rem;
-  transition: color 200ms ease;
+  transition: color var(--micro-dur) ease;
 }
 
 .contact-link:hover .contact-value {
@@ -1040,6 +1182,28 @@ ul {
 .reveal-ready .reveal.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered children inside revealed sections */
+.reveal-ready .reveal .stagger {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal-ready .reveal.revealed .stagger {
+  animation: staggerIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stagger-done {
+  opacity: 1 !important;
+  transform: none;
+}
+
+@keyframes staggerIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Custom Scrollbar (Webkit) ── */
