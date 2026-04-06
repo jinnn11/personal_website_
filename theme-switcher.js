@@ -344,7 +344,7 @@
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 16px;
         padding: 0.75rem 1rem;
-        width: min(320px, calc(100vw - 2rem));
+        width: min(260px, calc(100vw - 2rem));
         max-height: calc(100vh - 7rem);
         overflow: auto;
         box-shadow: 0 8px 32px rgba(0,0,0,0.5);
@@ -367,12 +367,12 @@
         align-items: center;
         gap: 0.35rem;
         width: 100%;
-        padding: 0.35rem 0.65rem;
+        padding: 0.35rem 0.55rem;
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 8px;
         background: rgba(255,255,255,0.04);
         color: rgba(255,255,255,0.75);
-        font-size: 0.7rem;
+        font-size: 0.66rem;
         font-family: inherit;
         cursor: pointer;
         transition: all 150ms ease;
