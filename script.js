@@ -23,6 +23,7 @@ if (yearElement) {
 (() => {
   const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
   const sections = [];
+  let activeLink = null;
   navLinks.forEach((link) => {
     const id = link.getAttribute("href").slice(1);
     const el = document.getElementById(id);
@@ -37,6 +38,8 @@ if (yearElement) {
   }
 
   function paintActive(link) {
+    if (activeLink === link) return;
+
     navLinks.forEach((l) => {
       l.classList.remove("active");
       l.removeAttribute("aria-current");
@@ -56,6 +59,7 @@ if (yearElement) {
     link.style.opacity = "1";
     link.style.fontWeight = "700";
     link.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.22)";
+    activeLink = link;
   }
 
   function updateActive() {
