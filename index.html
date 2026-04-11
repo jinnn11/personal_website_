@@ -39,55 +39,76 @@
         </div>
       </header>
 
+      <!-- Page-wide ambient orbs — evenly distributed, not section-focused -->
+      <div class="page-orbs" aria-hidden="true">
+        <div class="orb pg-orb-1"></div>
+        <div class="orb pg-orb-2"></div>
+        <div class="orb pg-orb-3"></div>
+        <div class="orb pg-orb-4"></div>
+        <div class="orb pg-orb-5"></div>
+        <div class="orb pg-orb-6"></div>
+        <div class="orb pg-orb-7"></div>
+      </div>
+
       <main>
         <!-- Hero -->
         <section class="hero" id="top">
-          <h1>I'm Swaminathan Sankaran</h1>
-          <p class="hero-sub">
-            I like building ML systems that don't break the moment they hit real
-            data. Currently studying Data Science at UB and looking for
-            internship opportunities.
-          </p>
+          <div class="hero-glow" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1>I'm Swaminathan Sankaran</h1>
+              <p class="hero-sub">
+                I like building ML systems that don't break the moment they hit real
+                data. Currently studying Data Science at UB and looking for
+                internship opportunities.
+              </p>
               <div class="hero-actions">
                 <a class="button button-primary" href="assets/swaminathan_resume.pdf?v=20260406" target="_blank" rel="noreferrer">Resume</a>
                 <a class="button button-secondary" href="#projects">Projects</a>
                 <a class="button button-secondary" href="#contact">Contact</a>
               </div>
+            </div>
+            <div class="hero-photo">
+              <img src="assets/profile.jpg" alt="Swaminathan Sankaran" />
+            </div>
+          </div>
         </section>
 
         <!-- About -->
         <section class="section reveal" id="about">
           <p class="eyebrow">About</p>
           <h2 class="section-title">A bit about me</h2>
-          <p>
-            I'm a Master's student in Data Science at the University at
-            Buffalo, and curiosity has shaped a lot of how I learn and work. I
-            enjoy understanding how things work, whether that is a technical
-            system, a human decision, or a bigger idea in philosophy,
-            psychology, and rationality.
-          </p>
-          <p>
-            A lot of that mindset comes from the things I've always enjoyed
-            outside of work. I used to be a competitive gamer, which taught me
-            how to think strategically, stay composed, and keep improving
-            through practice. I'm also a speedcuber, so I've always liked
-            patterns, problem solving, and the challenge of getting better with
-            focus and repetition. I enjoy reading, exploring different
-            perspectives, and learning through food, culture, and the ways
-            people think and live.
-          </p>
-          <p>
-            That same curiosity is what drew me to data science and machine
-            learning. It also shapes how I approach my work. I enjoy building
-            systems that are thoughtful, useful, and reliable, and I'm
-            especially interested in turning ideas into practical solutions
-            that create real impact.
-          </p>
-          <p>
-            I'm currently looking for internship opportunities where I can keep
-            learning, contribute meaningfully, and grow as both a problem
-            solver and engineer.
-          </p>
+          <div class="about-copy">
+            <p>
+              I'm a Master's student in Data Science at the University at
+              Buffalo, and curiosity has shaped a lot of how I learn and work. I
+              enjoy understanding how things work, whether that is a technical
+              system, a human decision, or a bigger idea in philosophy,
+              psychology, and rationality.
+            </p>
+            <p>
+              A lot of that mindset comes from the things I've always enjoyed
+              outside of work. I used to be a competitive gamer, which taught me
+              how to think strategically, stay composed, and keep improving
+              through practice. I'm also a speedcuber, so I've always liked
+              patterns, problem solving, and the challenge of getting better with
+              focus and repetition. I enjoy reading, exploring different
+              perspectives, and learning through food, culture, and the ways
+              people think and live.
+            </p>
+            <p>
+              That same curiosity is what drew me to data science and machine
+              learning. It also shapes how I approach my work. I enjoy building
+              systems that are thoughtful, useful, and reliable, and I'm
+              especially interested in turning ideas into practical solutions
+              that create real impact.
+            </p>
+            <p>
+              I'm currently looking for internship opportunities where I can keep
+              learning, contribute meaningfully, and grow as both a problem
+              solver and engineer.
+            </p>
+          </div>
         </section>
 
         <!-- Projects -->
@@ -414,7 +435,7 @@
 
     <!-- Temporary Theme Switcher -->
     <script>
-      window.ENABLE_THEME_SWITCHER = false;
+      window.ENABLE_THEME_SWITCHER = true;
       if (window.ENABLE_THEME_SWITCHER) {
         const switcherRoot = document.createElement("div");
         switcherRoot.id = "theme-switcher";

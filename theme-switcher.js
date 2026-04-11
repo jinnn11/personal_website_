@@ -1,5 +1,5 @@
 (() => {
-  const ENABLE_THEME_SWITCHER = false;
+  const ENABLE_THEME_SWITCHER = true;
   const themes = [
     {
       name: "Soft Cosmos",
@@ -592,6 +592,153 @@
     grid.appendChild(btn);
   });
 
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; }
+    else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+      else if (max === g) h = ((b - r) / d + 2) / 6;
+      else h = ((r - g) / d + 4) / 6;
+    }
+    return [h * 360, s, l];
+  }
+
+  function hslToRgb(h, s, l) {
+    h = ((h % 360) + 360) % 360;
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = l - c / 2;
+    let r, g, b;
+    if (h < 60)       { r = c; g = x; b = 0; }
+    else if (h < 120) { r = x; g = c; b = 0; }
+    else if (h < 180) { r = 0; g = c; b = x; }
+    else if (h < 240) { r = 0; g = x; b = c; }
+    else if (h < 300) { r = x; g = 0; b = c; }
+    else              { r = c; g = 0; b = x; }
+    return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
+  }
+
+  // Hand-picked complementary orb color pairs per theme
+  const ORB_PALETTES = {
+    "Soft Cosmos":           { warm: [253,186,180], cool: [130,220,200] },
+    "Dusk Aurora":           { warm: [255,191,105], cool: [107,200,220] },
+    "Midnight Garden":       { warm: [240,140,130], cool: [160,140,240] },
+    "Steel Sunrise":         { warm: [244,120,160], cool: [100,180,250] },
+    "Ocean Depths":          { warm: [250,160,120], cool: [80,230,200] },
+    "Velvet Night":          { warm: [240,200,120], cool: [160,150,240] },
+    "Slate & Gold":          { warm: [240,120,100], cool: [120,160,200] },
+    "Frosted Mint":          { warm: [240,160,130], cool: [150,140,230] },
+    "Neon Indigo":           { warm: [248,130,120], cool: [80,210,200] },
+    "Ember Smoke":           { warm: [248,180,80],  cool: [120,150,210] },
+    "Lunar Silver":          { warm: [220,170,180], cool: [160,200,230] },
+    "Electric Lime":         { warm: [240,130,110], cool: [170,130,240] },
+    "Royal Amethyst":        { warm: [252,180,130], cool: [100,210,200] },
+    "Carbon Copper":         { warm: [230,130,160], cool: [100,190,210] },
+    "Arctic Blue":           { warm: [252,170,130], cool: [160,150,230] },
+    "Warm Terracotta":       { warm: [230,190,100], cool: [120,190,160] },
+    "new - Graphite Bloom":  { warm: [250,190,100], cool: [100,200,210] },
+    "new - Ink Teal Fade":   { warm: [240,150,140], cool: [160,140,230] },
+    "new - Mocha Ember":     { warm: [240,120,150], cool: [100,170,240] },
+    "new - Glacier Violet":  { warm: [250,170,120], cool: [100,210,190] },
+    "new - Forest Signal":   { warm: [240,170,80],  cool: [120,160,230] },
+    "new - Rose Quartz Night":{ warm: [240,200,110], cool: [130,200,170] },
+    "new - Cobalt Current":  { warm: [250,150,120], cool: [100,220,190] },
+    "new 2 - Amber Alloy":   { warm: [240,120,140], cool: [80,200,200] },
+    "new 2 - Orchid Haze":   { warm: [240,190,90],  cool: [80,210,200] },
+    "new 2 - Deep Sea Glass": { warm: [240,140,120], cool: [100,170,240] },
+    "new 2 - Merlot Fade":   { warm: [250,180,80],  cool: [80,200,200] },
+    "new 2 - Ice Indigo":    { warm: [240,150,150], cool: [100,220,200] },
+    "new 2 - Copper Plum":   { warm: [200,130,220], cool: [100,200,200] },
+    "new 2 - Azure Mist":    { warm: [250,170,130], cool: [100,230,200] },
+    "new 2 - Neon Fig":      { warm: [250,190,100], cool: [80,220,200] },
+    "new 2 - Olive Ember":   { warm: [240,140,100], cool: [120,160,230] },
+    "new 2 - Coral Ink":     { warm: [240,200,100], cool: [100,200,210] },
+    "new 3 - Slate Mist":    { warm: [184,155,165], cool: [140,170,160] },
+    "new 3 - Soft Sage":     { warm: [180,150,155], cool: [145,165,185] },
+    "new 3 - Smoked Blue":   { warm: [170,145,160], cool: [140,165,145] },
+    "new 3 - Sandstone":     { warm: [185,150,150], cool: [135,165,155] },
+    "new 3 - Mauve Ash":     { warm: [185,150,160], cool: [140,165,150] },
+    "new 3 - Deep Olive":    { warm: [175,150,130], cool: [140,155,170] },
+    "new 3 - Fog Rose":      { warm: [190,175,130], cool: [140,170,160] },
+    "new 3 - Dusty Teal":    { warm: [170,145,145], cool: [145,145,170] },
+    "new 4 - Midnight Navy": { warm: [220,175,150], cool: [140,210,195] },
+    "new 4 - Executive Gold": { warm: [200,140,140], cool: [140,165,195] },
+    "new 4 - Obsidian Blue": { warm: [220,150,130], cool: [120,205,190] },
+    "new 4 - Graphite Pearl": { warm: [200,170,175], cool: [170,200,215] },
+    "new 4 - Deep Ink Cyan": { warm: [230,170,140], cool: [160,150,220] },
+    "new 4 - Onyx Brass":    { warm: [195,145,145], cool: [135,170,155] },
+    "new 4 - Carbon Emerald": { warm: [220,150,130], cool: [155,145,215] },
+    "new 4 - Titanium Violet":{ warm: [220,155,145], cool: [120,200,195] }
+  };
+
+  function buildOrbColors(accent, themeName) {
+    const palette = ORB_PALETTES[themeName];
+    const isN3 = themeName && themeName.startsWith("new 3");
+    const isN4 = themeName && themeName.startsWith("new 4");
+    // Muted/professional themes get softer alphas
+    const a1 = isN4 ? 0.18 : isN3 ? 0.20 : 0.30;
+    const a2 = isN4 ? 0.12 : isN3 ? 0.14 : 0.20;
+    const a3 = isN4 ? 0.10 : isN3 ? 0.12 : 0.18;
+    const a4 = isN4 ? 0.06 : isN3 ? 0.08 : 0.12;
+    const a5 = isN4 ? 0.08 : isN3 ? 0.10 : 0.14;
+
+    if (palette) {
+      const { warm, cool } = palette;
+      return {
+        orb1: `rgba(${accent[0]},${accent[1]},${accent[2]},${a1})`,
+        orb2: `rgba(${warm[0]},${warm[1]},${warm[2]},${a2})`,
+        orb3: `rgba(${cool[0]},${cool[1]},${cool[2]},${a3})`,
+        orb4: `rgba(${cool[0]},${cool[1]},${cool[2]},${a4})`,
+        orb5: `rgba(${warm[0]},${warm[1]},${warm[2]},${a5})`,
+        orbBorder: `rgba(${accent[0]},${accent[1]},${accent[2]},0.25)`,
+        orbGlow: `rgba(${accent[0]},${accent[1]},${accent[2]},0.15)`
+      };
+    }
+    // Fallback: algorithmic
+    const [h, s, l] = rgbToHsl(...accent);
+    const warm = hslToRgb((h + 65) % 360, Math.min(s * 1.15, 1), Math.min(l * 1.1, 1));
+    const cool = hslToRgb((h + 240) % 360, Math.min(s * 0.8, 1), l);
+    return {
+      orb1: `rgba(${accent[0]},${accent[1]},${accent[2]},${a1})`,
+      orb2: `rgba(${warm[0]},${warm[1]},${warm[2]},${a2})`,
+      orb3: `rgba(${cool[0]},${cool[1]},${cool[2]},${a3})`,
+      orb4: `rgba(${cool[0]},${cool[1]},${cool[2]},${a4})`,
+      orb5: `rgba(${warm[0]},${warm[1]},${warm[2]},${a5})`,
+      orbBorder: `rgba(${accent[0]},${accent[1]},${accent[2]},0.25)`,
+      orbGlow: `rgba(${accent[0]},${accent[1]},${accent[2]},0.15)`
+    };
+  }
+
+  function buildThemeGlow(t, { isNew3, isNew4 }) {
+    const [ar, ag, ab] = t.accent;
+    const baseAlpha = isNew4 ? 0.03 : isNew3 ? 0.04 : 0.05;
+    const centerAlpha = isNew4 ? 0.035 : isNew3 ? 0.045 : 0.06;
+    const edgeAlpha = isNew4 ? 0.022 : isNew3 ? 0.03 : 0.04;
+    const bottomAlpha = isNew4 ? 0.02 : isNew3 ? 0.026 : 0.035;
+    const orbAlpha = isNew4 ? 0.03 : isNew3 ? 0.038 : 0.052;
+    const orbSoftAlpha = isNew4 ? 0.022 : isNew3 ? 0.028 : 0.038;
+
+    const ambientLayers = [
+      `radial-gradient(circle at 52% 35%, rgba(${ar},${ag},${ab},${orbAlpha}) 0%, rgba(${ar},${ag},${ab},${orbSoftAlpha}) 18%, transparent 42%)`,
+      `radial-gradient(circle at 16% 20%, rgba(${ar},${ag},${ab},${orbSoftAlpha}) 0%, transparent 25%)`,
+      `radial-gradient(circle at 84% 22%, rgba(${ar},${ag},${ab},${orbSoftAlpha}) 0%, transparent 24%)`,
+      `radial-gradient(circle at 22% 74%, rgba(${ar},${ag},${ab},${bottomAlpha}) 0%, transparent 22%)`,
+      `radial-gradient(circle at 82% 78%, rgba(${ar},${ag},${ab},${bottomAlpha}) 0%, transparent 20%)`,
+      `radial-gradient(ellipse 70% 48% at 12% 14%, rgba(${ar},${ag},${ab},${baseAlpha}) 0%, transparent 58%)`,
+      `radial-gradient(ellipse 56% 40% at 84% 18%, rgba(${ar},${ag},${ab},${edgeAlpha}) 0%, transparent 54%)`,
+      `radial-gradient(ellipse 64% 46% at 52% 38%, rgba(${ar},${ag},${ab},${centerAlpha}) 0%, transparent 58%)`,
+      `radial-gradient(ellipse 50% 34% at 18% 62%, rgba(${ar},${ag},${ab},${edgeAlpha}) 0%, transparent 52%)`,
+      `radial-gradient(ellipse 58% 42% at 88% 72%, rgba(${ar},${ag},${ab},${bottomAlpha}) 0%, transparent 56%)`,
+      `radial-gradient(ellipse 66% 40% at 20% 88%, rgba(${ar},${ag},${ab},${bottomAlpha}) 0%, transparent 58%)`
+    ];
+
+    return [...t.glow, ...ambientLayers].join(", ");
+  }
+
   function applyTheme(t, btn) {
     const r = document.documentElement.style;
     const [ar, ag, ab] = t.accent;
@@ -618,7 +765,8 @@
 
     // Body background
     document.body.style.background = t.bg;
-    document.body.style.backgroundImage = (isNew3 || isNew4) ? t.glow.slice(0, 2).join(", ") : t.glow.join(", ");
+    r.setProperty("--page-glow", buildThemeGlow(t, { isNew3, isNew4 }));
+    document.body.style.backgroundImage = "";
 
     // Header backdrop
     const hdrInner = document.querySelector(".header-inner");
@@ -635,6 +783,16 @@
     r.setProperty("--_accent-15", `rgba(${ar},${ag},${ab},${a15})`);
     r.setProperty("--glass-border-hover", `rgba(${ar},${ag},${ab},${isNew4 ? "0.35" : "0.3"})`);
     r.setProperty("--float-shadow-hover", `0 14px 40px rgba(0,0,0,0.22), 0 0 20px rgba(${ar},${ag},${ab},0.08)`);
+
+    // Hero orb & photo glow colors
+    const orbs = buildOrbColors(t.accent, t.name);
+    r.setProperty("--orb-1", orbs.orb1);
+    r.setProperty("--orb-2", orbs.orb2);
+    r.setProperty("--orb-3", orbs.orb3);
+    r.setProperty("--orb-4", orbs.orb4);
+    r.setProperty("--orb-5", orbs.orb5);
+    r.setProperty("--orb-border", orbs.orbBorder);
+    r.setProperty("--orb-glow", orbs.orbGlow);
 
     // Active state
     grid.querySelectorAll(".ts-btn").forEach(b => b.classList.remove("active"));
