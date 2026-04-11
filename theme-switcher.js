@@ -1,5 +1,6 @@
 (() => {
   const ENABLE_THEME_SWITCHER = true;
+  const DEFAULT_THEME_NAME = "Steel Sunrise";
   const themes = [
     {
       name: "Soft Cosmos",
@@ -591,6 +592,14 @@
     btn.addEventListener("click", () => applyTheme(t, btn));
     grid.appendChild(btn);
   });
+
+  // Default startup theme
+  const defaultIndex = Math.max(
+    0,
+    themes.findIndex((t) => t.name === DEFAULT_THEME_NAME)
+  );
+  const defaultButton = grid.querySelectorAll(".ts-btn")[defaultIndex];
+  applyTheme(themes[defaultIndex], defaultButton);
 
   function rgbToHsl(r, g, b) {
     r /= 255; g /= 255; b /= 255;
