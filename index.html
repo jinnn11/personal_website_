@@ -126,12 +126,9 @@
                 <p class="project-kicker">MLOps / Production Systems</p>
                 <h3>Drift-Aware MLOps Pipeline</h3>
               </div>
-              <ul class="project-list">
-                <li>Drift-aware MLOps pipeline built to detect silent model degradation, trigger automated retraining, and improve model reliability under changing data distributions</li>
-                <li>Built and containerized the system using FastAPI, Airflow, MLflow, PostgreSQL, and Evidently AI with Docker Compose, with Kubernetes-ready orchestration in mind</li>
-                <li>Monitored system health and pipeline behavior in real time using Prometheus and Grafana dashboards</li>
-                <li>Validated end-to-end performance by simulating covariate and concept drift, triggering automated retraining that recovered shifted-distribution <strong>PR-AUC from 0.37 to 0.89</strong> while preserving historical <strong>ROC-AUC at 0.75</strong></li>
-              </ul>
+              <p class="project-desc">
+                Built an end-to-end MLOps pipeline that watches for silent model degradation and automatically retrains when things start drifting. Simulated real-world distribution shifts and the system recovered <strong>PR-AUC from 0.37 to 0.89</strong> without any manual intervention. The whole stack (FastAPI, Airflow, MLflow, Evidently, Prometheus, Grafana) runs in Docker Compose with Kubernetes manifests ready to go.
+              </p>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>XGBoost</span>
@@ -153,12 +150,9 @@
                 <p class="project-kicker">Multimodal Deep Learning</p>
                 <h3>Multi-Modal Molecular Similarity Regression</h3>
               </div>
-              <ul class="project-list">
-                <li>Modeled molecular similarity for drug discovery to improve candidate selection and ranking of chemical compounds</li>
-                <li>Designed a multi-modal architecture fusing 2D image features using ResNet-18, 3D geometry using SchNet, and fingerprint embeddings, trained with contrastive learning across 291,742 molecules</li>
-                <li>Achieved <strong>~0.92 Pearson correlation</strong> on 200 expert-annotated pairs, outperforming the Tanimoto similarity baseline on unseen molecular pairs</li>
-                <li>Built the system to combine complementary molecular views for stronger ranking quality in downstream discovery workflows</li>
-              </ul>
+              <p class="project-desc">
+                A multimodal system for predicting how similar two molecules are, built for drug discovery. It fuses three views of each molecule (2D images, 3D atomic geometry, and chemical fingerprints) using contrastive learning across ~292K molecules. Hit <strong>~0.92 Pearson correlation</strong> on expert-annotated pairs, beating the standard Tanimoto baseline.
+              </p>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>
@@ -176,12 +170,9 @@
                 <p class="project-kicker">Medical Imaging</p>
                 <h3>Patch-Level CT Tamper Classification</h3>
               </div>
-              <ul class="project-list">
-                <li>Built to detect tampering at the patch level within CT scans, where localized manipulation is harder to catch than whole-scan forgeries</li>
-                <li>Jointly trained a 3D convolutional compressor with an ImageNet-pretrained ResNet-18 across 169 volumetric lung CT scans to convert 16-slice 3D patches into compact 2D feature maps</li>
-                <li>Focused on patch-level manipulation, where tampering is more localized and more difficult to detect than whole-scan forgery</li>
-                <li>Achieved <strong>0.95 validation AUC</strong>, outperforming 2.5D, 3D, and projection-based baselines at lower computational cost</li>
-              </ul>
+              <p class="project-desc">
+                Detects localized tampering in CT scans, which is a harder problem than catching whole-scan forgeries. Uses a 3D convolutional compressor paired with a pretrained ResNet-18 to squeeze 16-slice 3D patches into compact 2D feature maps. Trained on 169 volumetric lung CTs and hit <strong>0.95 validation AUC</strong>, beating 2.5D, full 3D, and projection baselines while being cheaper to run.
+              </p>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>

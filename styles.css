@@ -637,8 +637,11 @@ ul {
 }
 
 .project-desc {
-  font-size: 0.95rem;
-  padding-bottom: 0.75rem;
+  font-size: 0.955rem;
+  line-height: 1.72;
+  color: rgba(247, 247, 244, 0.82);
+  text-wrap: pretty;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
