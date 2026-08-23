@@ -507,7 +507,6 @@ ul {
 }
 
 .about-copy {
-  max-width: 68ch;
   margin-inline: 0;
 }
 
@@ -530,15 +529,9 @@ ul {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 3rem;
   align-items: start;
-}
-
-.about-text h2 {
-  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-  margin-top: 0.25rem;
-  margin-bottom: 1rem;
 }
 
 .about-details {
@@ -565,6 +558,7 @@ ul {
 
 .detail-block p {
   font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 .detail-block p strong {
