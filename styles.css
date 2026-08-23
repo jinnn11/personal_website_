@@ -229,16 +229,6 @@ ul {
   transition-duration: 80ms;
 }
 
-.text-link {
-  color: var(--muted);
-  transition: color var(--micro-dur) ease;
-}
-
-.text-link:hover,
-.text-link:focus-visible {
-  color: var(--accent-dark);
-}
-
 /* ── Hero ── */
 
 .hero {
@@ -624,10 +614,6 @@ ul {
   margin-bottom: 0.9rem;
 }
 
-.project-header h3 {
-  grid-column: 1 / -1;
-}
-
 .project-date {
   color: var(--muted);
   font-size: 0.85rem;
@@ -651,6 +637,49 @@ ul {
   line-height: 1.35;
   letter-spacing: -0.015em;
   max-width: 32ch;
+}
+
+.project-title-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.8rem;
+}
+
+.project-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.26rem 0.62rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: color var(--micro-dur) ease, border-color var(--micro-dur) ease,
+    background var(--micro-dur) ease;
+}
+
+.project-repo svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.project-repo:hover,
+.project-repo:focus-visible {
+  color: var(--accent);
+  border-color: var(--glass-border-hover);
+  background: var(--accent-soft);
+}
+
+.project-card:hover .project-repo {
+  border-color: var(--line-strong);
 }
 
 .project-list {
@@ -728,33 +757,6 @@ ul {
   border-color: var(--_accent-15);
   background: var(--_accent-15);
   transform: translateY(-1px);
-}
-
-.text-link {
-  position: relative;
-  font-weight: 700;
-  font-size: 0.88rem;
-  white-space: nowrap;
-  padding-bottom: 2px;
-}
-
-.text-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--btn-dur) var(--card-ease);
-}
-
-.text-link:hover::after,
-.text-link:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left;
 }
 
 /* ── Experience ── */
