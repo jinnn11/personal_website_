@@ -148,9 +148,12 @@
                 <span class="project-date">Aug 2026</span>
                 <h3>Compositional Grounding Probes for Open-Vocabulary Segmentation</h3>
               </div>
-              <p class="project-desc">
-                A benchmark for finding where text-prompted segmentation models actually break. I mined <strong>914 probe items</strong> automatically from COCO, LVIS, and Visual Genome, then ran them through a reproducible evaluation pipeline with checkpointed GPU batch inference, unit-tested geometry utilities, and automated metrics. The failures turned out to be systematic: <strong>20.7% accuracy on negation prompts against 93% on controls</strong>, and 0 of 51 correct on paired spatial queries. An oracle ablation scored 99.6% with ground-truth inputs, which traces every failure back to the text-grounding stage rather than the mask decoder.
-              </p>
+              <ul class="project-list">
+                <li>Built a <strong>914-item benchmark</strong> mined automatically from COCO, LVIS, and Visual Genome to test text-prompted segmentation models</li>
+                <li>Engineered a reproducible evaluation pipeline with checkpointed GPU batch inference, unit-tested geometry utilities, and automated metrics</li>
+                <li>Exposed systematic model failures on compositional prompts: <strong>20.7% accuracy on negation vs 93% on controls</strong>, and 0 of 51 correct on paired spatial queries</li>
+                <li>Traced all failures to the text-grounding stage via an oracle ablation that scored <strong>99.6%</strong> with ground-truth inputs</li>
+              </ul>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>
@@ -171,9 +174,12 @@
                 <span class="project-date">Feb 2026</span>
                 <h3>Drift-Aware MLOps Pipeline</h3>
               </div>
-              <p class="project-desc">
-                An end-to-end MLOps pipeline that watches for silent model degradation and automatically retrains when things start drifting. The whole stack (FastAPI, Airflow, MLflow, PostgreSQL, Evidently AI, Prometheus, Grafana) is containerized with Docker Compose, with Kubernetes manifests ready for production. I validated it by simulating covariate and concept drift end to end: the automated retrain recovered shifted-distribution <strong>PR-AUC from 0.37 to 0.89</strong> while preserving historical ROC-AUC at 0.75, with no manual intervention.
-              </p>
+              <ul class="project-list">
+                <li>Designed a drift-aware MLOps pipeline to detect silent model degradation and trigger automated retraining, improving model reliability under changing data distributions</li>
+                <li>Built and containerized the system using FastAPI, Airflow, MLflow, PostgreSQL, and Evidently AI with Docker Compose, with Kubernetes manifests for production readiness</li>
+                <li>Monitored system health in real time using Prometheus and Grafana dashboards</li>
+                <li>Validated end-to-end performance by simulating covariate and concept drift, triggering automated retraining that recovered shifted-distribution <strong>PR-AUC from 0.37 to 0.89</strong> while preserving historical ROC-AUC at 0.75</li>
+              </ul>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>XGBoost</span>
@@ -197,9 +203,11 @@
                 <span class="project-date">Jan 2026</span>
                 <h3>Molecular Similarity Prediction</h3>
               </div>
-              <p class="project-desc">
-                A multimodal system for predicting how similar two molecules are, built to improve candidate selection and ranking in drug discovery. It fuses three views of each molecule — 2D image features (ResNet-18), 3D atomic geometry (SchNet), and fingerprint embeddings — trained with contrastive learning across <strong>291,742 molecules</strong>. It reached <strong>~0.92 Pearson correlation</strong> on 200 expert-annotated pairs, outperforming the Tanimoto similarity baseline on unseen molecular pairs.
-              </p>
+              <ul class="project-list">
+                <li>Modeled molecular similarity for drug discovery to improve candidate selection and ranking of chemical compounds</li>
+                <li>Designed a multi-modal architecture fusing 2D image features (ResNet-18), 3D geometry (SchNet), and fingerprint embeddings, trained with contrastive learning across <strong>291,742 molecules</strong></li>
+                <li>Achieved <strong>~0.92 Pearson correlation</strong> on 200 expert-annotated pairs, outperforming the Tanimoto similarity baseline on unseen molecular pairs</li>
+              </ul>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>
@@ -218,9 +226,11 @@
                 <span class="project-date">Dec 2025</span>
                 <h3>CT Image Tamper Detection</h3>
               </div>
-              <p class="project-desc">
-                Detects tampering at the patch level within CT scans, where localized manipulation is much harder to catch than whole-scan forgeries. I jointly trained a 3D convolutional compressor with an ImageNet-pretrained ResNet-18 across <strong>169 volumetric lung CT scans</strong>, converting 16-slice 3D patches into compact 2D feature maps. It hit <strong>0.95 validation AUC</strong>, outperforming 2.5D, full 3D, and projection-based baselines at lower computational cost.
-              </p>
+              <ul class="project-list">
+                <li>Built to detect tampering at the patch level within CT scans, where localized manipulation is harder to catch than whole-scan forgeries</li>
+                <li>Jointly trained a 3D convolutional compressor with an ImageNet-pretrained ResNet-18 across <strong>169 volumetric lung CT scans</strong> to convert 16-slice 3D patches into compact 2D feature maps</li>
+                <li>Achieved <strong>0.95 validation AUC</strong>, outperforming 2.5D, 3D, and projection-based baselines at lower computational cost</li>
+              </ul>
               <div class="project-footer">
                 <div class="tag-row">
                   <span>PyTorch</span>

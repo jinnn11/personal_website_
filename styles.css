@@ -653,21 +653,6 @@ ul {
   max-width: 32ch;
 }
 
-.project-desc {
-  font-size: 0.97rem;
-  line-height: 1.76;
-  color: rgba(247, 247, 244, 0.86);
-  text-wrap: pretty;
-  letter-spacing: 0.003em;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.project-desc strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
 .project-list {
   margin-top: 0.25rem;
   padding-left: 0;
@@ -689,6 +674,11 @@ ul {
   hyphens: none;
   letter-spacing: 0.003em;
   color: rgba(247, 247, 244, 0.86);
+}
+
+.project-list li strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .project-list li::before {
