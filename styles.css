@@ -639,12 +639,15 @@ ul {
   max-width: 32ch;
 }
 
-.project-title-row {
+.project-header h3 {
   grid-column: 1 / -1;
+}
+
+.project-meta {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.3rem 0.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  justify-self: end;
 }
 
 .project-repo {
@@ -1598,8 +1601,9 @@ ul {
     row-gap: 0.15rem;
   }
 
-  .project-date {
-    margin-bottom: 0.35rem;
+  .project-meta {
+    justify-self: start;
+    margin-bottom: 0.45rem;
   }
 
   .contact-section {
