@@ -507,12 +507,11 @@ ul {
 }
 
 .about-copy {
-  max-width: none;
+  max-width: 68ch;
   margin-inline: 0;
 }
 
 .about-copy p {
-  max-width: none;
   font-size: 1.02rem;
   line-height: 1.85;
   text-align: left;
