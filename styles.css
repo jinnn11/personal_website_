@@ -617,7 +617,22 @@ ul {
 }
 
 .project-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: 1rem;
   margin-bottom: 0.9rem;
+}
+
+.project-header h3 {
+  grid-column: 1 / -1;
+}
+
+.project-date {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  white-space: nowrap;
 }
 
 .project-kicker {
@@ -953,6 +968,27 @@ ul {
   letter-spacing: 0.03em;
 }
 
+.edu-gpa {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.exp-company-alt {
+  color: var(--muted);
+  font-size: 0.88em;
+  font-weight: 400;
+}
+
 .edu-courses {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -979,6 +1015,10 @@ ul {
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   transform-style: preserve-3d;
+}
+
+.skills-grid > .skill-group:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .skill-group {
@@ -1371,8 +1411,8 @@ ul {
 .site-nav a[aria-current="true"],
 .site-nav a[aria-current="true"]:hover {
   opacity: 1;
-  color: #111318;
-  background: #f7f7f4;
+  color: var(--bg);
+  background: var(--text);
   font-weight: 700;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.22);
   outline: 1px solid rgba(255,255,255,0.2);
@@ -1444,16 +1484,6 @@ ul {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-dark);
-}
-
-/* ── Project Image Consistency ── */
-
-.project-card img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  margin-bottom: 0.75rem;
 }
 
 /* ── Responsive ── */
@@ -1569,6 +1599,15 @@ ul {
   .project-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .project-header {
+    grid-template-columns: 1fr;
+    row-gap: 0.15rem;
+  }
+
+  .project-date {
+    margin-bottom: 0.35rem;
   }
 
   .contact-section {

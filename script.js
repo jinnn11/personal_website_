@@ -105,28 +105,20 @@ if (yearElement) {
     smoothScrollTo(top);
   }
 
+  // Styling lives in the `.site-nav a.active` rule in styles.css so the nav
+  // follows the theme tokens instead of hardcoded inline colors.
   function paintActive(link) {
     if (activeLink === link) return;
 
     navLinks.forEach((l) => {
       l.classList.remove("active");
       l.removeAttribute("aria-current");
-      l.style.background = "";
-      l.style.color = "";
-      l.style.opacity = "";
-      l.style.fontWeight = "";
-      l.style.boxShadow = "";
     });
 
     if (!link) return;
 
     link.classList.add("active");
     link.setAttribute("aria-current", "true");
-    link.style.background = "#f7f7f4";
-    link.style.color = "#111318";
-    link.style.opacity = "1";
-    link.style.fontWeight = "700";
-    link.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.22)";
     activeLink = link;
   }
 
