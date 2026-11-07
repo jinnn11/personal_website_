@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
     <meta name="author" content="Swaminathan Sankaran" />
     <link rel="canonical" href="https://www.swaminathansankaran.com/" />
     <link rel="icon" href="assets/favicon.svg?v=b1" type="image/svg+xml" />
-    <meta name="theme-color" content="#f4efe6" />
+    <meta name="theme-color" content="#14130f" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.swaminathansankaran.com/" />
@@ -29,7 +29,7 @@
       (function () {
         var theme = null;
         try { theme = localStorage.getItem("edition"); } catch (e) {}
-        if (theme !== "light" && theme !== "dark") theme = "light";
+        if (theme !== "light" && theme !== "dark") theme = "dark";
         document.documentElement.setAttribute("data-theme", theme);
         document.documentElement.classList.add("js");
       })();
@@ -73,14 +73,15 @@
         <nav class="nav" aria-label="Primary">
           <a href="#findings"><span class="nav-n">01</span>Findings</a>
           <a href="#experience"><span class="nav-n">02</span>Experience</a>
-          <a href="#skills"><span class="nav-n">03</span>Skills</a>
-          <a href="#about"><span class="nav-n">04</span>About</a>
-          <a href="#contact"><span class="nav-n">05</span>Contact</a>
+          <a href="#education"><span class="nav-n">03</span>Education</a>
+          <a href="#skills"><span class="nav-n">04</span>Skills</a>
+          <a href="#about"><span class="nav-n">05</span>About</a>
+          <a href="#contact"><span class="nav-n">06</span>Contact</a>
         </nav>
         <div class="masthead-actions">
-          <button class="edition-toggle" type="button" data-edition-toggle aria-label="Switch to the night edition (dark theme)">
+          <button class="edition-toggle" type="button" data-edition-toggle aria-label="Switch to the day edition (light theme)">
             <span class="edition-icon" aria-hidden="true"></span>
-            <span class="edition-label">Night</span>
+            <span class="edition-label">Day</span>
           </button>
           <a class="pill" href="assets/swaminathan_resume.pdf?v=20260823" target="_blank" rel="noreferrer">Résumé</a>
           <button class="index-button" type="button" data-open-index aria-haspopup="dialog" aria-controls="index-dialog">Index</button>
@@ -515,7 +516,7 @@
             <p class="section-n" aria-hidden="true">02</p>
             <div>
               <h2 class="section-title" id="experience-title">Experience</h2>
-              <p class="section-dek">Shipping ML to production at Zolvit, then an MS in Data Science at Buffalo.</p>
+              <p class="section-dek">Six months shipping document-AI services to production at Zolvit.</p>
             </div>
           </header>
 
@@ -539,6 +540,22 @@
                 </ul>
               </div>
             </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="section" id="education" aria-labelledby="education-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="section-n" aria-hidden="true">03</p>
+            <div>
+              <h2 class="section-title" id="education-title">Education</h2>
+              <p class="section-dek">An MS in Data Science at the University at Buffalo, after a B.Tech in AI and ML at VIT.</p>
+            </div>
+          </header>
+
+          <ol class="cv">
             <li class="cv-row">
               <p class="cv-when mono">Aug 2025 – Dec 2026</p>
               <div class="cv-what">
@@ -573,7 +590,7 @@
       <section class="section" id="skills" aria-labelledby="skills-title">
         <div class="wrap">
           <header class="section-head">
-            <p class="section-n" aria-hidden="true">03</p>
+            <p class="section-n" aria-hidden="true">04</p>
             <div>
               <h2 class="section-title" id="skills-title">Skills, and where I used them</h2>
               <p class="section-dek">Every dot is a project or job that used the skill. Hover a row or a column to trace it.</p>
@@ -608,7 +625,7 @@
       <section class="section" id="about" aria-labelledby="about-title">
         <div class="wrap">
           <header class="section-head">
-            <p class="section-n" aria-hidden="true">04</p>
+            <p class="section-n" aria-hidden="true">05</p>
             <div>
               <h2 class="section-title" id="about-title">About</h2>
             </div>
@@ -655,7 +672,7 @@
       <!-- Contact -->
       <section class="section contact" id="contact" aria-labelledby="contact-title">
         <div class="wrap">
-          <p class="section-n contact-n" aria-hidden="true">05</p>
+          <p class="section-n contact-n" aria-hidden="true">06</p>
           <h2 class="contact-title" id="contact-title">Have data you don’t quite <em>trust</em>? Let’s talk.</h2>
           <p class="contact-sub">I’m open to data science, ML and AI engineering roles. Email is the fastest way to reach me.</p>
           <div class="contact-actions">
@@ -692,9 +709,10 @@
         <ol class="index-list">
           <li><a href="#findings" data-close-index><span class="mono">01</span>Findings</a></li>
           <li><a href="#experience" data-close-index><span class="mono">02</span>Experience</a></li>
-          <li><a href="#skills" data-close-index><span class="mono">03</span>Skills</a></li>
-          <li><a href="#about" data-close-index><span class="mono">04</span>About</a></li>
-          <li><a href="#contact" data-close-index><span class="mono">05</span>Contact</a></li>
+          <li><a href="#education" data-close-index><span class="mono">03</span>Education</a></li>
+          <li><a href="#skills" data-close-index><span class="mono">04</span>Skills</a></li>
+          <li><a href="#about" data-close-index><span class="mono">05</span>About</a></li>
+          <li><a href="#contact" data-close-index><span class="mono">06</span>Contact</a></li>
         </ol>
         <ul class="index-sub">
           <li><a href="#finding-grid" data-close-index>Grid forecast audit</a></li>
@@ -714,6 +732,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b1" defer></script>
+    <script src="script.js?v=b2" defer></script>
   </body>
 </html>

@@ -215,6 +215,17 @@
       }).catch(function () { /* transition skipped */ });
     });
     sync();
+
+    // Paper colors for printing, whichever edition is showing
+    var shown = null;
+    window.addEventListener("beforeprint", function () {
+      shown = doc.getAttribute("data-theme");
+      doc.setAttribute("data-theme", "light");
+    });
+    window.addEventListener("afterprint", function () {
+      if (shown) doc.setAttribute("data-theme", shown);
+      shown = null;
+    });
   }
 
   /* ------------------------------------------------------------------

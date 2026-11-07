@@ -4,10 +4,9 @@ Personal site for Swaminathan Sankaran — <https://www.swaminathansankaran.com>
 
 No build step, no dependencies: plain HTML, CSS and vanilla JavaScript.
 
-This is the editorial design: a light "day edition" by default and a dark
-"night edition", set in Fraunces, Schibsted Grotesk and IBM Plex Mono. Each
-project is written up as a finding, with a figure drawn from its published
-results.
+This is the editorial design: a dark "night edition" by default and a light
+"day edition", set in Fraunces, Schibsted Grotesk and IBM Plex Mono. Each
+project is written up as a finding, with a figure drawn from its own results.
 
 ## Local preview
 
