@@ -971,9 +971,22 @@ button {
   letter-spacing: -0.032em;
 }
 
-.finding-dek {
-  max-width: 62ch;
+/* Plain-language summary first, technical detail after "Under the hood" */
+.finding-dek,
+.finding-copy > .finding-plain {
+  max-width: 60ch;
   font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.finding-how {
+  margin: 26px 0 8px;
+  color: var(--ink-3);
+}
+
+.finding-tech {
+  max-width: 62ch;
   color: var(--ink-2);
 }
 

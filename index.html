@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=b1" />
+    <link rel="stylesheet" href="styles.css?v=b3" />
 
     <script type="application/ld+json">
       {
@@ -173,8 +173,9 @@
             <div>
               <h2 class="section-title" id="findings-title">Findings</h2>
               <p class="section-dek">
-                Four projects, written up like findings: the question, what I built, what the evidence says,
-                and where it stops.
+                Five projects, one still in progress, written up like findings: the question, what I built, what
+                the evidence says, and where it stops. Each one starts in plain language; the technical detail
+                follows.
               </p>
             </div>
           </header>
@@ -187,8 +188,16 @@
               <p class="finding-meta mono"><span class="finding-no">Finding 01</span><span>Oct – Nov 2026</span><span>Data quality · Time series · Statistics</span></p>
               <h3 class="finding-title" id="f1-title">US grid forecasts looked like they were getting worse. Three errors in the public data explain it.</h3>
               <p class="finding-dek">
-                A 10-year audit of day-ahead demand forecasts for 50+ US grid operators in EIA-930: 6.1M hourly
-                records, an analysis plan committed to Git before any result, and 138 automated tests.
+                Every day, the organizations that run the US power grid forecast tomorrow’s electricity demand, and
+                the federal Energy Information Administration (EIA) publishes those forecasts next to what actually
+                happened. Taken at face value, the national numbers say forecasting is getting worse. I audited ten
+                years of that data and traced the apparent decline to three errors in what was published. Once
+                they’re fixed, the trend is flat.
+              </p>
+              <p class="mono finding-how">Under the hood</p>
+              <p class="finding-tech">
+                6.1 million hourly records for 50+ operators from EIA’s hourly grid data (EIA-930), an analysis plan
+                committed to Git before any results, and 138 automated tests.
               </p>
             </div>
           </div>
@@ -216,14 +225,14 @@
                   <p class="step-kicker mono">As published</p>
                   <h4 class="step-title">The national number says forecasts got worse.</h4>
                   <p>
-                    On the 50 operators present every year, national error rises 0.061 percentage points a year
-                    (Mann–Kendall p = 0.049), and 2025 is the worst of the ten years.
+                    Across the 50 operators present every year, national forecast error creeps up by 0.061
+                    percentage points a year (Mann–Kendall p = 0.049), and 2025 is the worst of the ten years.
                   </p>
                   <p>
-                    But the median operator shows no clear trend, and three of five pre-registered robustness
-                    checks don’t confirm the rise. The plan called for checking the largest operators that lose
-                    to the naive forecast against the operators’ own published data. Both that could be checked
-                    turned up problems.
+                    But the typical operator shows no clear trend, and three of the five robustness checks I
+                    committed to in advance don’t confirm the rise. So, as the plan required, I checked the largest
+                    operators that lose to the naive forecast against their own published data. In both that could
+                    be checked, the published data had errors.
                   </p>
                 </div>
               </div>
@@ -232,13 +241,14 @@
                   <p class="step-kicker mono">Error 1 and 2 · California ISO</p>
                   <h4 class="step-title">California’s demand ran an hour late.</h4>
                   <p>
-                    EIA-930’s forecast for the California ISO equals the operator’s own, but its demand matches
-                    the operator’s actual load an hour earlier: on 333 of 334 days checked in 2025, and for about
-                    four of the ten years in all.
+                    In EIA’s data, the California ISO’s forecast matches the operator’s own, but its demand runs an
+                    hour behind the operator’s records, so the forecast looks worse than it is. That holds on 333 of
+                    334 days checked in 2025, and for about four of the ten years in all.
                   </p>
                   <p>
-                    It also counts battery charging that the forecast leaves out. In 2025 the forecast gap follows
-                    charging almost megawatt for megawatt (R² = 0.91).
+                    It also counts electricity used to charge grid batteries, which the forecast leaves out. In 2025
+                    the gap between forecast and demand follows battery charging almost megawatt for megawatt
+                    (R² = 0.91).
                   </p>
                 </div>
               </div>
@@ -247,9 +257,10 @@
                   <p class="step-kicker mono">Error 3 · Southwest Power Pool</p>
                   <h4 class="step-title">Southwest Power Pool’s forecast changed in May 2025.</h4>
                   <p>
-                    Before 7 May 2025, the forecast EIA-930 carries for SWPP was within 2% of SPP’s own day-ahead
-                    forecast on 122 of 125 days. After it, the two were more than 2% apart on 219 of 238 days,
-                    while SWPP’s demand kept matching. Why it changed isn’t visible in the files.
+                    Before 7 May 2025, the forecast in EIA’s data for Southwest Power Pool matched SPP’s own
+                    day-ahead forecast (within 2% on 122 of 125 days). After that, the two were more than 2% apart
+                    on 219 of 238 days, while the demand figures still agreed. The jump in error comes from the
+                    published forecast, not from SPP’s forecasting. Why it changed isn’t visible in the files.
                   </p>
                 </div>
               </div>
@@ -258,8 +269,9 @@
                   <p class="step-kicker mono">Corrected</p>
                   <h4 class="step-title">With the three errors fixed, the trend is flat.</h4>
                   <p>
-                    National error now trends 0.009 points a year (p = 0.721), and 2025 falls from the worst of
-                    the ten years to 8th-worst. California’s 2025 error drops from 8.28% to 2.35%.
+                    National error now moves just 0.009 points a year (p = 0.721, no detectable trend), and 2025
+                    falls from the worst of the ten years to 8th-worst. California’s 2025 error drops from 8.28%
+                    to 2.35%.
                   </p>
                 </div>
               </div>
@@ -302,16 +314,21 @@
             <div class="finding-copy">
               <p class="finding-meta mono"><span class="finding-no">Finding 02</span><span>Aug 2026</span><span>Vision-language · Evaluation</span></p>
               <h3 class="finding-title" id="f2-title">Grounding DINO + SAM finds “the dog.” It mostly misses “not.”</h3>
-              <p>
-                Text-prompted segmentation handles “the dog.” I wanted to know whether it handles “the dog that is
-                not on the sofa,” “the cup left of the plate” or “the red one.” I built a benchmark of 914
-                human-verified probes across 608 images from COCO, LVIS and Visual Genome, covering negation,
-                spatial relations, attribute binding and fine-grained categories.
+              <p class="finding-plain">
+                Some AI tools can find and outline an object in a photo from a typed request like “the dog,” and
+                they’re used to label data and edit images automatically. I tested whether they understand the small
+                words that change the meaning: “the dog that is not on the sofa,” “the cup left of the plate,” “the
+                red one.” With “not” and “left of” they mostly fail, and I pinned the failures to one part of the
+                system.
               </p>
+              <p class="mono finding-how">Under the hood</p>
               <p>
-                Grounding DINO + SAM scored 20.7% on negation against 93% on controls, and got 0 of 51 paired
-                spatial queries right. Given ground-truth boxes, SAM scored 99.6%, which places every failure in
-                the text-grounding stage, not in segmentation.
+                I built a benchmark of 914 human-verified test prompts across 608 images from COCO, LVIS and Visual
+                Genome, covering negation, spatial relations, attribute binding and fine-grained categories.
+                Grounding DINO + SAM scored 20.7% on negation, below chance, against 93% on control prompts. On 51
+                left/right pairs it never got both right: it picks the same object whichever side is asked for.
+                Given the correct boxes, SAM scored 99.6%, so every failure is in reading the text, not in drawing
+                the outline.
               </p>
               <div class="finding-foot">
                 <ul class="tags"><li>PyTorch</li><li>Grounding DINO</li><li>SAM</li><li>COCO · LVIS · Visual Genome</li><li>CUDA</li><li>pytest</li></ul>
@@ -353,16 +370,20 @@
             <div class="finding-copy">
               <p class="finding-meta mono"><span class="finding-no">Finding 03</span><span>Feb 2026</span><span>MLOps · Production ML</span></p>
               <h3 class="finding-title" id="f3-title">Models fail quietly when the data shifts. This pipeline notices, retrains, and checks before it ships.</h3>
-              <p>
-                I built a pipeline that serves an XGBoost model behind FastAPI, logs every prediction to PostgreSQL,
-                watches for covariate and concept drift with Evidently, Prometheus and Grafana, and retrains through
-                Airflow and MLflow.
+              <p class="finding-plain">
+                A model that was accurate at launch can slowly go wrong as the world it sees changes, and nothing
+                crashes to warn you. I built a system around a model that predicts which bank customers will sign up
+                for a term deposit: it watches for that kind of change, retrains the model, and only lets the new
+                model take over if it’s actually better.
               </p>
+              <p class="mono finding-how">Under the hood</p>
               <p>
-                A retrained model only ships if it gains at least 0.005 PR-AUC on shifted data without losing more
-                than 0.03 ROC-AUC on historical data. In a simulated concept shift, the pipeline caught the drift,
-                retrained and recovered PR-AUC on the shifted data from 0.37 to 0.89, with historical ROC-AUC
-                holding at 0.75.
+                An XGBoost model served behind FastAPI, every prediction logged to PostgreSQL, drift checks with
+                Evidently, Prometheus and Grafana, and retraining run by Airflow and tracked in MLflow. A retrained
+                model only ships if it gains at least 0.005 PR-AUC on shifted data without losing more than 0.03
+                ROC-AUC on historical data. In a simulated recession, retraining lifted PR-AUC on the shifted data
+                from 0.84 to 0.89 and ROC-AUC from 0.54 to 0.65, and the new model passed the historical check
+                (ROC-AUC 0.75).
               </p>
               <div class="finding-foot">
                 <ul class="tags"><li>XGBoost</li><li>FastAPI</li><li>Airflow</li><li>MLflow</li><li>Evidently</li><li>Prometheus</li><li>Grafana</li><li>PostgreSQL</li><li>Docker</li><li>Kubernetes</li></ul>
@@ -384,22 +405,22 @@
                 </ol>
               </div>
               <div class="before-after" data-chart="drift">
-                <p class="ba-title mono">Simulated concept shift</p>
+                <p class="ba-title mono">Simulated recession · shifted data</p>
                 <div class="ba-row">
-                  <p class="ba-name">PR-AUC, shifted data</p>
-                  <div class="ba-track" role="img" aria-label="PR-AUC on shifted data: 0.37 before retraining, 0.89 after">
-                    <span class="ba-before" style="--v: 0.37"></span>
+                  <p class="ba-name">PR-AUC</p>
+                  <div class="ba-track" role="img" aria-label="PR-AUC on shifted data: 0.84 before retraining, 0.89 after">
+                    <span class="ba-before" style="--v: 0.84"></span>
                     <span class="ba-after" style="--v: 0.89"></span>
                   </div>
-                  <p class="ba-values"><span class="v-before">0.37</span> → <span class="v-after">0.89</span></p>
+                  <p class="ba-values"><span class="v-before">0.84</span> → <span class="v-after">0.89</span></p>
                 </div>
                 <div class="ba-row">
-                  <p class="ba-name">ROC-AUC, historical data</p>
-                  <div class="ba-track" role="img" aria-label="ROC-AUC on historical data: 0.75 before and after">
-                    <span class="ba-before" style="--v: 0.75"></span>
-                    <span class="ba-after" style="--v: 0.75"></span>
+                  <p class="ba-name">ROC-AUC</p>
+                  <div class="ba-track" role="img" aria-label="ROC-AUC on shifted data: 0.54 before retraining, 0.65 after">
+                    <span class="ba-before" style="--v: 0.54"></span>
+                    <span class="ba-after" style="--v: 0.65"></span>
                   </div>
-                  <p class="ba-values"><span class="v-before">0.75</span> → <span class="v-after">0.75</span></p>
+                  <p class="ba-values"><span class="v-before">0.54</span> → <span class="v-after">0.65</span></p>
                 </div>
                 <ul class="legend legend-small" aria-hidden="true">
                   <li><span class="key key-pub key-bar"></span>Before retraining</li>
@@ -415,16 +436,19 @@
           <div class="wrap finding-grid">
             <div class="finding-copy">
               <p class="finding-meta mono"><span class="finding-no">Finding 04</span><span>Dec 2025</span><span>Computer vision · Medical imaging · Team of 2</span></p>
-              <h3 class="finding-title" id="f4-title">Spotting lung CT scans that a GAN has tampered with.</h3>
-              <p>
-                We trained PyTorch models to tell authentic lung-CT regions from tampered
-                ones, where a GAN had injected or removed tumors, using a public dataset of 100 scans and 169
-                labeled locations.
+              <h3 class="finding-title" id="f4-title">Spotting lung CT scans that AI has tampered with.</h3>
+              <p class="finding-plain">
+                AI can now edit medical scans, adding a lung tumor that isn’t there or erasing one that is, which
+                could change a diagnosis. As a team of two, we trained models to flag the parts of a lung CT scan
+                that have been altered.
               </p>
+              <p class="mono finding-how">Under the hood</p>
               <p>
-                Our 3D-to-2D compressor condenses 16 CT slices into one image for an ImageNet-pretrained ResNet-18.
-                It ranked first of five designs on 39 patches from scans held out of training. With no separate test
-                set, that is a small-sample result, and the repository says so.
+                PyTorch models trained on a public dataset of 100 lung CT scans with 169 labeled locations, where a
+                GAN had injected or removed tumors. Our 3D-to-2D compressor condenses 16 CT slices into one image for
+                an ImageNet-pretrained ResNet-18, and it ranked first of five designs (by best and average validation
+                AUC) on 39 patches from scans held out of training. With no separate test set, that shows a
+                learnable signal, not a finished detector, and the repository says so.
               </p>
               <div class="finding-foot">
                 <ul class="tags"><li>PyTorch</li><li>ResNet-18</li><li>3D CNN</li><li>DICOM · pydicom</li><li>Transfer learning</li></ul>
@@ -460,15 +484,18 @@
             <div class="finding-copy">
               <p class="finding-meta mono"><span class="finding-no finding-no-live"><span class="status-dot" aria-hidden="true"></span>In progress</span><span>LLM evaluation · Information extraction</span></p>
               <h3 class="finding-title" id="f5-title">Can an LLM read an earnings release without getting the numbers wrong?</h3>
-              <p>
-                Models extract revenue, net income and diluted EPS from 60 SEC earnings press releases, and every one
-                of the 293 figures is graded automatically against the company’s XBRL filing. Three API models
-                scored 293 / 293.
+              <p class="finding-plain">
+                Every quarter, companies announce their results in press releases, and pulling the key numbers out
+                of them is routine work in finance. I’m testing whether AI models can do it without mistakes,
+                checking every answer automatically against what the company officially files with the SEC.
               </p>
+              <p class="mono finding-how">Under the hood</p>
               <p>
-                Open models mostly failed on units: the right figure, off by a power of ten. Asking for each figure
-                as printed plus its unit, and doing the arithmetic in code, cut their errors 65% and unit slips 90%.
-                Next: a LoRA fine-tune of Qwen3-8B, served with vLLM.
+                Models extract revenue, net income and diluted EPS from 60 earnings press releases, and all 293
+                figures are graded against the company’s XBRL filing. Three API models scored 293 / 293. Open models
+                mostly failed on units: the right figure, off by a power of ten. Asking for each figure as printed
+                plus its unit, and doing the arithmetic in code, cut their errors 65% and unit slips 90%. Now: a
+                LoRA fine-tune of Qwen3-8B, served with vLLM.
               </p>
               <div class="finding-foot">
                 <ul class="tags"><li>LLM evaluation</li><li>vLLM</li><li>Prompt design</li><li>XBRL</li><li>LoRA</li><li>Python</li></ul>
@@ -497,7 +524,7 @@
             <p class="on-file-label mono">Also on file</p>
             <a class="on-file-item" href="https://github.com/jinnn11/molecular-similarity-prediction" target="_blank" rel="noreferrer">
               <span class="on-file-name">Molecular Similarity Prediction</span>
-              <span class="on-file-desc">Contrastive pretraining of image, 3D and fingerprint encoders on 291,742 molecules; Pearson 0.90 on 200 rated pairs with no training on the ratings.</span>
+              <span class="on-file-desc">Can a model judge how alike two drug-like molecules are? Encoders pretrained on 291,742 molecules (drawings, 3D shapes and fingerprints) agreed with ratings of 200 pairs at a 0.90 correlation, without training on the ratings.</span>
               <span class="on-file-arrow" aria-hidden="true">↗</span>
             </a>
             <a class="on-file-item" href="https://github.com/jinnn11?tab=repositories" target="_blank" rel="noreferrer">
