@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=b7" />
+    <link rel="stylesheet" href="styles.css?v=b8" />
 
     <script type="application/ld+json">
       {
@@ -633,26 +633,50 @@
             <p class="section-n" aria-hidden="true">04</p>
             <div>
               <h2 class="section-title" id="skills-title">Skills, and where I used them</h2>
-              <p class="section-dek">Every dot is a project or job that used the skill. Hover a row or a column to trace it.</p>
+              <p class="section-dek">What I use at each step of taking a model from raw data to production. The numbers are the findings where I used them.</p>
             </div>
           </header>
 
-          <div class="matrix-wrap">
-            <table class="matrix" data-matrix>
-              <caption class="sr-only">Skills by project: which projects and jobs used each skill</caption>
-              <thead>
-                <tr>
-                  <th scope="col" class="matrix-corner"><span class="mono">Skill</span></th>
-                  <th scope="col" data-col="0"><span class="long">SEC benchmark</span><span class="short" aria-hidden="true">SEC</span></th>
-                  <th scope="col" data-col="1"><span class="long">Grid audit</span><span class="short" aria-hidden="true">Grid</span></th>
-                  <th scope="col" data-col="2"><span class="long">Grounding probes</span><span class="short" aria-hidden="true">Probes</span></th>
-                  <th scope="col" data-col="3"><span class="long">Drift MLOps</span><span class="short" aria-hidden="true">Drift</span></th>
-                  <th scope="col" data-col="4"><span class="long">CT tamper</span><span class="short" aria-hidden="true">CT</span></th>
-                  <th scope="col" data-col="5"><span class="long">Zolvit</span><span class="short" aria-hidden="true">Zolvit</span></th>
-                </tr>
-              </thead>
-              <tbody data-matrix-body></tbody>
-            </table>
+          <!-- From raw data to production: one column per step, with the findings that used it -->
+          <div class="pp" data-pp>
+            <ol class="pp-steps">
+              <li class="pp-step">
+                <span class="pp-node" aria-hidden="true"></span>
+                <h3 class="pp-title">Data</h3>
+                <p class="pp-sub">Get it, check it</p>
+                <ul class="pp-tools"><li>Python</li><li>SQL, PostgreSQL</li><li>pandas</li><li>Statistical testing</li><li>Time series</li><li>Matplotlib</li></ul>
+                <p class="pp-refs">Used in <span class="pp-r"><a href="#finding-sec" aria-label="Finding 01: SEC benchmark">01</a>, <a href="#finding-grid" aria-label="Finding 02: grid audit">02</a>, <a href="#finding-drift" aria-label="Finding 04: drift MLOps">04</a></span></p>
+              </li>
+              <li class="pp-step">
+                <span class="pp-node" aria-hidden="true"></span>
+                <h3 class="pp-title">Models</h3>
+                <p class="pp-sub">Train and test</p>
+                <ul class="pp-tools"><li>PyTorch</li><li>XGBoost</li><li>Computer vision</li><li>Vision-language models</li><li>NLP, OCR, T5</li><li>DICOM, medical imaging</li></ul>
+                <p class="pp-refs">Used in <span class="pp-r"><a href="#finding-sec" aria-label="Finding 01: SEC benchmark">01</a>, <a href="#finding-probes" aria-label="Finding 03: grounding probes">03</a>, <a href="#finding-drift" aria-label="Finding 04: drift MLOps">04</a>, <a href="#finding-ct" aria-label="Finding 05: CT tamper">05</a>, <a class="z" href="#experience" aria-label="Zolvit internship, in Experience">Zolvit</a></span></p>
+              </li>
+              <li class="pp-step">
+                <span class="pp-node" aria-hidden="true"></span>
+                <h3 class="pp-title">LLMs</h3>
+                <p class="pp-sub">Evaluate and fine-tune</p>
+                <ul class="pp-tools"><li>LLM evaluation</li><li>Fine-tuning: LoRA, PEFT</li><li>RAG, embeddings, search</li></ul>
+                <p class="pp-refs">Used in <span class="pp-r"><a href="#finding-sec" aria-label="Finding 01: SEC benchmark">01</a>, <a class="z" href="#experience" aria-label="Zolvit internship, in Experience">Zolvit</a></span></p>
+              </li>
+              <li class="pp-step">
+                <span class="pp-node" aria-hidden="true"></span>
+                <h3 class="pp-title">Serving</h3>
+                <p class="pp-sub">Ship it</p>
+                <ul class="pp-tools"><li>vLLM</li><li>Quantization: FP8, AWQ</li><li>FastAPI</li><li>Docker</li><li>Kubernetes</li><li>AWS</li></ul>
+                <p class="pp-refs">Used in <span class="pp-r"><a href="#finding-sec" aria-label="Finding 01: SEC benchmark">01</a>, <a href="#finding-drift" aria-label="Finding 04: drift MLOps">04</a>, <a class="z" href="#experience" aria-label="Zolvit internship, in Experience">Zolvit</a></span></p>
+              </li>
+              <li class="pp-step">
+                <span class="pp-node" aria-hidden="true"></span>
+                <h3 class="pp-title">Operations</h3>
+                <p class="pp-sub">Keep it working</p>
+                <ul class="pp-tools"><li>Airflow</li><li>MLflow</li><li>Evidently, Prometheus, Grafana</li><li>pytest</li><li>Git, GitHub</li></ul>
+                <p class="pp-refs">Used in <span class="pp-r"><a href="#findings" aria-label="All five findings">01–05</a>, <a class="z" href="#experience" aria-label="Zolvit internship, in Experience">Zolvit</a></span></p>
+              </li>
+            </ol>
+            <span class="pp-packet" aria-hidden="true"></span>
           </div>
           <div class="also">
             <p class="mono also-label">Also work with</p>
@@ -769,6 +793,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b6" defer></script>
+    <script src="script.js?v=b7" defer></script>
   </body>
 </html>

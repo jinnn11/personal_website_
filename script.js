@@ -133,42 +133,6 @@
     "Prompt v2, value plus unit: Llama-3.1-8B replied 95359 and 24780 in millions, which code converts to 95,359,000,000 and 24,780,000,000, both matching the 10-Q, and 1.65 for diluted EPS, which matches."
   ];
 
-  var PROJECTS = ["SEC benchmark", "Grid audit", "Grounding probes", "Drift MLOps", "CT tamper", "Zolvit"];
-  var MATRIX = [
-    ["Languages and data", [
-      ["Python", [1, 1, 1, 1, 1, 1]],
-      ["SQL · PostgreSQL", [0, 0, 0, 1, 0, 0]],
-      ["pandas", [0, 1, 0, 1, 0, 0]],
-      ["Statistical testing", [0, 1, 0, 0, 0, 0]],
-      ["Time series", [0, 1, 0, 0, 0, 0]],
-      ["Matplotlib", [0, 1, 0, 0, 0, 0]]
-    ]],
-    ["Machine learning", [
-      ["PyTorch", [1, 0, 1, 0, 1, 0]],
-      ["Computer vision", [0, 0, 1, 0, 1, 0]],
-      ["Vision-language models", [0, 0, 1, 0, 0, 0]],
-      ["LLM evaluation", [1, 0, 0, 0, 0, 0]],
-      ["vLLM", [1, 0, 0, 0, 0, 0]],
-      ["XGBoost", [0, 0, 0, 1, 0, 1]],
-      ["NLP · OCR · T5", [0, 0, 0, 0, 0, 1]],
-      ["RAG · embeddings · search", [0, 0, 0, 0, 0, 1]],
-      ["DICOM · medical imaging", [0, 0, 0, 0, 1, 0]]
-    ]],
-    ["MLOps and infrastructure", [
-      ["Docker", [0, 0, 0, 1, 0, 1]],
-      ["FastAPI", [0, 0, 0, 1, 0, 1]],
-      ["Airflow", [0, 0, 0, 1, 0, 0]],
-      ["MLflow", [0, 0, 0, 1, 0, 0]],
-      ["Monitoring: Evidently, Prometheus, Grafana", [0, 0, 0, 1, 0, 1]],
-      ["Kubernetes", [0, 0, 0, 1, 0, 0]],
-      ["AWS", [0, 0, 0, 0, 0, 1]]
-    ]],
-    ["Practice", [
-      ["pytest · automated tests", [1, 1, 1, 0, 0, 0]],
-      ["Git · GitHub", [1, 1, 1, 1, 1, 0]]
-    ]]
-  ];
-
   /* ------------------------------------------------------------------
      Tooltip and toast
      ------------------------------------------------------------------ */
@@ -304,7 +268,7 @@
      ------------------------------------------------------------------ */
 
   function initReveal() {
-    var targets = $$(".section-head, .finding-head, .fig-one, .finding-copy, .plate, .ledger, .on-file, .cv-row, .matrix-wrap, .also, .about-photo, .about-copy, .contact-title, .contact-sub, .contact-actions, .contact-links");
+    var targets = $$(".section-head, .finding-head, .fig-one, .finding-copy, .plate, .ledger, .on-file, .cv-row, .pp, .also, .about-photo, .about-copy, .contact-title, .contact-sub, .contact-actions, .contact-links");
     if (!("IntersectionObserver" in window) || reduceMotion) return;
     targets.forEach(function (t) { t.classList.add("reveal"); });
     var io = new IntersectionObserver(function (entries) {
@@ -1259,40 +1223,64 @@
   }
 
   /* ------------------------------------------------------------------
-     Skills matrix
+     Skills pipeline: a dot runs from Data to Operations and lights each
+     step as it passes; it only moves while the section is on screen
      ------------------------------------------------------------------ */
 
-  function initMatrix() {
-    var body = $("[data-matrix-body]");
-    var table = $("[data-matrix]");
-    if (!body || !table) return;
-    var html = "";
-    MATRIX.forEach(function (group) {
-      html += '<tr class="group"><th scope="colgroup" colspan="7">' + group[0] + "</th></tr>";
-      group[1].forEach(function (row) {
-        html += '<tr><th scope="row">' + row[0] + "</th>";
-        row[1].forEach(function (on, c) {
-          html += '<td data-col="' + c + '">' + (on
-            ? '<span class="mdot" aria-hidden="true"></span><span class="sr-only">Used in ' + PROJECTS[c] + "</span>"
-            : '<span class="mnone" aria-hidden="true"></span><span class="sr-only">Not used in ' + PROJECTS[c] + "</span>") + "</td>";
-        });
-        html += "</tr>";
-      });
-    });
-    body.innerHTML = html;
-    var current = -1;
-    function mark(col) {
-      if (col === current) return;
-      current = col;
-      $$("[data-col]", table).forEach(function (n) {
-        n.classList.toggle("is-col", col >= 0 && n.getAttribute("data-col") === String(col));
-      });
+  function initPipeline() {
+    var pp = $("[data-pp]");
+    if (!pp || reduceMotion || !("IntersectionObserver" in window)) return;
+    var list = $(".pp-steps", pp);
+    var packet = $(".pp-packet", pp);
+    var nodes = $$(".pp-node", pp);
+    var DUR = 7000, P = 10;  // loop length (ms), dot size (px)
+    var geo = null, t0 = 0, raf = 0, running = false;
+
+    // Positions along the line, relative to .pp-steps (the top left of .pp)
+    function measure() {
+      var box = list.getBoundingClientRect();
+      var vertical = getComputedStyle(list).gridTemplateColumns.split(" ").length === 1;
+      geo = {
+        vertical: vertical,
+        start: vertical ? 6 : 0,
+        len: vertical ? box.height - 12 - P : box.width - P,
+        stops: nodes.map(function (n) {
+          var r = n.getBoundingClientRect();
+          return vertical ? r.top + r.height / 2 - box.top : r.left + r.width / 2 - box.left;
+        })
+      };
     }
-    table.addEventListener("pointerover", function (e) {
-      var cell = e.target.closest("[data-col]");
-      mark(cell ? parseInt(cell.getAttribute("data-col"), 10) : -1);
-    });
-    table.addEventListener("pointerleave", function () { mark(-1); });
+
+    function frame(now) {
+      if (!t0) t0 = now;
+      var t = ((now - t0) % DUR) / DUR;
+      var along = geo.start + t * geo.len;
+      packet.style.transform = geo.vertical ? "translate(4px," + along + "px)" : "translate(" + along + "px,4px)";
+      packet.style.opacity = String(t < 0.04 ? t / 0.04 : t > 0.96 ? (1 - t) / 0.04 : 1);
+      var c = along + P / 2;
+      geo.stops.forEach(function (s, i) {
+        if (Math.abs(c - s) < 10) {
+          var n = nodes[i];
+          n.classList.add("is-lit");
+          clearTimeout(n._off);
+          n._off = setTimeout(function () { n.classList.remove("is-lit"); }, 900);
+        }
+      });
+      if (running) raf = requestAnimationFrame(frame);
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        running = e.isIntersecting;
+        cancelAnimationFrame(raf);
+        if (running) {
+          measure();  // fonts or layout may have changed since the last run
+          raf = requestAnimationFrame(frame);
+        }
+      });
+    }, { threshold: 0.2 }).observe(pp);
   }
 
   /* ------------------------------------------------------------------
@@ -1345,7 +1333,7 @@
     initLoop();
     initSmallFigures();
     initReadout();
-    initMatrix();
+    initPipeline();
     initCopy();
   }
 

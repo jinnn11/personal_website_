@@ -2226,114 +2226,118 @@ button {
   color: var(--ink-3);
 }
 
-/* ---------- Skills matrix ---------- */
+/* ---------- Skills pipeline ---------- */
 
-.matrix-wrap {
-  max-width: 1040px;
-  overflow-x: auto;
+/* Five steps on one line; a dot (script.js) runs along it and lights each node */
+.pp {
+  position: relative;
 }
 
-.matrix {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
+.pp-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 clamp(18px, 2.6vw, 40px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.matrix thead th {
-  height: 132px;
-  padding: 0 0 12px;
-  vertical-align: bottom;
-  font-weight: 500;
-  border-bottom: 1px solid var(--ink);
+.pp-steps::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ink);
 }
 
-.matrix thead th[data-col] {
-  width: 12%;
-  cursor: default;
+.pp-step {
+  position: relative;
+  padding-top: 40px;
 }
 
+.pp-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  transition: background-color 0.35s, border-color 0.35s;
+}
 
-.matrix thead th[data-col] span {
-  display: inline-block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+.pp-node.is-lit {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.pp-title {
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  font-weight: 450;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  font-variation-settings: "opsz" 110, "SOFT" 30;
+}
+
+.pp-sub {
+  margin: 6px 0 0;
   font-family: var(--f-display);
-  font-size: 16px;
-  white-space: nowrap;
-  transition: color 0.2s;
-  font-variation-settings: "opsz" 24;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-3);
+  font-variation-settings: "opsz" 40, "SOFT" 50, "WONK" 1;
 }
 
-.matrix thead th[data-col] .short {
-  display: none;
+.pp-tools {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--rule);
+  font-size: 15.5px;
+  line-height: 1.9;
 }
 
-.matrix-corner {
-  text-align: left;
+.pp-refs {
+  margin: 16px 0 0;
+  font-family: var(--f-mono);
+  font-size: 12.5px;
   color: var(--ink-3);
 }
 
-.matrix tbody th {
-  padding: 6px 12px 6px 0;
-  text-align: left;
-  font-weight: 400;
+.pp-r a {
   color: var(--ink-2);
-  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
 }
 
-.matrix tbody td {
-  text-align: center;
-  border-bottom: 1px solid var(--rule);
-}
-
-.matrix .group th {
-  padding: 22px 0 8px;
-  font-family: var(--f-mono);
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+.pp-r a:hover {
   color: var(--accent);
-  border-bottom: 1px solid var(--ink-3);
+  text-decoration: underline;
 }
 
-.mdot {
-  display: inline-block;
-  width: 11px;
-  height: 11px;
+.pp-r .z {
+  font-family: var(--f-text);
+  font-size: 13px;
+}
+
+.pp-packet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--ink);
-  vertical-align: middle;
-  transition: transform 0.2s var(--ease), background-color 0.2s;
-}
-
-.mnone {
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--rule-2);
-  vertical-align: middle;
-}
-
-.matrix tbody tr:not(.group):hover th,
-.matrix tbody tr:not(.group):hover td,
-.matrix .is-col {
-  background: var(--paper-2);
-}
-
-.matrix tbody tr:not(.group):hover th {
-  color: var(--ink);
-}
-
-.matrix tbody tr:not(.group):hover .mdot,
-.matrix .is-col .mdot {
   background: var(--accent);
-  transform: scale(1.2);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 20%, transparent);
+  opacity: 0;
+  pointer-events: none;
 }
 
-.matrix thead th.is-col span {
-  color: var(--accent);
+.pp + .also {
+  max-width: none;
 }
 
 .also {
@@ -2849,6 +2853,37 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .pp-steps {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-left: 38px;
+  }
+
+  .pp-steps::before {
+    top: 6px;
+    bottom: 6px;
+    left: 8px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .pp-step {
+    padding-top: 0;
+  }
+
+  .pp-node {
+    top: 6px;
+    left: -38px;
+  }
+
+  .pp-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+    line-height: 1.6;
+  }
+
   .fig-one-head {
     grid-template-columns: 1fr;
   }
@@ -3125,34 +3160,6 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .matrix {
-    font-size: 13.5px;
-  }
-
-  .matrix thead th {
-    height: 74px;
-  }
-
-  .matrix thead th[data-col] {
-    width: 34px;
-  }
-
-  .matrix thead th[data-col] span {
-    font-size: 14px;
-  }
-
-  .matrix thead th[data-col] .long {
-    display: none;
-  }
-
-  .matrix thead th[data-col] .short {
-    display: inline-block;
-  }
-
-  .matrix tbody th {
-    padding-right: 8px;
-  }
-
   .also {
     grid-template-columns: 1fr;
   }
@@ -3203,6 +3210,7 @@ button {
   .toast,
   .fig-one-controls,
   .numbers summary,
+  .pp-packet,
   .back-top {
     display: none !important;
   }
