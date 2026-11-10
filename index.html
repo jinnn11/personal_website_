@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=b5" />
+    <link rel="stylesheet" href="styles.css?v=b6" />
 
     <script type="application/ld+json">
       {
@@ -91,34 +91,36 @@
     </header>
 
     <main id="main">
-      <!-- Front page -->
+      <!-- Front page: who, what kind of work, and the five findings (titles mirror each finding's h3) -->
       <section class="front" id="top" aria-labelledby="front-name">
         <div class="wrap">
-          <div class="front-kicker mono" data-draw-rule>
-            <span>Data scientist &amp; ML engineer</span>
-            <span>Buffalo, New York</span>
-            <span>MS Data Science · December 2026</span>
-          </div>
-
-          <h1 class="front-name" id="front-name" aria-label="Swaminathan Sankaran">
-            <span class="front-line" data-proximity>Swaminathan</span>
-            <span class="front-line front-line-2" data-proximity>Sankaran</span>
-          </h1>
-
-          <div class="front-grid">
-            <p class="front-dek">
-              I build machine-learning systems and audit the data underneath them, and I don’t trust a
-              number until I’ve checked it against something <em>independent</em>.
-            </p>
+          <div class="front-intro">
+            <h1 class="front-name" id="front-name">Swaminathan Sankaran</h1>
             <div class="front-side">
-              <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to data science, ML and AI roles · graduating Dec 2026</p>
-              <div class="front-cta">
-                <a class="btn btn-ink" href="#findings">Read the findings <span aria-hidden="true">↓</span></a>
-                <a class="btn btn-line" href="assets/swaminathan_resume.pdf?v=20261107c" target="_blank" rel="noreferrer">Résumé (PDF)</a>
-                <a class="btn btn-line" href="mailto:sankaranswaminathan21@gmail.com">Email</a>
-              </div>
+              <p class="front-sub">Data scientist and ML engineer in Buffalo, New York. MS Data Science, December 2026.</p>
+              <dl class="front-facts">
+                <div><dt>Open to</dt><dd>Data science, ML and AI roles</dd></div>
+                <div><dt>Work</dt><dd>Remote, on-site or hybrid; open to relocation</dd></div>
+                <div><dt>Start</dt><dd>Subject to work authorization</dd></div>
+              </dl>
+              <p class="front-links">
+                <a class="text-link" href="assets/swaminathan_resume.pdf?v=20261107c" target="_blank" rel="noreferrer">Résumé (PDF)</a>
+                <a class="text-link" href="mailto:sankaranswaminathan21@gmail.com">Email</a>
+                <a class="text-link" href="https://github.com/jinnn11" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="text-link" href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">LinkedIn</a>
+              </p>
             </div>
           </div>
+          <nav class="front-toc" aria-label="Findings">
+            <p class="front-toc-label">Five findings</p>
+            <ol>
+              <li><a href="#finding-sec"><span class="front-toc-n">01</span><span class="front-toc-t">Can an LLM read an earnings release without getting the numbers wrong?</span><span class="front-toc-m">LLM evaluation · Fine-tuning · Serving</span></a></li>
+              <li><a href="#finding-grid"><span class="front-toc-n">02</span><span class="front-toc-t">US grid forecasts looked like they were getting worse. Three errors in the public data explain it.</span><span class="front-toc-m">Data quality · Time series</span></a></li>
+              <li><a href="#finding-probes"><span class="front-toc-n">03</span><span class="front-toc-t">Grounding DINO + SAM finds “the dog.” It mostly misses “not.”</span><span class="front-toc-m">Vision-language · Evaluation</span></a></li>
+              <li><a href="#finding-drift"><span class="front-toc-n">04</span><span class="front-toc-t">Models fail quietly when the data shifts. This pipeline notices, retrains, and checks before it ships.</span><span class="front-toc-m">MLOps · Production ML</span></a></li>
+              <li><a href="#finding-ct"><span class="front-toc-n">05</span><span class="front-toc-t">Spotting lung CT scans that AI has tampered with.</span><span class="front-toc-m">Computer vision · Medical imaging</span></a></li>
+            </ol>
+          </nav>
         </div>
       </section>
 
@@ -775,6 +777,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b5" defer></script>
+    <script src="script.js?v=b6" defer></script>
   </body>
 </html>

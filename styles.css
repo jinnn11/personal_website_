@@ -357,145 +357,125 @@ button {
 /* ---------- Front page ---------- */
 
 .front {
-  padding: calc(var(--head-h) + clamp(20px, 4vw, 48px)) 0 0;
+  padding-top: calc(var(--head-h) + clamp(28px, 5vw, 60px));
 }
 
-.front-kicker {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 6px 24px;
-  padding: 11px 0 10px;
-  border-top: 3px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  color: var(--ink-2);
-}
-
-.js .front-kicker {
-  animation: wipe 1.1s var(--ease) 0.05s both;
+/* Name on the left; who, what kind of work and links on the right */
+.front-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px 56px;
+  align-items: end;
 }
 
 .front-name {
-  margin: clamp(18px, 3vw, 34px) 0 clamp(18px, 2.6vw, 30px);
+  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
   font-weight: 400;
-  font-size: clamp(3.1rem, 16.6vw, 15.2rem);
-  line-height: 0.86;
-  letter-spacing: -0.045em;
-  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
 }
 
-.front-line {
-  display: block;
-  white-space: nowrap;
-}
-
-.front-line-2 {
-  padding-left: 9.5vw;
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-}
-
-.front-line .ch {
-  display: inline-block;
-  font-variation-settings: "wght" 400, "opsz" 144, "SOFT" 100, "WONK" 0;
-  transition: font-variation-settings 0.35s var(--ease);
-}
-
-.front-line-2 .ch {
-  font-variation-settings: "wght" 400, "opsz" 144, "SOFT" 100, "WONK" 1;
-}
-
-.js .front-line .ch {
-  opacity: 0;
-  transform: translateY(0.32em);
-}
-
-.name-ready .front-line .ch {
-  animation: rise 1s var(--ease) var(--d, 0ms) both;
-}
-
-.front-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 28px 64px;
-  align-items: end;
-  padding-bottom: clamp(28px, 4vw, 44px);
-  border-bottom: 1px solid var(--ink);
-}
-
-.front-dek {
+.front-sub {
+  max-width: 46ch;
   margin: 0;
-  max-width: 31ch;
-  font-family: var(--f-display);
-  font-size: clamp(1.35rem, 2.3vw, 2.05rem);
-  line-height: 1.24;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  font-variation-settings: "opsz" 40, "SOFT" 40;
-}
-
-.front-dek em {
-  color: var(--accent);
-  font-variation-settings: "opsz" 40, "SOFT" 40, "WONK" 1;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 18px;
-  font-size: 14.5px;
+  font-size: 16.5px;
+  line-height: 1.5;
   color: var(--ink-2);
 }
 
-.status-dot {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--good);
-  animation: pulse 2.6s ease-out infinite;
+.front-facts {
+  display: grid;
+  gap: 4px;
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
 }
 
-.front-cta {
+.front-facts div {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  gap: 12px;
+}
+
+.front-facts dt {
+  color: var(--ink-3);
+}
+
+.front-facts dd {
+  margin: 0;
+}
+
+.front-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 46px;
-  padding: 0 20px;
-  border-radius: 999px;
+  gap: 8px 24px;
+  margin: 16px 0 0;
   font-size: 15px;
+}
+
+/* The five findings, listed like a front-page index */
+.front-toc {
+  margin-top: clamp(32px, 5vw, 56px);
+  border-top: 3px solid var(--ink);
+}
+
+.front-toc-label {
+  margin: 0;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 14px;
   font-weight: 600;
+  color: var(--ink-2);
+}
+
+.front-toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.front-toc li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.front-toc a {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr) 17rem;
+  gap: 6px 24px;
+  align-items: baseline;
+  padding: 15px 0;
   text-decoration: none;
-  transition: transform 0.2s var(--ease), background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
+.front-toc-n {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  color: var(--ink-3);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
-.btn-ink {
-  background: var(--ink);
-  color: var(--paper);
+.front-toc-t {
+  font-family: var(--f-display);
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  line-height: 1.25;
+  font-variation-settings: "opsz" 40, "SOFT" 30;
+  transition: color 0.2s;
 }
 
-.btn-ink:hover {
-  background: var(--accent);
+.front-toc-m {
+  font-size: 14px;
+  color: var(--ink-3);
+  text-align: right;
 }
 
-.btn-line {
-  border: 1px solid var(--ink);
+.front-toc a:hover .front-toc-t {
+  color: var(--accent);
 }
 
-.btn-line:hover {
-  background: var(--ink);
-  color: var(--paper);
+/* The findings head sits closer to a short front page */
+.front + .section {
+  padding-top: clamp(64px, 8vw, 112px);
 }
 
 /* ---------- Figures (shared) ---------- */
@@ -2866,25 +2846,6 @@ button {
   }
 }
 
-@keyframes wipe {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent);
-  }
-  70%,
-  100% {
-    box-shadow: 0 0 0 9px transparent;
-  }
-}
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1180px) {
@@ -2912,9 +2873,19 @@ button {
 }
 
 @media (max-width: 899px) {
-  .front-grid {
+  .front-intro {
     grid-template-columns: 1fr;
     align-items: start;
+  }
+
+  .front-toc a {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+  }
+
+  .front-toc-m {
+    grid-column: 2;
+    text-align: left;
+    font-size: 13px;
   }
 
   .fig-one-head {
@@ -3056,20 +3027,6 @@ button {
     width: 34px;
     padding: 0;
     justify-content: center;
-  }
-
-  .front-kicker span:nth-child(2) {
-    display: none;
-  }
-
-  .front-line-2 {
-    padding-left: 7vw;
-  }
-
-  .btn {
-    height: 44px;
-    padding: 0 16px;
-    font-size: 14.5px;
   }
 
   .seg-btn {

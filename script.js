@@ -6,7 +6,6 @@
 
   var doc = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var NS = "http://www.w3.org/2000/svg";
 
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -298,50 +297,6 @@
       n.addEventListener("click", function () { dlg.close(); });
     });
     dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
-  }
-
-  /* ------------------------------------------------------------------
-     Name: letters rise in, then thicken near the pointer
-     ------------------------------------------------------------------ */
-
-  function initName() {
-    var lines = $$("[data-proximity]");
-    if (!lines.length) return;
-    var letters = [];
-    lines.forEach(function (line, li) {
-      var text = line.textContent;
-      line.textContent = "";
-      line.setAttribute("aria-hidden", "true");
-      Array.prototype.forEach.call(text, function (ch, i) {
-        var s = el("span", "ch", line, ch);
-        s.style.setProperty("--d", (li * 260 + i * 38) + "ms");
-        letters.push({ node: s, wonk: li === 1 ? 1 : 0, w: 400 });
-      });
-    });
-    requestAnimationFrame(function () { doc.classList.add("name-ready"); });
-    if (reduceMotion || !finePointer) return;
-
-    var front = $(".front");
-    var mx = 0, my = 0, inside = false, raf = 0;
-    var RADIUS = 220, BASE = 400, PEAK = 680;
-    function frame() {
-      raf = 0;
-      var rects = letters.map(function (L) { return L.node.getBoundingClientRect(); });
-      letters.forEach(function (L, i) {
-        var r = rects[i];
-        var d = Math.hypot(mx - (r.left + r.width / 2), my - (r.top + r.height / 2));
-        var k = inside ? Math.max(0, 1 - d / RADIUS) : 0;
-        k = k * k * (3 - 2 * k);
-        var w = Math.round(BASE + (PEAK - BASE) * k);
-        if (w !== L.w) {
-          L.w = w;
-          L.node.style.fontVariationSettings = '"wght" ' + w + ', "opsz" 144, "SOFT" ' + Math.round(100 - 60 * k) + ', "WONK" ' + L.wonk;
-        }
-      });
-    }
-    function queue() { if (!raf) raf = requestAnimationFrame(frame); }
-    front.addEventListener("pointermove", function (e) { mx = e.clientX; my = e.clientY; inside = true; queue(); });
-    front.addEventListener("pointerleave", function () { inside = false; queue(); });
   }
 
   /* ------------------------------------------------------------------
@@ -1383,7 +1338,6 @@
     initEdition();
     initMasthead();
     initIndex();
-    initName();
     initReveal();
     initSwarm();
     initScrolly();
