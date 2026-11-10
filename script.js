@@ -1375,6 +1375,47 @@
   }
 
   /* ------------------------------------------------------------------
+     Follow: every side figure, and the About photo, stays in view while its
+     text scrolls past, for at least the same distance. The text column gets a
+     min-height to make room; a figure taller than the screen sticks by its
+     bottom edge instead of its top. Narrow screens: one column, no following.
+     ------------------------------------------------------------------ */
+
+  function initFollow() {
+    var pairs = $$(".finding-grid").map(function (g) { return [$(".finding-copy", g), $(".plate", g)]; })
+      .concat([[$(".about-copy"), $(".about-photo")]])
+      .filter(function (pr) { return pr[0] && pr[1]; });
+    if (!pairs.length) return;
+    var narrow = window.matchMedia("(max-width: 899px)");
+    var head = parseFloat(getComputedStyle(doc).getPropertyValue("--head-h")) || 64;
+    var raf = 0;
+    function apply() {
+      raf = 0;
+      var room = clamp(Math.round(window.innerHeight * 0.18), 140, 200);
+      pairs.forEach(function (pr) {
+        var copy = pr[0], fig = pr[1];
+        if (narrow.matches) {
+          copy.style.minHeight = "";
+          fig.style.removeProperty("--stick-top");
+          return;
+        }
+        var h = fig.offsetHeight;
+        fig.style.setProperty("--stick-top", Math.round(Math.min(head + 24, window.innerHeight - h - 24)) + "px");
+        copy.style.minHeight = (h + room) + "px";
+      });
+    }
+    function queue() { if (!raf) raf = requestAnimationFrame(apply); }
+    apply();
+    window.addEventListener("resize", queue);
+    if (narrow.addEventListener) narrow.addEventListener("change", queue);
+    if ("ResizeObserver" in window) {
+      var ro = new ResizeObserver(queue);
+      pairs.forEach(function (pr) { ro.observe(pr[1]); });
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queue);
+  }
+
+  /* ------------------------------------------------------------------
      Copy email, year
      ------------------------------------------------------------------ */
 
@@ -1425,6 +1466,7 @@
     initSmallFigures();
     initReadout();
     initPipeline();
+    initFollow();
     initCopy();
   }
 

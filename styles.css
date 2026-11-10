@@ -986,8 +986,10 @@ button {
   color: var(--ink-2);
 }
 
+/* Side figures follow the scroll; script.js sets --stick-top and the copy's min-height (initFollow) */
 .plate {
-  position: relative;
+  position: sticky;
+  top: var(--stick-top, calc(var(--head-h) + 24px));
   padding: clamp(18px, 2.4vw, 28px);
   background: var(--paper-2);
   border: 1px solid var(--rule);
@@ -2364,6 +2366,8 @@ button {
 
 .about-photo {
   margin: 0;
+  position: sticky;
+  top: var(--stick-top, calc(var(--head-h) + 24px));
 }
 
 .about-photo img {
@@ -2877,6 +2881,11 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .plate {
+    position: relative;
+    top: auto;
+  }
+
   .pp-steps {
     grid-template-columns: 1fr;
     gap: 34px;
@@ -3007,6 +3016,8 @@ button {
   }
 
   .about-photo {
+    position: relative;
+    top: auto;
     max-width: 340px;
   }
 
