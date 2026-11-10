@@ -115,7 +115,7 @@
     ["gpt-oss-20b", "", 94.5, 94.2]
   ];
 
-  // Fig. 3 readout: Apple's release for the quarter ended March 29, 2025 (validation set), Llama-3.1-8B's
+  // Fig. 2 readout: Apple's release for the quarter ended March 29, 2025 (validation set), Llama-3.1-8B's
   // replies under each prompt, graded against the 10-Q's XBRL values.
   // [10-Q value, v1 reply, v1 correct, v2 value, v2 unit, v2 value as printed]
   var READ = [
@@ -134,38 +134,38 @@
     "Prompt v2, value plus unit: Llama-3.1-8B replied 95359 and 24780 in millions, which code converts to 95,359,000,000 and 24,780,000,000, both matching the 10-Q, and 1.65 for diluted EPS, which matches."
   ];
 
-  var PROJECTS = ["Grid audit", "Grounding probes", "Drift MLOps", "CT tamper", "SEC benchmark", "Zolvit"];
+  var PROJECTS = ["SEC benchmark", "Grid audit", "Grounding probes", "Drift MLOps", "CT tamper", "Zolvit"];
   var MATRIX = [
     ["Languages and data", [
       ["Python", [1, 1, 1, 1, 1, 1]],
-      ["SQL · PostgreSQL", [0, 0, 1, 0, 0, 0]],
-      ["pandas", [1, 0, 1, 0, 0, 0]],
-      ["Statistical testing", [1, 0, 0, 0, 0, 0]],
-      ["Time series", [1, 0, 0, 0, 0, 0]],
-      ["Matplotlib", [1, 0, 0, 0, 0, 0]]
+      ["SQL · PostgreSQL", [0, 0, 0, 1, 0, 0]],
+      ["pandas", [0, 1, 0, 1, 0, 0]],
+      ["Statistical testing", [0, 1, 0, 0, 0, 0]],
+      ["Time series", [0, 1, 0, 0, 0, 0]],
+      ["Matplotlib", [0, 1, 0, 0, 0, 0]]
     ]],
     ["Machine learning", [
-      ["PyTorch", [0, 1, 0, 1, 1, 0]],
-      ["Computer vision", [0, 1, 0, 1, 0, 0]],
-      ["Vision-language models", [0, 1, 0, 0, 0, 0]],
-      ["LLM evaluation", [0, 0, 0, 0, 1, 0]],
-      ["vLLM", [0, 0, 0, 0, 1, 0]],
-      ["XGBoost", [0, 0, 1, 0, 0, 1]],
+      ["PyTorch", [1, 0, 1, 0, 1, 0]],
+      ["Computer vision", [0, 0, 1, 0, 1, 0]],
+      ["Vision-language models", [0, 0, 1, 0, 0, 0]],
+      ["LLM evaluation", [1, 0, 0, 0, 0, 0]],
+      ["vLLM", [1, 0, 0, 0, 0, 0]],
+      ["XGBoost", [0, 0, 0, 1, 0, 1]],
       ["NLP · OCR · T5", [0, 0, 0, 0, 0, 1]],
       ["RAG · embeddings · search", [0, 0, 0, 0, 0, 1]],
-      ["DICOM · medical imaging", [0, 0, 0, 1, 0, 0]]
+      ["DICOM · medical imaging", [0, 0, 0, 0, 1, 0]]
     ]],
     ["MLOps and infrastructure", [
-      ["Docker", [0, 0, 1, 0, 0, 1]],
-      ["FastAPI", [0, 0, 1, 0, 0, 1]],
-      ["Airflow", [0, 0, 1, 0, 0, 0]],
-      ["MLflow", [0, 0, 1, 0, 0, 0]],
-      ["Monitoring: Evidently, Prometheus, Grafana", [0, 0, 1, 0, 0, 1]],
-      ["Kubernetes", [0, 0, 1, 0, 0, 0]],
+      ["Docker", [0, 0, 0, 1, 0, 1]],
+      ["FastAPI", [0, 0, 0, 1, 0, 1]],
+      ["Airflow", [0, 0, 0, 1, 0, 0]],
+      ["MLflow", [0, 0, 0, 1, 0, 0]],
+      ["Monitoring: Evidently, Prometheus, Grafana", [0, 0, 0, 1, 0, 1]],
+      ["Kubernetes", [0, 0, 0, 1, 0, 0]],
       ["AWS", [0, 0, 0, 0, 0, 1]]
     ]],
     ["Practice", [
-      ["pytest · automated tests", [1, 1, 0, 0, 1, 0]],
+      ["pytest · automated tests", [1, 1, 1, 0, 0, 0]],
       ["Git · GitHub", [1, 1, 1, 1, 1, 0]]
     ]]
   ];
@@ -599,7 +599,7 @@
       if (captionEl) {
         captionEl.innerHTML = next === "corrected"
           ? "<strong>Corrected.</strong> With its demand moved back an hour and battery charging taken out, California ISO scores 0.56. With its forecast replaced by SPP\u2019s own from 7 May, Southwest Power Pool scores 0.54. Both now beat the naive forecast."
-          : "<strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast. Press <em>Corrected</em> to apply the three data fixes from Finding 01.";
+          : "<strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast. Press <em>Corrected</em> to apply the three data fixes from Finding 02.";
       }
       var dest = next === "corrected" ? target.__cor : target.__pub;
       var start = {};
@@ -727,7 +727,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 2: scroll-driven line chart for Finding 01
+     Fig. 3: scroll-driven line chart for Finding 02
      ------------------------------------------------------------------ */
 
   function initScrolly() {
@@ -886,7 +886,7 @@
     function setHeader(sc, i) {
       if (titleEl) titleEl.textContent = sc.title;
       if (subEl) subEl.textContent = sc.sub;
-      if (labelEl) labelEl.textContent = "Fig. 2 · Step " + (i + 1) + " of " + SCENES.length;
+      if (labelEl) labelEl.textContent = "Fig. 3 · Step " + (i + 1) + " of " + SCENES.length;
       if (legendCor) legendCor.classList.toggle("is-off", !sc.cor);
       host.setAttribute("aria-label", sc.aria);
       pathCor.classList.toggle("is-dashed", !!sc.dashed);
@@ -987,7 +987,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 3: waffles and the 51 misses
+     Fig. 4: waffles and the 51 misses
      ------------------------------------------------------------------ */
 
   function initWaffles() {
@@ -1016,7 +1016,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 4: the retraining loop, with a runner that lights each stage
+     Fig. 5: the retraining loop, with a runner that lights each stage
      ------------------------------------------------------------------ */
 
   function initLoop() {
@@ -1095,7 +1095,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 4b, 5, 6: before/after bars, CT slices and dot plot, SEC scorecard
+     Fig. 5b, 6, 2: before/after bars, CT slices and dot plot, SEC scorecard
      ------------------------------------------------------------------ */
 
   function initSmallFigures() {
@@ -1189,7 +1189,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 3 readout: one release read under two prompts. Rows are read,
+     Fig. 2 readout: one release read under two prompts. Rows are read,
      the reply is typed, then checked against the 10-Q; it alternates
      v1 and v2 while on screen until a tab is pressed.
      ------------------------------------------------------------------ */

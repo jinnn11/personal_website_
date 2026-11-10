@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=b4" />
+    <link rel="stylesheet" href="styles.css?v=b5" />
 
     <script type="application/ld+json">
       {
@@ -148,7 +148,7 @@
             <figcaption class="fig-caption">
               <span class="fig-caption-text" data-fig1-caption>
                 <strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast.
-                Press <em>Corrected</em> to apply the three data fixes from Finding 01.
+                Press <em>Corrected</em> to apply the three data fixes from Finding 02.
               </span>
               <span class="fig-caption-note">
                 Skill = 1 − (forecast error ÷ naive error) on the same hours. Two operators sit off the left edge:
@@ -181,11 +181,71 @@
           </header>
         </div>
 
-        <!-- Finding 01: grid audit -->
+        <!-- Finding 01: SEC -->
+        <article class="finding finding-first" id="finding-sec" aria-labelledby="f5-title">
+          <div class="wrap finding-grid">
+            <div class="finding-copy">
+              <p class="finding-meta mono"><span class="finding-no">Finding 01</span><span>Oct – Nov 2026</span><span>LLM evaluation · Fine-tuning · Serving</span></p>
+              <h3 class="finding-title" id="f5-title">Can an LLM read an earnings release without getting the numbers wrong?</h3>
+              <p class="finding-plain">
+                Every quarter, companies announce their results in press releases, and pulling the key numbers out
+                of them is routine work in finance. I tested whether AI models can do it without mistakes, checking
+                every answer automatically against what the company officially files with the SEC. Then I trained a
+                small open model that gets within two points of the best paid models at under half the cost of the
+                cheapest one.
+              </p>
+              <p class="mono finding-how">Under the hood</p>
+              <p>
+                A pipeline links about 4,700 earnings releases from the S&amp;P 500’s non-financial companies, filed
+                2023 to 2026, to the XBRL figures in each company’s matching 10-Q or 10-K, and a grader scores every
+                revenue, net income and EPS figure a model extracts and labels each error. Across 9 models, open
+                models mostly failed on units; asking for each figure as printed plus its unit, and converting in
+                code, cut their errors 65%. A LoRA fine-tune of Qwen3-8B on 2,000 releases labelled from XBRL raised
+                accuracy on 37 companies it never saw from 89.1% to 99.2% (+10.1 points, 95% interval +5.1 to
+                +15.6), with the test protocol fixed before any test prediction. Served in FP8 with vLLM on one H100,
+                it reads 6,143 releases an hour for $0.56 per 1,000, against $1.24 to $24.11 for the API models; on
+                later releases from the training companies it still trails them by 1.8 to 2.0 points.
+              </p>
+              <div class="finding-foot">
+                <ul class="tags"><li>LLM evaluation</li><li>LoRA</li><li>vLLM</li><li>FP8 · AWQ</li><li>XBRL</li><li>Python</li></ul>
+                <a class="text-link" href="https://github.com/jinnn11/sec-earnings-bench" target="_blank" rel="noreferrer">Read the write-up and code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <figure class="fig plate" aria-labelledby="f5-fig-title">
+              <p class="fig-label mono">Fig. 2</p>
+              <p class="plate-title" id="f5-fig-title">One release, two prompts</p>
+              <p class="rd-source mono">Apple · quarter ended March 29, 2025 · in millions, except per share</p>
+              <div class="rd-switch" role="group" aria-label="Prompt">
+                <button type="button" class="rd-tab" data-v="1" aria-pressed="true"><span class="key key-pub key-dot" aria-hidden="true"></span>Prompt v1</button>
+                <button type="button" class="rd-tab" data-v="2" aria-pressed="false"><span class="key key-cor key-dot" aria-hidden="true"></span>v2: value + unit</button>
+              </div>
+              <div class="readout" data-chart="readout" data-v="1" role="img" aria-label="Prompt v1, asking for raw dollars: Llama-3.1-8B replied 95359 for total net sales and 24780 for net income, a million times smaller than the 10-Q’s 95,359,000,000 and 24,780,000,000, and 1.65 for diluted EPS, which matches.">
+                <div class="rd-head mono" aria-hidden="true"><span>Release says</span><span>Llama-3.1-8B replied</span><span>10-Q says (XBRL)</span></div>
+                <div class="rd-row"><p class="rd-line"><span>Total net sales</span><span class="rd-num">95,359</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <div class="rd-row"><p class="rd-line"><span>Net income</span><span class="rd-num">24,780</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <div class="rd-row"><p class="rd-line"><span>Diluted EPS</span><span class="rd-num">1.65</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <p class="rd-sum"></p>
+              </div>
+              <p class="plate-title plate-title-2">Open models: share of 293 figures correct</p>
+              <ul class="legend legend-small" aria-hidden="true">
+                <li><span class="key key-pub key-dot"></span>Prompt v1</li>
+                <li><span class="key key-cor key-dot"></span>v2: value + unit</li>
+              </ul>
+              <div class="scorecard" data-chart="sec" role="img" aria-label="Accuracy, prompt v1 to v2: Llama-3.1-8B 44.4 to 85.0 percent; Qwen3-8B without thinking 67.9 to 88.7; Qwen3-8B with thinking 70.0 to 90.1; Gemma-3-12B 71.7 to 88.4; gpt-oss-20b 94.5 to 94.2."></div>
+              <p class="plate-note">One A100 per run. Unit slips across open models: 355 → 34.</p>
+              <details class="numbers">
+                <summary>Show the numbers</summary>
+                <div class="numbers-body" data-table="sec"></div>
+              </details>
+            </figure>
+          </div>
+        </article>
+
+        <!-- Finding 02: grid audit -->
         <article class="finding finding-lead" id="finding-grid" aria-labelledby="f1-title">
           <div class="wrap">
             <div class="finding-head">
-              <p class="finding-meta mono"><span class="finding-no">Finding 01</span><span>Oct – Nov 2026</span><span>Data quality · Time series · Statistics</span></p>
+              <p class="finding-meta mono"><span class="finding-no">Finding 02</span><span>Oct – Nov 2026</span><span>Data quality · Time series · Statistics</span></p>
               <h3 class="finding-title" id="f1-title">US grid forecasts looked like they were getting worse. Three errors in the public data explain it.</h3>
               <p class="finding-dek">
                 Every day, the organizations that run the US power grid forecast tomorrow’s electricity demand, and
@@ -206,7 +266,7 @@
             <div class="scrolly-figure">
               <figure class="fig sfig" aria-labelledby="sfig-title">
                 <div class="sfig-head">
-                  <p class="fig-label mono" data-scene-label>Fig. 2 · Step 1 of 5</p>
+                  <p class="fig-label mono" data-scene-label>Fig. 3 · Step 1 of 5</p>
                   <p class="sfig-title" id="sfig-title" data-scene-title>National forecast error by year</p>
                   <p class="sfig-sub" data-scene-sub>Total absolute error ÷ total demand, 50 operators present every year</p>
                 </div>
@@ -305,66 +365,6 @@
               <ul class="tags"><li>Python</li><li>pandas</li><li>Time series</li><li>Mann–Kendall</li><li>Theil–Sen</li><li>pytest</li><li>Pre-registration</li></ul>
               <a class="text-link" href="https://github.com/jinnn11/grid-forecast-audit" target="_blank" rel="noreferrer">Code &amp; write-up <span aria-hidden="true">↗</span></a>
             </div>
-          </div>
-        </article>
-
-        <!-- Finding 02: SEC -->
-        <article class="finding" id="finding-sec" aria-labelledby="f5-title">
-          <div class="wrap finding-grid">
-            <div class="finding-copy">
-              <p class="finding-meta mono"><span class="finding-no">Finding 02</span><span>Oct – Nov 2026</span><span>LLM evaluation · Fine-tuning · Serving</span></p>
-              <h3 class="finding-title" id="f5-title">Can an LLM read an earnings release without getting the numbers wrong?</h3>
-              <p class="finding-plain">
-                Every quarter, companies announce their results in press releases, and pulling the key numbers out
-                of them is routine work in finance. I tested whether AI models can do it without mistakes, checking
-                every answer automatically against what the company officially files with the SEC. Then I trained a
-                small open model that gets within two points of the best paid models at under half the cost of the
-                cheapest one.
-              </p>
-              <p class="mono finding-how">Under the hood</p>
-              <p>
-                A pipeline links about 4,700 earnings releases from the S&amp;P 500’s non-financial companies, filed
-                2023 to 2026, to the XBRL figures in each company’s matching 10-Q or 10-K, and a grader scores every
-                revenue, net income and EPS figure a model extracts and labels each error. Across 9 models, open
-                models mostly failed on units; asking for each figure as printed plus its unit, and converting in
-                code, cut their errors 65%. A LoRA fine-tune of Qwen3-8B on 2,000 releases labelled from XBRL raised
-                accuracy on 37 companies it never saw from 89.1% to 99.2% (+10.1 points, 95% interval +5.1 to
-                +15.6), with the test protocol fixed before any test prediction. Served in FP8 with vLLM on one H100,
-                it reads 6,143 releases an hour for $0.56 per 1,000, against $1.24 to $24.11 for the API models; on
-                later releases from the training companies it still trails them by 1.8 to 2.0 points.
-              </p>
-              <div class="finding-foot">
-                <ul class="tags"><li>LLM evaluation</li><li>LoRA</li><li>vLLM</li><li>FP8 · AWQ</li><li>XBRL</li><li>Python</li></ul>
-                <a class="text-link" href="https://github.com/jinnn11/sec-earnings-bench" target="_blank" rel="noreferrer">Read the write-up and code <span aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-            <figure class="fig plate" aria-labelledby="f5-fig-title">
-              <p class="fig-label mono">Fig. 3</p>
-              <p class="plate-title" id="f5-fig-title">One release, two prompts</p>
-              <p class="rd-source mono">Apple · quarter ended March 29, 2025 · in millions, except per share</p>
-              <div class="rd-switch" role="group" aria-label="Prompt">
-                <button type="button" class="rd-tab" data-v="1" aria-pressed="true"><span class="key key-pub key-dot" aria-hidden="true"></span>Prompt v1</button>
-                <button type="button" class="rd-tab" data-v="2" aria-pressed="false"><span class="key key-cor key-dot" aria-hidden="true"></span>v2: value + unit</button>
-              </div>
-              <div class="readout" data-chart="readout" data-v="1" role="img" aria-label="Prompt v1, asking for raw dollars: Llama-3.1-8B replied 95359 for total net sales and 24780 for net income, a million times smaller than the 10-Q’s 95,359,000,000 and 24,780,000,000, and 1.65 for diluted EPS, which matches.">
-                <div class="rd-head mono" aria-hidden="true"><span>Release says</span><span>Llama-3.1-8B replied</span><span>10-Q says (XBRL)</span></div>
-                <div class="rd-row"><p class="rd-line"><span>Total net sales</span><span class="rd-num">95,359</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
-                <div class="rd-row"><p class="rd-line"><span>Net income</span><span class="rd-num">24,780</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
-                <div class="rd-row"><p class="rd-line"><span>Diluted EPS</span><span class="rd-num">1.65</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
-                <p class="rd-sum"></p>
-              </div>
-              <p class="plate-title plate-title-2">Open models: share of 293 figures correct</p>
-              <ul class="legend legend-small" aria-hidden="true">
-                <li><span class="key key-pub key-dot"></span>Prompt v1</li>
-                <li><span class="key key-cor key-dot"></span>v2: value + unit</li>
-              </ul>
-              <div class="scorecard" data-chart="sec" role="img" aria-label="Accuracy, prompt v1 to v2: Llama-3.1-8B 44.4 to 85.0 percent; Qwen3-8B without thinking 67.9 to 88.7; Qwen3-8B with thinking 70.0 to 90.1; Gemma-3-12B 71.7 to 88.4; gpt-oss-20b 94.5 to 94.2."></div>
-              <p class="plate-note">One A100 per run. Unit slips across open models: 355 → 34.</p>
-              <details class="numbers">
-                <summary>Show the numbers</summary>
-                <div class="numbers-body" data-table="sec"></div>
-              </details>
-            </figure>
           </div>
         </article>
 
@@ -649,11 +649,11 @@
               <thead>
                 <tr>
                   <th scope="col" class="matrix-corner"><span class="mono">Skill</span></th>
-                  <th scope="col" data-col="0"><span class="long">Grid audit</span><span class="short" aria-hidden="true">Grid</span></th>
-                  <th scope="col" data-col="1"><span class="long">Grounding probes</span><span class="short" aria-hidden="true">Probes</span></th>
-                  <th scope="col" data-col="2"><span class="long">Drift MLOps</span><span class="short" aria-hidden="true">Drift</span></th>
-                  <th scope="col" data-col="3"><span class="long">CT tamper</span><span class="short" aria-hidden="true">CT</span></th>
-                  <th scope="col" data-col="4"><span class="long">SEC benchmark</span><span class="short" aria-hidden="true">SEC</span></th>
+                  <th scope="col" data-col="0"><span class="long">SEC benchmark</span><span class="short" aria-hidden="true">SEC</span></th>
+                  <th scope="col" data-col="1"><span class="long">Grid audit</span><span class="short" aria-hidden="true">Grid</span></th>
+                  <th scope="col" data-col="2"><span class="long">Grounding probes</span><span class="short" aria-hidden="true">Probes</span></th>
+                  <th scope="col" data-col="3"><span class="long">Drift MLOps</span><span class="short" aria-hidden="true">Drift</span></th>
+                  <th scope="col" data-col="4"><span class="long">CT tamper</span><span class="short" aria-hidden="true">CT</span></th>
                   <th scope="col" data-col="5"><span class="long">Zolvit</span><span class="short" aria-hidden="true">Zolvit</span></th>
                 </tr>
               </thead>
@@ -758,8 +758,8 @@
           <li><a href="#contact" data-close-index><span class="mono">06</span>Contact</a></li>
         </ol>
         <ul class="index-sub">
-          <li><a href="#finding-grid" data-close-index>Grid forecast audit</a></li>
           <li><a href="#finding-sec" data-close-index>SEC extraction benchmark</a></li>
+          <li><a href="#finding-grid" data-close-index>Grid forecast audit</a></li>
           <li><a href="#finding-probes" data-close-index>Grounding probes</a></li>
           <li><a href="#finding-drift" data-close-index>Drift-aware MLOps</a></li>
           <li><a href="#finding-ct" data-close-index>CT tamper classification</a></li>
@@ -775,6 +775,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b3" defer></script>
+    <script src="script.js?v=b4" defer></script>
   </body>
 </html>
