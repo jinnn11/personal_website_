@@ -115,7 +115,7 @@
     ["gpt-oss-20b", "", 94.5, 94.2]
   ];
 
-  // Fig. 2 readout: Apple's release for the quarter ended March 29, 2025 (validation set), Llama-3.1-8B's
+  // Fig. 1 readout: Apple's release for the quarter ended March 29, 2025 (validation set), Llama-3.1-8B's
   // replies under each prompt, graded against the 10-Q's XBRL values.
   // [10-Q value, v1 reply, v1 correct, v2 value, v2 unit, v2 value as printed]
   var READ = [
@@ -349,7 +349,7 @@
      ------------------------------------------------------------------ */
 
   function initReveal() {
-    var targets = $$(".section-head, .finding-head, .finding-copy, .plate, .ledger, .on-file, .cv-row, .matrix-wrap, .also, .about-photo, .about-copy, .contact-title, .contact-sub, .contact-actions, .contact-links");
+    var targets = $$(".section-head, .finding-head, .fig-one, .finding-copy, .plate, .ledger, .on-file, .cv-row, .matrix-wrap, .also, .about-photo, .about-copy, .contact-title, .contact-sub, .contact-actions, .contact-links");
     if (!("IntersectionObserver" in window) || reduceMotion) return;
     targets.forEach(function (t) { t.classList.add("reveal"); });
     var io = new IntersectionObserver(function (entries) {
@@ -361,7 +361,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 1: every operator's 2025 skill, as published and corrected
+     Fig. 2: every operator's 2025 skill, as published and corrected
      ------------------------------------------------------------------ */
 
   function initSwarm() {
@@ -599,7 +599,7 @@
       if (captionEl) {
         captionEl.innerHTML = next === "corrected"
           ? "<strong>Corrected.</strong> With its demand moved back an hour and battery charging taken out, California ISO scores 0.56. With its forecast replaced by SPP\u2019s own from 7 May, Southwest Power Pool scores 0.54. Both now beat the naive forecast."
-          : "<strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast. Press <em>Corrected</em> to apply the three data fixes from Finding 02.";
+          : "<strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast. Press <em>Corrected</em> to apply the three data fixes explained below.";
       }
       var dest = next === "corrected" ? target.__cor : target.__pub;
       var start = {};
@@ -1095,7 +1095,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 5b, 6, 2: before/after bars, CT slices and dot plot, SEC scorecard
+     Fig. 5b, 6, 1: before/after bars, CT slices and dot plot, SEC scorecard
      ------------------------------------------------------------------ */
 
   function initSmallFigures() {
@@ -1189,7 +1189,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Fig. 2 readout: one release read under two prompts. Rows are read,
+     Fig. 1 readout: one release read under two prompts. Rows are read,
      the reply is typed, then checked against the 10-Q; it alternates
      v1 and v2 while on screen until a tab is pressed.
      ------------------------------------------------------------------ */

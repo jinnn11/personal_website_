@@ -119,49 +119,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Fig. 1 -->
-          <figure class="fig fig-one" id="fig-1" aria-labelledby="fig1-title">
-            <div class="fig-one-head">
-              <div>
-                <p class="fig-label mono">Fig. 1</p>
-                <h2 class="fig-one-title" id="fig1-title">In 2025, 19 of 53 US grid operators lost to a naive forecast. <span class="fig-one-twist">Two only looked that way.</span></h2>
-                <p class="fig-one-sub">
-                  Each dot is one operator’s day-ahead demand forecast in EIA-930, the federal government’s hourly
-                  grid data, scored against a naive forecast that repeats demand from 24 hours earlier. Left of
-                  zero, the naive forecast wins.
-                </p>
-              </div>
-              <div class="fig-one-controls">
-                <div class="seg" role="group" aria-label="Data shown in Fig. 1">
-                  <button type="button" class="seg-btn is-on" data-fig1-state="published" aria-pressed="true">As published</button>
-                  <button type="button" class="seg-btn" data-fig1-state="corrected" aria-pressed="false">Corrected</button>
-                </div>
-                <p class="tally" aria-live="polite">
-                  <span class="tally-n" data-fig1-count>19</span>
-                  <span class="tally-text">of 53 lose to the<br />naive forecast</span>
-                </p>
-              </div>
-            </div>
-            <div class="fig-one-plot" data-chart="swarm" tabindex="0" role="img"
-              aria-label="Dot plot of 2025 forecast skill for 53 grid operators. As published, 19 score below zero, including California ISO at minus 0.78 and Southwest Power Pool at minus 0.79. Corrected, California ISO scores 0.56 and Southwest Power Pool 0.54, and 17 operators score below zero. Use the arrow keys to step through the operators."></div>
-            <figcaption class="fig-caption">
-              <span class="fig-caption-text" data-fig1-caption>
-                <strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast.
-                Press <em>Corrected</em> to apply the three data fixes from Finding 02.
-              </span>
-              <span class="fig-caption-note">
-                Skill = 1 − (forecast error ÷ naive error) on the same hours. Two operators sit off the left edge:
-                Puget Sound Energy (−5.32) and Duke Energy Florida (−2.75). Source:
-                <a href="https://github.com/jinnn11/grid-forecast-audit" target="_blank" rel="noreferrer">grid-forecast-audit</a>,
-                main run and “All corrections” variant.
-              </span>
-            </figcaption>
-            <details class="numbers">
-              <summary>Show the numbers</summary>
-              <div class="numbers-body" data-table="swarm"></div>
-            </details>
-          </figure>
         </div>
       </section>
 
@@ -212,7 +169,7 @@
               </div>
             </div>
             <figure class="fig plate" aria-labelledby="f5-fig-title">
-              <p class="fig-label mono">Fig. 2</p>
+              <p class="fig-label mono">Fig. 1</p>
               <p class="plate-title" id="f5-fig-title">One release, two prompts</p>
               <p class="rd-source mono">Apple · quarter ended March 29, 2025 · in millions, except per share</p>
               <div class="rd-switch" role="group" aria-label="Prompt">
@@ -260,6 +217,49 @@
                 committed to Git before any results, and 138 automated tests.
               </p>
             </div>
+
+            <!-- Fig. 2: every operator's 2025 skill, as published and corrected -->
+            <figure class="fig fig-one" id="fig-swarm" aria-labelledby="fig1-title">
+              <div class="fig-one-head">
+                <div>
+                  <p class="fig-label mono">Fig. 2</p>
+                  <h4 class="fig-one-title" id="fig1-title">In 2025, 19 of 53 US grid operators lost to a naive forecast. <span class="fig-one-twist">Two only looked that way.</span></h4>
+                  <p class="fig-one-sub">
+                    Each dot is one operator’s day-ahead demand forecast in EIA-930, the federal government’s hourly
+                    grid data, scored against a naive forecast that repeats demand from 24 hours earlier. Left of
+                    zero, the naive forecast wins.
+                  </p>
+                </div>
+                <div class="fig-one-controls">
+                  <div class="seg" role="group" aria-label="Data shown in Fig. 2">
+                    <button type="button" class="seg-btn is-on" data-fig1-state="published" aria-pressed="true">As published</button>
+                    <button type="button" class="seg-btn" data-fig1-state="corrected" aria-pressed="false">Corrected</button>
+                  </div>
+                  <p class="tally" aria-live="polite">
+                    <span class="tally-n" data-fig1-count>19</span>
+                    <span class="tally-text">of 53 lose to the<br />naive forecast</span>
+                  </p>
+                </div>
+              </div>
+              <div class="fig-one-plot" data-chart="swarm" tabindex="0" role="img"
+                aria-label="Dot plot of 2025 forecast skill for 53 grid operators. As published, 19 score below zero, including California ISO at minus 0.78 and Southwest Power Pool at minus 0.79. Corrected, California ISO scores 0.56 and Southwest Power Pool 0.54, and 17 operators score below zero. Use the arrow keys to step through the operators."></div>
+              <figcaption class="fig-caption">
+                <span class="fig-caption-text" data-fig1-caption>
+                  <strong>As published.</strong> California ISO and Southwest Power Pool both lose to the naive forecast.
+                  Press <em>Corrected</em> to apply the three data fixes explained below.
+                </span>
+                <span class="fig-caption-note">
+                  Skill = 1 − (forecast error ÷ naive error) on the same hours. Two operators sit off the left edge:
+                  Puget Sound Energy (−5.32) and Duke Energy Florida (−2.75). Source:
+                  <a href="https://github.com/jinnn11/grid-forecast-audit" target="_blank" rel="noreferrer">grid-forecast-audit</a>,
+                  main run and “All corrections” variant.
+                </span>
+              </figcaption>
+              <details class="numbers">
+                <summary>Show the numbers</summary>
+                <div class="numbers-body" data-table="swarm"></div>
+              </details>
+            </figure>
           </div>
 
           <div class="scrolly wrap" data-scrolly>
@@ -352,7 +352,7 @@
 
           <div class="wrap">
             <details class="numbers numbers-wide">
-              <summary>Show the numbers behind Fig. 2</summary>
+              <summary>Show the numbers behind Fig. 3</summary>
               <div class="numbers-body" data-table="scrolly"></div>
             </details>
             <dl class="ledger">
@@ -775,6 +775,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b4" defer></script>
+    <script src="script.js?v=b5" defer></script>
   </body>
 </html>
