@@ -152,6 +152,33 @@
   }
   function hideTip() { if (tip) tip.hidden = true; }
 
+  // Every chart answers the cursor the same way: the mark under it stays bright, the rest step
+  // back, and the tooltip gives the exact numbers. On touch, a tap does the same and a tap
+  // elsewhere (or a scroll) clears it.
+  function hoverMarks(box, sel, tipFor, onChange) {
+    if (!box) return;
+    var hot = null;
+    $$(sel, box).forEach(function (n) { n.setAttribute("data-hover-item", ""); });
+    function set(item, x, y) {
+      if (item !== hot) {
+        if (hot) hot.classList.remove("is-hot");
+        hot = item;
+        if (hot) hot.classList.add("is-hot");
+        box.classList.toggle("is-hovering", !!hot);
+        if (onChange) onChange(hot);
+      }
+      var html = hot && tipFor ? tipFor(hot) : "";
+      if (html) showTip(html, x, y); else hideTip();
+    }
+    function at(e) { set(e.target.closest(sel), e.clientX, e.clientY); }
+    box.addEventListener("pointermove", at);
+    box.addEventListener("pointerdown", at);
+    box.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") set(null); });
+    document.addEventListener("pointerdown", function (e) { if (hot && !box.contains(e.target)) set(null); });
+    window.addEventListener("scroll", function () { if (hot) set(null); }, { passive: true });
+  }
+  function signedNum(v, d) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(d); }
+
   var toastEl = $(".toast");
   var toastTimer = 0;
   function toast(msg) {
@@ -706,6 +733,7 @@
     var gLines = svgEl("g", null, svg);
     var pathCor = svgEl("path", { class: "line-cor" }, gLines);
     var pathPub = svgEl("path", { class: "line-pub" }, gLines);
+    var gHover = svgEl("g", null, svg);
     var gPts = svgEl("g", null, svg);
     var ptsCor = YEARS.map(function () { return svgEl("circle", { class: "pt-cor", r: 3.5 }, gPts); });
     var ptsPub = YEARS.map(function () { return svgEl("circle", { class: "pt-pub", r: 3.5 }, gPts); });
@@ -818,6 +846,7 @@
 
     function full() {
       measure();
+      clearHover();
       if (!W || !H) return;
       var sc = SCENES[idx];
       drawAxis();
@@ -828,6 +857,7 @@
 
     function go(i) {
       if (i === idx) return;
+      clearHover();
       var from = { y0: cur.y0, y1: cur.y1, pub: cur.pub.slice(), cor: cur.cor.slice(), corA: cur.corA };
       idx = i;
       var sc = SCENES[i];
@@ -858,6 +888,40 @@
       }
       anim = requestAnimationFrame(tick);
     }
+
+    // Hover: a guide at the nearest year, its points enlarged, the exact values in the tooltip
+    var SERIES = ["National", "California ISO", "Southwest Power Pool", "National", "National"];
+    var hoverI = -1;
+    function clearHover() {
+      if (hoverI < 0) return;
+      hoverI = -1;
+      gHover.textContent = "";
+      ptsPub.concat(ptsCor).forEach(function (pt) { pt.classList.remove("is-hot"); });
+      hideTip();
+    }
+    function hoverAt(e) {
+      if (anim || !W) return;
+      var r = host.getBoundingClientRect();
+      var x = e.clientX - r.left;
+      if (x < m.l - 12 || x > W - m.r + 12) { clearHover(); return; }
+      var i = clamp(Math.round((x - m.l) / (W - m.l - m.r) * 10 - 0.5), 0, YEARS.length - 1);
+      var sc = SCENES[idx];
+      if (i !== hoverI) {
+        clearHover();
+        hoverI = i;
+        var gx = X(YEARS[i] + 0.5);
+        svgEl("line", { class: "hover-guide", x1: gx, x2: gx, y1: m.t, y2: H - m.b }, gHover);
+        ptsPub[i].classList.add("is-hot");
+        if (sc.cor) ptsCor[i].classList.add("is-hot");
+      }
+      var top = sc.cor ? Math.max(sc.pub[i], sc.cor[i]) : sc.pub[i];
+      showTip("<strong>" + YEARS[i] + " \u00b7 " + SERIES[idx] + "</strong>As published " + sc.pub[i].toFixed(2) + "%" +
+        (sc.cor ? "<br>Corrected " + sc.cor[i].toFixed(2) + "%" : ""), r.left + X(YEARS[i] + 0.5), r.top + Y(top, cur));
+    }
+    host.addEventListener("pointermove", hoverAt);
+    host.addEventListener("pointerdown", hoverAt);
+    host.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") clearHover(); });
+    window.addEventListener("scroll", clearHover, { passive: true });
 
     // Table
     var table = $('[data-table="scrolly"]');
@@ -930,6 +994,11 @@
       }
     });
     var plate = $("#finding-probes .plate");
+    hoverMarks(plate, ".waffle-block, .zero-row, .meter-row", function (b) {
+      if (b.classList.contains("zero-row")) return "<strong>Paired spatial queries</strong>0 of 51 left/right pairs had both sides right";
+      if (b.classList.contains("meter-row")) return "<strong>SAM given ground-truth boxes</strong>" + $(".meter-value", b).textContent + " correct: the outline step works";
+      return "<strong>" + $(".waffle-label", b).textContent + "</strong>" + $(".waffle-value", b).textContent + " answered correctly";
+    });
     if (reduceMotion) { if (plate) plate.classList.add("is-in"); return; }
     onVisible(plate, function () { plate.classList.add("is-in"); });
   }
@@ -943,7 +1012,7 @@
     if (!host) return;
     var track = $(".loop-track", host);
     var steps = $$(".loop-step", host);
-    var path = null, runner = null, halo = null, len = 0, raf = 0, last = 0, dist = 0, visible = false;
+    var path = null, runner = null, halo = null, len = 0, raf = 0, last = 0, dist = 0, visible = false, paused = false;
 
     function center(n) {
       var hb = host.getBoundingClientRect(), r = n.getBoundingClientRect();
@@ -1000,11 +1069,17 @@
       if (!visible) return;
       var dt = last ? Math.min(64, now - last) : 16;
       last = now;
-      dist += dt * 0.085;
-      place();
+      if (!paused) {
+        dist += dt * 0.085;
+        place();
+      }
       raf = requestAnimationFrame(frame);
     }
     build();
+    hoverMarks(host, ".loop-step", null, function (hot) {
+      paused = !!hot;
+      if (hot) steps.forEach(function (s) { s.classList.remove("is-active"); });
+    });
     if ("ResizeObserver" in window) new ResizeObserver(function () { build(); }).observe(host);
     if (reduceMotion || !("IntersectionObserver" in window)) return;
     new IntersectionObserver(function (entries) {
@@ -1023,6 +1098,11 @@
     if (ba) {
       if (reduceMotion) ba.classList.add("is-in");
       else onVisible(ba, function () { ba.classList.add("is-in"); });
+      hoverMarks(ba, ".ba-row", function (row) {
+        var b = parseFloat($(".v-before", row).textContent), a = parseFloat($(".v-after", row).textContent);
+        return "<strong>" + $(".ba-name", row).textContent + ", shifted data</strong>" + b.toFixed(2) + " before retraining \u2192 " + a.toFixed(2) + " after" +
+          '<br><span class="tip-mono">' + signedNum(a - b, 2) + "</span>";
+      });
     }
 
     // CT: 16 slices collapse into one image
@@ -1042,6 +1122,7 @@
     if (dp) {
       CT.forEach(function (row, i) {
         var r = el("div", "dp-row" + (row[2] ? " is-top" : ""), dp);
+        r.setAttribute("data-i", String(i));
         el("p", "dp-name", r, row[0]);
         var trk = el("div", "dp-track", r);
         var x = ((row[1] - 0.5) / 0.5 * 100).toFixed(1) + "%";
@@ -1061,6 +1142,10 @@
       el("span", null, ax);
       if (reduceMotion) dp.classList.add("is-in");
       else onVisible(dp, function () { dp.classList.add("is-in"); });
+      hoverMarks(dp, ".dp-row", function (row) {
+        var d = CT[parseInt(row.getAttribute("data-i"), 10)];
+        return "<strong>" + d[0] + "</strong>Peak validation AUC " + d[1].toFixed(3);
+      });
       var ctTable = $('[data-table="ct"]');
       if (ctTable) {
         ctTable.innerHTML = "<table><thead><tr><th>Design</th><th>Peak validation AUC</th></tr></thead><tbody>" +
@@ -1073,6 +1158,7 @@
     if (card) {
       SEC.forEach(function (row, i) {
         var r = el("div", "sc-row", card);
+        r.setAttribute("data-i", String(i));
         var name = el("p", "sc-name", r, row[0]);
         if (row[1]) el("span", null, name, row[1]);
         var trk = el("div", "sc-track", r);
@@ -1098,6 +1184,11 @@
       el("span", null, ax2);
       if (reduceMotion) card.classList.add("is-in");
       else onVisible(card, function () { card.classList.add("is-in"); });
+      hoverMarks(card, ".sc-row", function (row) {
+        var d = SEC[parseInt(row.getAttribute("data-i"), 10)];
+        return "<strong>" + d[0] + (d[1] ? " (" + d[1] + ")" : "") + "</strong>Prompt v1 " + d[2].toFixed(1) + "% \u2192 v2 " + d[3].toFixed(1) + "%" +
+          '<br><span class="tip-mono">' + signedNum(d[3] - d[2], 1) + " points</span>";
+      });
       var secTable = $('[data-table="sec"]');
       if (secTable) {
         secTable.innerHTML = "<table><thead><tr><th>Model</th><th>Prompt v1, %</th><th>v2: value + unit, %</th></tr></thead><tbody>" +
