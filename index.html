@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=b3" />
+    <link rel="stylesheet" href="styles.css?v=b4" />
 
     <script type="application/ld+json">
       {
@@ -340,7 +340,20 @@
             </div>
             <figure class="fig plate" aria-labelledby="f5-fig-title">
               <p class="fig-label mono">Fig. 3</p>
-              <p class="plate-title" id="f5-fig-title">Open models: share of 293 figures correct</p>
+              <p class="plate-title" id="f5-fig-title">One release, two prompts</p>
+              <p class="rd-source mono">Apple · quarter ended March 29, 2025 · in millions, except per share</p>
+              <div class="rd-switch" role="group" aria-label="Prompt">
+                <button type="button" class="rd-tab" data-v="1" aria-pressed="true"><span class="key key-pub key-dot" aria-hidden="true"></span>Prompt v1</button>
+                <button type="button" class="rd-tab" data-v="2" aria-pressed="false"><span class="key key-cor key-dot" aria-hidden="true"></span>v2: value + unit</button>
+              </div>
+              <div class="readout" data-chart="readout" data-v="1" role="img" aria-label="Prompt v1, asking for raw dollars: Llama-3.1-8B replied 95359 for total net sales and 24780 for net income, a million times smaller than the 10-Q’s 95,359,000,000 and 24,780,000,000, and 1.65 for diluted EPS, which matches.">
+                <div class="rd-head mono" aria-hidden="true"><span>Release says</span><span>Llama-3.1-8B replied</span><span>10-Q says (XBRL)</span></div>
+                <div class="rd-row"><p class="rd-line"><span>Total net sales</span><span class="rd-num">95,359</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <div class="rd-row"><p class="rd-line"><span>Net income</span><span class="rd-num">24,780</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <div class="rd-row"><p class="rd-line"><span>Diluted EPS</span><span class="rd-num">1.65</span></p><p class="rd-reply"></p><p class="rd-check"></p></div>
+                <p class="rd-sum"></p>
+              </div>
+              <p class="plate-title plate-title-2">Open models: share of 293 figures correct</p>
               <ul class="legend legend-small" aria-hidden="true">
                 <li><span class="key key-pub key-dot"></span>Prompt v1</li>
                 <li><span class="key key-cor key-dot"></span>v2: value + unit</li>
@@ -762,6 +775,6 @@
     <div class="tip" role="tooltip" hidden></div>
     <div class="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=b2" defer></script>
+    <script src="script.js?v=b3" defer></script>
   </body>
 </html>

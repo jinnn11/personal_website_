@@ -115,6 +115,25 @@
     ["gpt-oss-20b", "", 94.5, 94.2]
   ];
 
+  // Fig. 3 readout: Apple's release for the quarter ended March 29, 2025 (validation set), Llama-3.1-8B's
+  // replies under each prompt, graded against the 10-Q's XBRL values.
+  // [10-Q value, v1 reply, v1 correct, v2 value, v2 unit, v2 value as printed]
+  var READ = [
+    ["95,359,000,000", "95359", false, "95359", "millions", "95,359"],
+    ["24,780,000,000", "24780", false, "24780", "millions", "24,780"],
+    ["1.65", "1.65", true, "1.65", "", ""]
+  ];
+  var READ_SUM = [
+    "",
+    "2 of 3 wrong: asked for raw dollars, it dropped the “millions”, so revenue and net income came out a million times too small.",
+    "3 of 3 right: it copies each figure and names the unit, and code does the multiplying."
+  ];
+  var READ_ALT = [
+    "",
+    "Prompt v1, asking for raw dollars: Llama-3.1-8B replied 95359 for total net sales and 24780 for net income, a million times smaller than the 10-Q’s 95,359,000,000 and 24,780,000,000, and 1.65 for diluted EPS, which matches.",
+    "Prompt v2, value plus unit: Llama-3.1-8B replied 95359 and 24780 in millions, which code converts to 95,359,000,000 and 24,780,000,000, both matching the 10-Q, and 1.65 for diluted EPS, which matches."
+  ];
+
   var PROJECTS = ["Grid audit", "Grounding probes", "Drift MLOps", "CT tamper", "SEC benchmark", "Zolvit"];
   var MATRIX = [
     ["Languages and data", [
@@ -1170,6 +1189,121 @@
   }
 
   /* ------------------------------------------------------------------
+     Fig. 3 readout: one release read under two prompts. Rows are read,
+     the reply is typed, then checked against the 10-Q; it alternates
+     v1 and v2 while on screen until a tab is pressed.
+     ------------------------------------------------------------------ */
+
+  function initReadout() {
+    var host = $('[data-chart="readout"]');
+    if (!host) return;
+    var fig = host.closest("figure") || host.parentNode;
+    var tabs = $$(".rd-tab", fig);
+    var rows = $$(".rd-row", host);
+    var sum = $(".rd-sum", host);
+    var timers = [], ver = 1, auto = !reduceMotion, visible = false;
+
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function stop() { timers.forEach(clearTimeout); timers = []; }
+
+    function setup(v) {
+      ver = v;
+      host.setAttribute("data-v", String(v));
+      host.setAttribute("aria-label", READ_ALT[v]);
+      tabs.forEach(function (t) {
+        t.setAttribute("aria-pressed", t.getAttribute("data-v") === String(v) ? "true" : "false");
+      });
+      rows.forEach(function (r, i) {
+        var d = READ[i], ok = v === 2 || d[2];
+        var rep = $(".rd-reply", r), chk = $(".rd-check", r);
+        rep.textContent = "";
+        chk.textContent = "";
+        el("span", "rd-typed", rep);
+        if (v === 2 && d[4]) {
+          el("span", "rd-unit", rep, d[4]);
+          var conv = el("span", "rd-conv", rep);
+          el("span", "rd-eq", conv, "= ");
+          el("span", "rd-conv-num", conv, d[5]);
+        }
+        el("span", "rd-ans", chk, d[0]);
+        el("span", "rd-chip " + (ok ? "is-ok" : "is-bad"), chk, ok ? "✓ match" : "✗ unit slip");
+        r.className = "rd-row" + (ok ? "" : " is-bad");
+      });
+      sum.textContent = READ_SUM[v];
+      sum.classList.remove("is-on");
+    }
+
+    // The end state, without motion
+    function finish(v) {
+      stop();
+      setup(v);
+      rows.forEach(function (r, i) {
+        var d = READ[i];
+        $(".rd-typed", r).textContent = v === 1 ? d[1] : d[3];
+        var num = $(".rd-conv-num", r);
+        if (num) num.textContent = d[5] + ",000,000";
+        ["is-reading", "is-unit", "is-conv", "is-checked"].forEach(function (c) { r.classList.add(c); });
+      });
+      sum.classList.add("is-on");
+    }
+
+    function play(v) {
+      stop();
+      setup(v);
+      var t = 300;
+      rows.forEach(function (r, i) {
+        var d = READ[i];
+        var text = v === 1 ? d[1] : d[3];
+        var typed = $(".rd-typed", r);
+        later(function () { r.classList.add("is-reading"); }, t);
+        t += 480;
+        later(function () { r.classList.add("is-typing"); }, t);
+        for (var c = 1; c <= text.length; c++) {
+          (function (n, at) {
+            later(function () { typed.textContent = text.slice(0, n); }, at);
+          })(c, t + c * 75);
+        }
+        t += text.length * 75 + 180;
+        later(function () { r.classList.remove("is-typing"); }, t);
+        if (v === 2 && d[4]) {
+          later(function () { r.classList.add("is-unit"); }, t);
+          t += 420;
+          var num = $(".rd-conv-num", r);
+          later(function () { r.classList.add("is-conv"); }, t);
+          // multiply by a million in two steps: 95,359 -> 95,359,000 -> 95,359,000,000
+          [1, 2].forEach(function (k) {
+            later(function () { num.textContent = d[5] + (k === 1 ? ",000" : ",000,000"); }, t + k * 200);
+          });
+          t += 520;
+        }
+        later(function () { r.classList.add("is-checked"); }, t);
+        t += 620;
+      });
+      later(function () { sum.classList.add("is-on"); }, t);
+      t += 4200;
+      if (auto) later(function () { if (auto && visible) play(ver === 1 ? 2 : 1); }, t);
+    }
+
+    finish(1);
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () {
+        auto = false;
+        var v = parseInt(t.getAttribute("data-v"), 10);
+        if (reduceMotion) finish(v);
+        else play(v);
+      });
+    });
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (entries) {
+      var now = entries[0].isIntersecting;
+      if (now === visible) return;
+      visible = now;
+      if (visible && auto) play(ver);
+      else if (!visible) finish(ver);
+    }, { threshold: 0.35 }).observe(host);
+  }
+
+  /* ------------------------------------------------------------------
      Skills matrix
      ------------------------------------------------------------------ */
 
@@ -1256,6 +1390,7 @@
     initWaffles();
     initLoop();
     initSmallFigures();
+    initReadout();
     initMatrix();
     initCopy();
   }
