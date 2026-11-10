@@ -357,120 +357,92 @@ button {
 /* ---------- Front page ---------- */
 
 .front {
-  padding-top: calc(var(--head-h) + clamp(28px, 5vw, 60px));
+  padding-top: calc(var(--head-h) + clamp(36px, 7vw, 96px));
 }
 
-/* Name on the left; who, what kind of work and links on the right */
-.front-intro {
+/* Name and one line on the left; a short "Currently" list on the right */
+.front-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px 56px;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 40px clamp(40px, 6vw, 96px);
   align-items: end;
 }
 
 .front-name {
-  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.022em;
   font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
 }
 
-.front-sub {
-  max-width: 46ch;
-  margin: 0;
-  font-size: 16.5px;
-  line-height: 1.5;
+.front-dek {
+  max-width: 30ch;
+  margin: 22px 0 0;
+  font-family: var(--f-display);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.3;
   color: var(--ink-2);
+  font-variation-settings: "opsz" 40, "SOFT" 40;
 }
 
-.front-facts {
-  display: grid;
-  gap: 4px;
-  margin: 14px 0 0;
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-.front-facts div {
-  display: grid;
-  grid-template-columns: 4.6rem minmax(0, 1fr);
-  gap: 12px;
-}
-
-.front-facts dt {
-  color: var(--ink-3);
-}
-
-.front-facts dd {
-  margin: 0;
-}
-
-.front-links {
+.front-cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
-  margin: 16px 0 0;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 28px 0 0;
   font-size: 15px;
 }
 
-/* The five findings, listed like a front-page index */
-.front-toc {
-  margin-top: clamp(32px, 5vw, 56px);
+.front-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.front-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.front-now {
   border-top: 3px solid var(--ink);
 }
 
-.front-toc-label {
+.front-now-label {
   margin: 0;
-  padding: 12px 0 10px;
-  border-bottom: 1px solid var(--ink);
+  padding: 12px 0 8px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--ink-2);
 }
 
-.front-toc ol {
+.front-now ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.front-toc li {
-  border-bottom: 1px solid var(--rule);
+.front-now li {
+  padding: 11px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
 }
 
-.front-toc a {
-  display: grid;
-  grid-template-columns: 3.2rem minmax(0, 1fr) 17rem;
-  gap: 6px 24px;
-  align-items: baseline;
-  padding: 15px 0;
-  text-decoration: none;
-}
-
-.front-toc-n {
-  font-family: var(--f-display);
-  font-size: 1.05rem;
-  color: var(--ink-3);
-  font-variant-numeric: lining-nums tabular-nums;
-}
-
-.front-toc-t {
-  font-family: var(--f-display);
-  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
-  line-height: 1.25;
-  font-variation-settings: "opsz" 40, "SOFT" 30;
-  transition: color 0.2s;
-}
-
-.front-toc-m {
-  font-size: 14px;
-  color: var(--ink-3);
-  text-align: right;
-}
-
-.front-toc a:hover .front-toc-t {
-  color: var(--accent);
+.front-now li a {
+  color: var(--ink);
 }
 
 /* The findings head sits closer to a short front page */
@@ -2873,19 +2845,8 @@ button {
 }
 
 @media (max-width: 899px) {
-  .front-intro {
+  .front-grid {
     grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .front-toc a {
-    grid-template-columns: 2.2rem minmax(0, 1fr);
-  }
-
-  .front-toc-m {
-    grid-column: 2;
-    text-align: left;
-    font-size: 13px;
   }
 
   .fig-one-head {
