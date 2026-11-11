@@ -84,7 +84,7 @@
             <span class="edition-icon" aria-hidden="true"></span>
             <span class="edition-label">Day</span>
           </button>
-          <a class="pill" href="assets/swaminathan_resume.pdf?v=20261111b" target="_blank" rel="noreferrer">Résumé</a>
+          <a class="pill" href="assets/swaminathan_resume.pdf?v=20261111c" target="_blank" rel="noreferrer">Résumé</a>
           <button class="index-button" type="button" data-open-index aria-haspopup="dialog" aria-controls="index-dialog">Index</button>
         </div>
       </div>
@@ -100,7 +100,7 @@
             <p class="front-dek">Data scientist and ML engineer. I build machine-learning systems and audit the data underneath them.</p>
             <p class="front-cta">
               <a class="front-btn" href="#findings">Read the findings <span aria-hidden="true">↓</span></a>
-              <a class="text-link" href="assets/swaminathan_resume.pdf?v=20261111b" target="_blank" rel="noreferrer">Résumé (PDF)</a>
+              <a class="text-link" href="assets/swaminathan_resume.pdf?v=20261111c" target="_blank" rel="noreferrer">Résumé (PDF)</a>
               <a class="text-link" href="mailto:sankaranswaminathan21@gmail.com">Email</a>
             </p>
           </div>
@@ -424,26 +424,30 @@
           <div class="wrap finding-grid">
             <div class="finding-copy">
               <p class="finding-meta mono"><span class="finding-no">Finding 04</span><span>Feb–Nov 2026</span><span>MLOps · Experiment</span></p>
-              <h3 class="finding-title" id="f3-title">Drift alarms didn’t beat a schedule. On three years of real loans, quarterly retraining matched monthly with 69% fewer retrains.</h3>
+              <h3 class="finding-title" id="f3-title">Drift alarms didn’t beat a schedule. On $4.2B of real loans, quarterly retraining matched monthly with 69% fewer retrains.</h3>
               <p class="finding-plain">
                 A model that was accurate at launch can slowly go wrong as the world it sees changes. The usual
                 advice is to watch for that change and retrain when it shows up. I tested whether that beats simply
                 retraining on a schedule, on 36 months of Lending Club loans replayed month by month, with each
-                loan’s outcome arriving 1, 3 or 6 months late, the way real labels do.
+                loan’s outcome arriving 1, 3 or 6 months late, the way real labels do. Retraining paid: a lender
+                turning down its riskiest 10% of loan dollars would have declined $8–14M more in loans that later
+                defaulted. What triggered the retraining barely mattered.
               </p>
               <p class="mono finding-how">Under the hood</p>
               <p>
-                Eight policies, five seeds, three label delays. A quarterly schedule matched monthly retraining
-                within 0.001 PR-AUC with 69% fewer retrains (11 vs 35), while never retraining fell 5–7% behind.
-                Drift-triggered retraining needed up to 60% more retrains than quarterly for the same accuracy,
-                because KS and domain-classifier tests alarmed in about 35 of 36 months. In a benchmark with injected
-                drift (10 seeds), those input-only tests did no better than chance on concept drift, while a
-                label-based calibration test caught every case, one label delay late, and 89–97% of its alarms
-                preceded real degradation. The rules plug into an MLOps pipeline I built: FastAPI serving with every
-                prediction logged to PostgreSQL, Evidently drift checks on those logged predictions, retraining run
-                by Airflow and tracked in MLflow, a promotion gate on held-out data (it rejected 13 of 35 monthly
-                candidates in the replay) and one-step rollback. Rechecking that pipeline, I found and fixed a
-                train/test overlap that had inflated an earlier reported gain.
+                Eight policies, five seeds, three label delays. Against never retraining, retraining declined
+                $8–14M more in loans that later defaulted over $4.2B of applications, and approved about as much
+                more in loans that were repaid. A quarterly schedule kept 98–102% of monthly retraining’s gain
+                (within 0.001 PR-AUC) with 69% fewer retrains (11 vs 35). Drift-triggered retraining needed about
+                60% more retrains than quarterly for the same result, because KS and domain-classifier tests
+                alarmed in 35–36 of 36 months; PSI ≥ 0.1 stayed quiet and left $2.7–3.2M on the table. In a
+                benchmark with injected drift (10 seeds), those input-only tests did no better than chance on
+                concept drift, while a label-based calibration test caught every case, one label delay late, and
+                89–97% of its alarms preceded real degradation. The rules plug into an MLOps pipeline I built:
+                FastAPI serving with every prediction logged to PostgreSQL, Evidently drift checks on those logged
+                predictions, retraining run by Airflow and tracked in MLflow, a promotion gate on held-out data (it
+                rejected 13–14 of 35 monthly candidates in the replay) and one-step rollback. Rechecking that
+                pipeline, I found and fixed a train/test overlap that had inflated an earlier reported gain.
               </p>
               <div class="finding-foot">
                 <ul class="tags"><li>XGBoost</li><li>SciPy</li><li>FastAPI</li><li>PostgreSQL</li><li>Evidently</li><li>Airflow</li><li>MLflow</li><li>Prometheus</li><li>Grafana</li><li>Docker</li></ul>
@@ -465,31 +469,31 @@
                 </ol>
               </div>
               <div class="before-after" data-chart="drift">
-                <p class="ba-title mono">Lending Club, 3-month label delay · retrains over 36 months</p>
-                <div class="ba-row" data-tip="&lt;strong&gt;Monthly schedule&lt;/strong&gt;35 retrains · mean PR-AUC 0.284&lt;br&gt;best in 103 of 105 paired comparisons">
+                <p class="ba-title mono">Lending Club, 3-month label delay · 36 months, $4.2B of applications</p>
+                <div class="ba-row" data-tip="&lt;strong&gt;Monthly schedule&lt;/strong&gt;35 retrains · mean PR-AUC 0.284&lt;br&gt;+$8.1M of later-defaulted loans declined vs never retraining">
                   <p class="ba-name">Monthly schedule</p>
-                  <div class="ba-track" role="img" aria-label="Monthly schedule: 35 retrains, mean PR-AUC 0.284"><span class="ba-after" style="--v: 0.972"></span></div>
-                  <p class="ba-values"><span class="v-after">35</span> · .284</p>
+                  <div class="ba-track" role="img" aria-label="Monthly schedule: 35 retrains, 8.1 million dollars more of later-defaulted loans declined than never retraining"><span class="ba-after" style="--v: 0.972"></span></div>
+                  <p class="ba-values"><span class="v-after">35</span> · $8.1M</p>
                 </div>
-                <div class="ba-row" data-tip="&lt;strong&gt;Drift-triggered (KS tests)&lt;/strong&gt;17.8 retrains · mean PR-AUC 0.283&lt;br&gt;alarmed in 35.6 of 36 months">
+                <div class="ba-row" data-tip="&lt;strong&gt;Drift-triggered (KS tests)&lt;/strong&gt;18 retrains · mean PR-AUC 0.284&lt;br&gt;alarmed in 35.8 of 36 months · +$7.9M">
                   <p class="ba-name">Drift-triggered</p>
-                  <div class="ba-track" role="img" aria-label="Drift-triggered retraining: 17.8 retrains, mean PR-AUC 0.283"><span class="ba-before" style="--v: 0.494"></span></div>
-                  <p class="ba-values"><span class="v-before">17.8</span> · .283</p>
+                  <div class="ba-track" role="img" aria-label="Drift-triggered retraining: 18 retrains, 7.9 million dollars more of later-defaulted loans declined than never retraining"><span class="ba-before" style="--v: 0.5"></span></div>
+                  <p class="ba-values"><span class="v-before">18</span> · $7.9M</p>
                 </div>
-                <div class="ba-row" data-tip="&lt;strong&gt;Quarterly schedule&lt;/strong&gt;11 retrains · mean PR-AUC 0.283">
+                <div class="ba-row" data-tip="&lt;strong&gt;Quarterly schedule&lt;/strong&gt;11 retrains · mean PR-AUC 0.283&lt;br&gt;+$7.9M, 98% of monthly’s gain">
                   <p class="ba-name">Quarterly schedule</p>
-                  <div class="ba-track" role="img" aria-label="Quarterly schedule: 11 retrains, mean PR-AUC 0.283"><span class="ba-after" style="--v: 0.306"></span></div>
-                  <p class="ba-values"><span class="v-after">11</span> · .283</p>
+                  <div class="ba-track" role="img" aria-label="Quarterly schedule: 11 retrains, 7.9 million dollars more of later-defaulted loans declined than never retraining"><span class="ba-after" style="--v: 0.306"></span></div>
+                  <p class="ba-values"><span class="v-after">11</span> · $7.9M</p>
                 </div>
-                <div class="ba-row" data-tip="&lt;strong&gt;Never retrain&lt;/strong&gt;0 retrains · mean PR-AUC 0.269">
+                <div class="ba-row" data-tip="&lt;strong&gt;Never retrain&lt;/strong&gt;0 retrains · mean PR-AUC 0.268&lt;br&gt;the baseline for the dollar figures">
                   <p class="ba-name">Never retrain</p>
-                  <div class="ba-track" role="img" aria-label="Never retrain: 0 retrains, mean PR-AUC 0.269"><span class="ba-after" style="--v: 0"></span></div>
-                  <p class="ba-values"><span class="v-after">0</span> · .269</p>
+                  <div class="ba-track" role="img" aria-label="Never retrain: 0 retrains, the baseline"><span class="ba-after" style="--v: 0"></span></div>
+                  <p class="ba-values"><span class="v-after">0</span> · –</p>
                 </div>
                 <ul class="legend legend-small" aria-hidden="true">
                   <li><span class="key key-cor key-bar"></span>Fixed schedule</li>
                   <li><span class="key key-pub key-bar"></span>Retrain on a drift alarm</li>
-                  <li>Right: retrains · mean PR-AUC</li>
+                  <li>Right: retrains · later-defaulted loans declined vs never retraining, declining the riskiest 10% of dollars</li>
                 </ul>
               </div>
             </figure>
@@ -757,7 +761,7 @@
             <li><a href="mailto:sankaranswaminathan21@gmail.com">Write an email <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://github.com/jinnn11" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
-            <li><a href="assets/swaminathan_resume.pdf?v=20261111b" target="_blank" rel="noreferrer">Résumé (PDF) <span aria-hidden="true">↗</span></a></li>
+            <li><a href="assets/swaminathan_resume.pdf?v=20261111c" target="_blank" rel="noreferrer">Résumé (PDF) <span aria-hidden="true">↗</span></a></li>
           </ul>
         </div>
       </section>
@@ -794,7 +798,7 @@
           <li><a href="#finding-ct" data-close-index>CT tamper classification</a></li>
         </ul>
         <div class="index-foot">
-          <a href="assets/swaminathan_resume.pdf?v=20261111b" target="_blank" rel="noreferrer">Résumé ↗</a>
+          <a href="assets/swaminathan_resume.pdf?v=20261111c" target="_blank" rel="noreferrer">Résumé ↗</a>
           <a href="https://www.linkedin.com/in/swaminathan-sankaran-02643524b/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
           <a href="https://github.com/jinnn11" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
