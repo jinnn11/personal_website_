@@ -1099,6 +1099,7 @@
       if (reduceMotion) ba.classList.add("is-in");
       else onVisible(ba, function () { ba.classList.add("is-in"); });
       hoverMarks(ba, ".ba-row", function (row) {
+        if (row.getAttribute("data-tip")) return row.getAttribute("data-tip");
         var b = parseFloat($(".v-before", row).textContent), a = parseFloat($(".v-after", row).textContent);
         return "<strong>" + $(".ba-name", row).textContent + ", shifted data</strong>" + b.toFixed(2) + " before retraining \u2192 " + a.toFixed(2) + " after" +
           '<br><span class="tip-mono">' + signedNum(a - b, 2) + "</span>";
