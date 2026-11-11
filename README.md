@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal site for Swaminathan Sankaran — <https://www.swaminathansankaran.com>
+Personal site for Nathan Sankaran — <https://www.swaminathansankaran.com>
 
 No build step, no dependencies: plain HTML, CSS and vanilla JavaScript.
 

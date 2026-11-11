@@ -1,4 +1,4 @@
-/* Swaminathan Sankaran: portfolio, editorial edition.
+/* Nathan Sankaran: portfolio, editorial edition.
    Plain JavaScript, no dependencies. Every chart is drawn from the data below,
    which mirrors the projects' published results. */
 (function () {
